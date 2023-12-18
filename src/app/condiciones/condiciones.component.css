@@ -219,7 +219,7 @@ footer{
 }
 .container{
   margin-top: 3em;
-  position: relative;
+  position: absolute;
   max-width:430px ;
   width: 100%;
   background: #FFFF;
