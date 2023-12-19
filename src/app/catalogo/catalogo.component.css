@@ -157,7 +157,6 @@ footer{
   display: flex;
   flex-direction: row;
   float: left;
-  height: 30em;
 }
 
 .productos{
@@ -196,13 +195,8 @@ footer{
 
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  bottom: 2rem;
-  z-index: 5;
-}
-
-.text-start{
-  width: 30rem;
-  left: -30em;
+  bottom: 3rem;
+  z-index: 10;
 }
 
 /* Declare heights because of positioning of img element */
