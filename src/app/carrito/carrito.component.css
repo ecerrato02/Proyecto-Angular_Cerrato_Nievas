@@ -1,9 +1,3 @@
-body{
-  position: relative;
-  padding-bottom: 8em;
-  min-height: 100vh;
-}
-
 #tamano-logo{
   width: 6em;
 }
@@ -220,7 +214,6 @@ footer{
 .container{
   margin-top: 3em;
   position: relative;
-  max-width:430px ;
   width: 100%;
   background: #FFFF;
   border-radius: 10px;

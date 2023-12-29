@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="forms">
+    <div class="form login">
+      <img src="./assets/logo-BD.png" width="70" height="70">
+      <span class="title"> Black Diamond </span>
+
+      <form action="#">
+        <div class="input-field">
+          <input type="email" placeholder="Introduce tu email" required>
+          <i class="fa-solid fa-user icon"></i>
+        </div>
+
+        <div class="input-field">
+          <input type="password" placeholder="Contraseña" required>
+          <i class="fa-solid fa-lock icon"></i>
+        </div>
+
+
+        <div class="checkbox-text">
+          <div class="checkbox-content">
+            <input type="checkbox" id="logCheck">
+            <label
+              for="logCheck" class="text"> Recuérdame </label>
+          </div>
+
+          <a href="" class="text">¿Has olvidado tu contraseña?</a>
+        </div>
+
+        <div class="input-field button">
+          <input type="button" value="Iniciar Sesión">
+        </div>
+
+      </form>
+
+      <div class="login-signup">
+					<span class="text"> ¿No tienes una cuenta?
+						<br>
+						<a routerLink="/formulario-registro" routerLinkActive="Active" class="text signup-text"><b>Crea una cuenta</b></a>
+					</span>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
