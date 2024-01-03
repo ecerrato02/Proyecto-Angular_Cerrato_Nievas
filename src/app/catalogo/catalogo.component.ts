@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 import { productos } from '../bd/productos';
 
@@ -9,7 +9,9 @@ import { productos } from '../bd/productos';
   imports: [
     RouterOutlet,
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'

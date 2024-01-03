@@ -55,7 +55,7 @@
 </div>
 
 <div class="todos-productos">
-  <div *ngFor="let producto of arrayProductos" class="productos"><a class="productos-enlaces" href="">
+  <div *ngFor="let producto of arrayProductos" class="productos"><a class="productos-enlaces" routerLink="/productos" routerLinkActive="Active">
     <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% dto.</div>
     <img alt="Imagen Productos" class="imagen-productos" src='{{producto.fotoProducto}}'>
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>
