@@ -147,26 +147,46 @@ footer{
 }
 
 .separador{
+  padding-top: .5em;
   height: 5em;
   display: inline-block;
   width: 100%;
   background-color: rgba(141, 141, 141, 0.42);
 }
 
+.separador-dos{
+  margin-top: 5em;
+  padding-top: .5em;
+  height: 5em;
+  display: inline-block;
+  width: 100%;
+  background-color: rgba(141, 141, 141, 0.42);
+}
+
+#filtro{
+  float: right;
+  margin-right: 5em;
+}
+
 .todos-productos{
   display: flex;
-  flex-direction: row;
   float: left;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 100%;
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 .productos{
   text-align: center;
   width: 18em;
   margin-left: 4.5em;
-  margin-bottom: 2em;
   margin-top: 1.9em;
   padding: 2em;
   border-radius: .2em;
+  transition: transform 0.3s ease-out;
 }
 
 .iconos{
@@ -181,6 +201,7 @@ footer{
 .productos:hover{
   transform: scale(1.03);
   box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: -4em;
 }
 
 .productos-enlaces{
@@ -392,8 +413,8 @@ footer{
 }
 
 .precio{
-  float: right;
-  margin-right: .3em;
+  float: left;
+  margin-left: 40%;
   font-weight: bold;
   margin-top: -1em;
   color: green;
@@ -401,7 +422,7 @@ footer{
 
 .precio-anterior{
   float: right;
-  margin-right: 2em;
+  margin-right: .3em;
   font-weight: bold;
   margin-top: -1em;
   color: grey;
@@ -515,7 +536,7 @@ footer{
 }
 
 .restar-producto{
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.8);
   font-weight: bold;
   float: left;
   width: 1.8em;
@@ -527,8 +548,12 @@ footer{
   width: 3em;
 }
 
+.nombre-producto{
+  margin-bottom: .5em;
+}
+
 .sumar-producto{
-  background-color: green;
+  background-color: rgba(0, 128, 0, 0.8);
   font-weight: bold;
   float: left;
   width: 1.8em;
@@ -536,13 +561,13 @@ footer{
 }
 
 .centrar-sumarproducto{
-  margin-left: 25%;
+  margin-left: 4%;
   margin-top: 0.8em;
   display: none;
 }
 
 .productos:hover .centrar-sumarproducto {
-  display: block;
+  display: inline-block;
 }
 
 .centrar-sumarproducto-descuento{
