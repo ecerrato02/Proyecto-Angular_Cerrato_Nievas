@@ -18,5 +18,6 @@ export const routes: Routes = [
   {path: 'formulario-contactos', component:FormularioContactosComponent},
   {path: 'formulario-registro', component:FormularioRegistroComponent},
   {path: 'productos', component:ProductosComponent},
+  {path: 'productos/:id', component:ProductosComponent},
 
 ];

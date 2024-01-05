@@ -55,16 +55,17 @@
 </div>
 
 <div class="todos-productos">
-  <div *ngFor="let producto of arrayProductos" class="productos"><a class="productos-enlaces" routerLink="/productos" routerLinkActive="Active">
+  <div *ngFor="let producto of arrayProductos" class="productos">
+    <a (click)="verDetalleProducto(producto.idProducto)" class="productos-enlaces" routerLinkActive="Active">
     <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% dto.</div>
     <img alt="Imagen Productos" class="imagen-productos" src='{{producto.fotoProducto}}'>
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>
     <div *ngIf="producto.descuentoProducto">
-      <p class="precio">{{Number((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)}}€</p>
-      <p class="precio-anterior">{{producto.precioProducto}}€</p>
+      <p class="precio">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
+      <p class="precio-anterior">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
     </div>
     <div *ngIf="!producto.descuentoProducto">
-      <p class="precio">{{producto.precioProducto}}€</p>
+      <p class="precio">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
     </div>
     <input type="hidden" value="{{producto.categoriaProducto}}">
     <input type="hidden" value="{{producto.idProducto}}">

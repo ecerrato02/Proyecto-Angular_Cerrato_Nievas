@@ -1,30 +1,50 @@
-<img src="" alt="Imagen Producto">
-<h2>CS2</h2>
-<p>Descripción corta</p>
-<label>Plataforma: </label>
-<select>
-  <option>PC - Steam</option>
-  <option>PC - Ubisoft</option>
-  <option>Nintendo Switch</option>
-  <option>XBOX</option>
-  <option>PlayStation 4</option>
-  <option>PlayStation 5</option>
-</select>
-<p>Precio</p>
-<p>Descripción Larga</p>
-<div>
-  <div>
-    <p>Hardware Mínimo: </p>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
+<div id="informacion-basica">
+  <img id="imagen-juegos" src="{{producto.fotoProducto}}" alt="Imagen Producto">
+  <h2>{{producto.nombreProducto}}</h2>
+  <p>{{producto.descripcionProducto}}</p>
+  <div class="en-linea">
+    <label>Plataforma: </label>
+    <select>
+      <option *ngIf="producto.steamProducto">PC - Steam</option>
+      <option *ngIf="producto.ubisoftProducto">PC - Ubisoft</option>
+      <option *ngIf="producto.switchProducto">Nintendo Switch</option>
+      <option *ngIf="producto.xboxProducto">XBOX</option>
+      <option *ngIf="producto.ps4Producto">PlayStation 4</option>
+      <option *ngIf="producto.ps5Producto">PlayStation 5</option>
+    </select>
   </div>
-  <div>
-    <p>Hardware Recomendado: </p>
+  <div class="en-linea">
+    <p id="precio-producto">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
   </div>
 </div>
+<div id="espacio-derechoProductos">
+  <h4>CS2</h4>
+  <p id="descripcion-larga">{{producto.descripcionLargarProducto}}</p>
+  <div>
+    <div class="hardware">
+      <p>Hardware Mínimo: </p>
+      <ul>
+        <li>Sistema Operativo: Windows 10/11 o Ubuntu 20.04.</li>
+        <li>Procesador: CPU de 4 subprocesos - Intel® Core™ i5 750 o superior.</li>
+        <li>Memoria: 8 GB de RAM.</li>
+        <li>Gráficos: La tarjeta gráfica de ser de al menos 1 GB y debe ser compatible con DirectX 11 y Shader Model 5.0.</li>
+        <li>DirectX: Versión 11</li>
+      </ul>
+    </div>
+    <div class="hardware" *ngIf="producto.hardwareRecomendadoProducto">
+      <p>Hardware Recomendado: </p>
+      <ul>
+        <li>Sistema Operativo: </li>
+        <li>Procesador: </li>
+        <li>Memoria: </li>
+        <li>Gráficos: </li>
+      </ul>
+    </div>
+  </div>
+  <div id="final-pag"></div>
+</div>
+
+<div *ngIf="mensajeError" class="error">
+  {{ mensajeError }}
+</div>
+
