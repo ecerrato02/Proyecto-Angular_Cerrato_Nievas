@@ -1,0 +1,55 @@
+#imagen-juegos{
+  width: 20em;
+  float: left;
+  border-radius: 3em 0 0 3em;
+  margin-right: 3em;
+}
+
+#informacion-basica{
+  width: 70%;
+  background-color: rgba(204, 204, 204, 0.3);
+  display: inline-block;
+  margin-left: 14%;
+  margin-top: 2em;
+  border-radius: 3em 0 0 3em;
+}
+
+#descripcion-larga{
+
+}
+
+#espacio-derechoProductos{
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 3em;
+}
+
+#precio-producto{
+  font-weight: bold;
+  color: green;
+  float: left;
+  margin-left: 4em;
+  margin-bottom: 8em;
+}
+
+
+#precio-anterior-producto{
+  font-weight: bold;
+  color: grey;
+  text-decoration: line-through;
+}
+
+.en-linea{
+  display: inline-block;
+}
+
+.hardware{
+  width: 46%;
+  float: left;
+}
+
+#final-pag{
+  height: 1em;
+  width: 100%;
+  display: inline-block;
+}

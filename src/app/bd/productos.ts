@@ -1,0 +1,44 @@
+export class productos{
+  idProducto = 0;
+  fotoProducto = "";
+  nombreProducto = "";
+  descripcionProducto = "";
+  descripcionLargarProducto = "";
+  categoriaProducto = 0;
+  precioProducto = 0;
+  descuentoProducto = false;
+  porcentajeDescuentoProducto = 0;
+  hardwareRecomendadoProducto = false;
+  steamProducto = false;
+  ubisoftProducto = false;
+  switchProducto = false;
+  xboxProducto = false;
+  ps4Producto = false;
+  ps5Producto = false;
+  soRecomendadoProducto = "";
+  procesadorRecomendadoProducto = "";
+  memoriaRecomendadoProducto = "";
+  graficosRecomendadoProducto = "";
+  constructor(newIdProducto: number, newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string){
+    this.idProducto = newIdProducto;
+    this.fotoProducto = newFotoProducto;
+    this.nombreProducto = newNombreProducto;
+    this.descripcionProducto = newDescripcionProducto;
+    this.descripcionLargarProducto = newDescripcionLargaProducto;
+    this.categoriaProducto = newCategoriaProducto;
+    this.precioProducto = newPrecioProducto;
+    this.descuentoProducto = newDescuentoProducto;
+    this.porcentajeDescuentoProducto = newPorcentajeDescuentoProducto;
+    this.hardwareRecomendadoProducto = newHardwareRecomendadoProducto;
+    this.steamProducto = newSteamProducto;
+    this.ubisoftProducto = newUbisoftProducto;
+    this.switchProducto = newSwitchProducto;
+    this.xboxProducto = newXboxProducto;
+    this.ps4Producto = newPs4Producto;
+    this.ps5Producto = newPs5Producto;
+    this.soRecomendadoProducto = newSoRecomendadoProducto;
+    this.procesadorRecomendadoProducto = newProcesadorRecomendadoProducto;
+    this.memoriaRecomendadoProducto = newMemoriaRecomendadoProducto;
+    this.graficosRecomendadoProducto = newGraficosRecomendadoProducto;
+  }
+}

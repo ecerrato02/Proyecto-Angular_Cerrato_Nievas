@@ -42,173 +42,42 @@
     <span class="visually-hidden">Siguiente</span>
   </button>
 </div>
-
 <div class="separador"></div>
 
+<div id="filtro">
+  <label>Categoría: </label>
+  <select id="filtro-cat" (change)="filtrado()">
+    <option value="0"></option>
+    <option value="1">FPS</option>
+    <option value="2">Survival</option>
+    <option value="3">Estrategia</option>
+  </select>
+</div>
 
 <div class="todos-productos">
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
+  <div *ngFor="let producto of arrayProductos" class="productos">
+    <a (click)="verDetalleProducto(producto.idProducto)" class="productos-enlaces" routerLinkActive="Active">
+    <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% dto.</div>
+    <img alt="Imagen Productos" class="imagen-productos" src='{{producto.fotoProducto}}'>
+    <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>
+    <div *ngIf="producto.descuentoProducto">
+      <p class="precio">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
+      <p class="precio-anterior">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
+    </div>
+    <div *ngIf="!producto.descuentoProducto">
+      <p class="precio">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
+    </div>
+    <input type="hidden" value="{{producto.categoriaProducto}}">
+    <input type="hidden" value="{{producto.idProducto}}">
   </a>
     <div class="centrar-sumarproducto">
       <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <div class="porcentaje-descuento">20% dto.</div>
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p>Descripción producto de prueba</p>
-    <p class="precio">52,99€</p>
-    <p class="precio-anterior">64,99€</p>
-  </a>
-    <div class="centrar-sumarproducto-descuento">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
+      <input class="numero-productos" type="number" max="50" min="1" value="1">
       <button class="sumar-producto">+</button>
     </div>
   </div>
 </div>
-<div class="filtros">
-  <h4 id="recomendados"> Recomendados: </h4>
-  <p> <a class="enlaces-limpios" href="#">Multijugador</a> <br>
-    <a class="enlaces-limpios" href="#">Mejor valorados</a> <br>
-    <a class="enlaces-limpios" href="#">Nuevos</a> <br>
-  </p>
-
-  <h4 id="explorar"> Explorar por género: </h4>
-  <p> <a class="enlaces-limpios" href="#">Free to play</a> <br>
-    <a class="enlaces-limpios" href="#"> Acceso anticipado </a> <br>
-    <a class="enlaces-limpios" href="#"> Acción </a> <br>
-    <a class="enlaces-limpios" href="#"> Aventura </a> <br>
-    <a class="enlaces-limpios" href="#"> Casuales </a> <br>
-    <a class="enlaces-limpios" href="#"> Carreras </a> <br>
-    <a class="enlaces-limpios" href="#"> Deportes </a> <br>
-    <a class="enlaces-limpios" href="#"> Estrategia </a> <br>
-    <a class="enlaces-limpios" href="#"> Multijugador </a> <br>
-    <a class="enlaces-limpios" href="#"> Rol </a> <br>
-    <a class="enlaces-limpios" href="#"> Simulación </a> <br>
-    <a class="enlaces-limpios" href="#"> Otros </a> <br>
-  </p>
-</div>
-<div class="todos-productos">
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-</div>
-<div class="todos-productos">
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-  <div class="productos"><a class="productos-enlaces" href="">
-    <img alt="Imagen Productos" class="imagen-productos" src="./assets/logo-BD.png">
-    <h3>Producto prueba</h3>
-    <p class="descripcion">Descripción producto de prueba</p>
-    <p class="precio">29,99€</p>
-  </a>
-    <div class="centrar-sumarproducto">
-      <button class="restar-producto">-</button>
-      <input class="numero-productos" type="number" max="50">
-      <button class="sumar-producto">+</button>
-    </div>
-  </div>
-</div>
-<div class="separador"></div>
+<div class="separador-dos"></div>
 <div class="separar-inicio"></div>
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">

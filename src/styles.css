@@ -154,22 +154,6 @@ footer{
   background-color: rgba(141, 141, 141, 0.42);
 }
 
-.todos-productos{
-  display: flex;
-  flex-direction: row;
-  float: left;
-}
-
-.productos{
-  text-align: center;
-  width: 18em;
-  margin-left: 4.5em;
-  margin-bottom: 2em;
-  margin-top: 1.9em;
-  padding: 2em;
-  border-radius: .2em;
-}
-
 .iconos{
   width: 1.5em;
   height: auto;
@@ -390,23 +374,6 @@ footer{
 
 .descripcion{
   display: inline-block;
-}
-
-.precio{
-  float: right;
-  margin-right: .3em;
-  font-weight: bold;
-  margin-top: -1em;
-  color: green;
-}
-
-.precio-anterior{
-  float: right;
-  margin-right: 2em;
-  font-weight: bold;
-  margin-top: -1em;
-  color: grey;
-  text-decoration: line-through;
 }
 
 .porcentaje-descuento{
