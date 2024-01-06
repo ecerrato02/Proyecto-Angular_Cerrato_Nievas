@@ -11,12 +11,12 @@ body{
 
 #lupa-busqueda{
   width: 1em;
-  height: 1em;
+  height: .9em;
 }
 
 .btn-outline-success{
-  width: 6em;
-  height: auto;
+  width: 3em;
+  height: 2.3em;
 }
 
 .btn-outline-success:hover{
