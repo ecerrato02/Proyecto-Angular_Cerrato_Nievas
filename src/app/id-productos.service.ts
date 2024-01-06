@@ -63,7 +63,7 @@ export class IdProductosService {
     }
   }
 
-  agregarUnaUnidadCarrito(idProducto: number, cantidad: number): void {
+  agregarUnaUnidadCarrito(idProducto: number, cantidad: number) {
     const productoCompleto = this.obtenerProductoPorId(idProducto);
     if (productoCompleto) {
       productoCompleto.cantidadProducto = cantidad;
