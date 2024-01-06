@@ -24,7 +24,8 @@ export class productos{
   memoriaRecomendadoProducto = "";
   graficosRecomendadoProducto = "";
   videoProducto = "";
-  constructor(newIdProducto: number, newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string){
+  cantidadProducto = 0;
+  constructor(newIdProducto: number, newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string, newCantidadProducto: number){
     this.idProducto = newIdProducto;
     this.fotoProducto = newFotoProducto;
     this.nombreProducto = newNombreProducto;
@@ -50,5 +51,6 @@ export class productos{
     this.memoriaRecomendadoProducto = newMemoriaRecomendadoProducto;
     this.graficosRecomendadoProducto = newGraficosRecomendadoProducto;
     this.videoProducto = newVideoProducto;
+    this.cantidadProducto = newCantidadProducto;
   }
 }

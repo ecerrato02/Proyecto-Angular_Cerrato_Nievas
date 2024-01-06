@@ -20,6 +20,8 @@
   <div *ngIf="producto.descuentoProducto">
     <p id="precio-anterior-producto">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
   </div>
+  <input type="number" [(ngModel)]="producto.cantidadProducto" min="1" value="1">
+  <button id="agregarAlCarrito" (click)="agregarProductoAlCarrito(producto)">Añadir al carrito</button>
 
 </div>
 <div id="espacio-derechoProductos">
@@ -38,10 +40,10 @@
     <div class="hardware" *ngIf="producto.hardwareRecomendadoProducto">
       <p class="subrayado negrita">Hardware Recomendado: </p>
       <ul>
-        <li>Sistema Operativo: </li>
-        <li>Procesador: </li>
-        <li>Memoria: </li>
-        <li>Gráficos: </li>
+        <li>Sistema Operativo: {{producto.soRecomendadoProducto}}</li>
+        <li>Procesador: {{producto.procesadorRecomendadoProducto}}</li>
+        <li>Memoria: {{producto.memoriaRecomendadoProducto}}</li>
+        <li>Gráficos: {{producto.graficosRecomendadoProducto}}</li>
       </ul>
     </div>
   </div>
