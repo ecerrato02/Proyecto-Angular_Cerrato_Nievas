@@ -16,13 +16,17 @@
       <option *ngIf="producto.ps5Producto">PlayStation 5</option>
     </select>
   </div>
-  <p id="precio-producto">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
-  <div *ngIf="producto.descuentoProducto">
-    <p id="precio-anterior-producto">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
+  <div id="precios-productos">
+    <p id="precio-producto">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
+    <div *ngIf="producto.descuentoProducto">
+      <p id="precio-anterior-producto">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
+    </div>
   </div>
-  <input type="number" [(ngModel)]="producto.cantidadProducto" min="1" value="1">
-  <button id="agregarAlCarrito" (click)="agregarProductoAlCarrito(producto)">Añadir al carrito</button>
-
+  <br>
+  <div id="agregar-carrito">
+    <input id="cantidadAgregar" type="number" [(ngModel)]="producto.cantidadProducto" min="1" max="50" value="1">
+    <button id="agregarAlCarrito" (click)="agregarProductoAlCarrito(producto)">AÑADIR AL CARRITO</button>
+  </div>
 </div>
 <div id="espacio-derechoProductos">
   <h4 class="subrayado">{{producto.nombreProducto}}:</h4>

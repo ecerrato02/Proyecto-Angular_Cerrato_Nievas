@@ -38,7 +38,6 @@
   float: left;
   margin-right: 4em;
   font-size: 1.5em;
-  margin-top: .5em;
 }
 
 
@@ -47,7 +46,6 @@
   color: grey;
   text-decoration: line-through;
   font-size: 1.5em;
-  margin-top: .5em;
 }
 
 .en-linea{
@@ -63,6 +61,36 @@
   height: 1em;
   width: 100%;
   display: inline-block;
+}
+
+#agregar-carrito{
+  width: 100%;
+}
+
+#agregarAlCarrito{
+  background-color: green;
+  font-weight: bold;
+  border-left: none;
+}
+
+#cantidadAgregar{
+  width: 3em;
+  background-color: transparent;
+  border-top: .15em solid black;
+  border-bottom: .15em solid black;
+  border-left: .15em solid black;
+}
+
+#cantidadAgregar:focus{
+  outline: none;
+}
+
+#agregarAlCarrito:hover{
+  transform: scale(1.05);
+}
+
+#precios-productos{
+  width: 100%;
 }
 
 #descuento-producto{
