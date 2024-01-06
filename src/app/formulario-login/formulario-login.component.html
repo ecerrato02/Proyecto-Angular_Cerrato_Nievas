@@ -1,35 +1,23 @@
 <div class="container">
   <div class="forms">
     <div class="form login">
-      <img src="./assets/logo-BD.png" width="70" height="70">
+      <img src="./assets/logo-BD.png" alt="logo" width="70" height="70">
       <span class="title"> Black Diamond </span>
 
-      <form action="#">
+      <form>
         <div class="input-field">
-          <input type="email" placeholder="Introduce tu email" required>
+          <input id="email" type="email" placeholder="Introduce tu email" required>
           <i class="fa-solid fa-user icon"></i>
         </div>
 
         <div class="input-field">
-          <input type="password" placeholder="Contraseña" required>
+          <input id="password" type="password" placeholder="Contraseña" required>
           <i class="fa-solid fa-lock icon"></i>
         </div>
 
-
-        <div class="checkbox-text">
-          <div class="checkbox-content">
-            <input type="checkbox" id="logCheck">
-            <label
-              for="logCheck" class="text"> Recuérdame </label>
-          </div>
-
-          <a href="" class="text">¿Has olvidado tu contraseña?</a>
-        </div>
-
         <div class="input-field button">
-          <input type="button" value="Iniciar Sesión">
+          <input type="button" value="Iniciar Sesión" (click)="login()">
         </div>
-
       </form>
 
       <div class="login-signup">

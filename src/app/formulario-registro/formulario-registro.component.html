@@ -9,12 +9,12 @@
 
         <tr>
           <td align="center"> <label > Nombre: </label>
-            <input type="text" id="Nombre" name="Nombre"> </td>
+            <input type="text" id="nombre" name="Nombre"> </td>
         </tr>
 
         <tr>
           <td align="center"> <label > Apellidos: </label>
-            <input type="text" id="Apellidos" name="Apellidos"> </td>
+            <input type="text" id="apellidos" name="Apellidos"> </td>
         </tr>
 
         <tr>
@@ -35,20 +35,21 @@
 
         <tr>
           <td align="center"><label >Email: </label>
-            <input type="email" id="Email" name="Email"> </td>
+            <input type="email" id="email" name="Email"> </td>
         </tr>
 
         <tr>
           <td align="center"> <label > Contraseña: </label>
-            <input type="password" id="contra" name="Contraseña"> </td>
+            <input type="password" id="password" name="Contraseña"> </td>
         </tr>
 
       </table>
 
       <div class="input-field button">
-        <input type="button" value="Registrarse">
+        <input type="submit" value="Registrarse" (click)="registrarUsuario()">
       </div>
       </form>
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>

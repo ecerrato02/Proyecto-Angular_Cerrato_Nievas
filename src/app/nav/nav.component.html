@@ -34,7 +34,8 @@
         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success" type="submit"><img id="lupa-busqueda" alt="Lupa Busqueda" src="./assets/lupa.png"></button>
         <a class="carrito-boton" routerLink="carrito" routerLinkActive="active"><img class="carro-imagen" alt="Carrito compra" src="./assets/carrito-negro.png"></a>
-        <a class="inicio-sesion" routerLink="formulario-login" routerLinkActive="Active">Iniciar Sesión</a>
+        <a *ngIf="sessionStorage.getItem('inicio')!=  'inicio correcto' " class="inicio-sesion" routerLink="formulario-login">Iniciar Sesión</a>
+        <a *ngIf="sessionStorage.getItem('inicio') ===  'inicio correcto' " class="inicio-sesion" routerLink="formulario-login" (click)="cerrarSesion()">Cerrar Sesión</a>
       </form>
     </div>
   </div>
