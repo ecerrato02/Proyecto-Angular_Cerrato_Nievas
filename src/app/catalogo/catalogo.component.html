@@ -7,21 +7,9 @@
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="https://gaming-cdn.com/img/products/6842/hcover/1920x620/6842.jpg?v=1696933764" class="bd-placeholder-img" width="100%" height="100%">
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1>Juegos más vendidos</h1>
-          <p class="boton-vermas"><a class="btn btn-lg btn-primary" href="#">Ver Más</a></p>
-        </div>
-      </div>
     </div>
     <div class="carousel-item">
       <img src="https://gaming-cdn.com/img/products/12715/hcover/1920x620/12715.jpg?v=1697010471" class="bd-placeholder-img" width="100%" height="100%">
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1>Juegos mejor valorados</h1>
-          <p class="boton-vermas"><a class="btn btn-lg btn-primary" href="#">Ver más</a></p>
-        </div>
-      </div>
     </div>
     <!--            <div class="carousel-item">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
@@ -52,7 +40,10 @@
       <option value="3">Estrategia</option>
     </select>
   </div>
+  <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit"><img id="lupa-busqueda" alt="Lupa Busqueda" src="./assets/lupa.png"></button>
 </div>
+
 
 <div class="todos-productos">
   <div *ngFor="let producto of arrayProductos" class="productos">
