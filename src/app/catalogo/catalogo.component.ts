@@ -5,6 +5,7 @@ import { productos } from '../bd/productos';
 import { Router } from '@angular/router';
 import { ProductosComponent } from "../productos/productos.component";
 import { IdProductosService } from "../id-productos.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-catalogo',
@@ -14,7 +15,8 @@ import { IdProductosService } from "../id-productos.service";
     NgForOf,
     NgIf,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    FormsModule
   ],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
@@ -49,4 +51,19 @@ export class CatalogoComponent {
 
   protected readonly Math = Math;
   protected readonly Number = Number;
+
+  filtroBusqueda: string = '';
+  filtrarProductos() {
+    // Si el valor de búsqueda está vacío, mostrar todos los productos
+    if (!this.filtroBusqueda.trim()) {
+      this.arrayProductos = [...this.todosLosProductos];
+      return;
+    }
+
+    // Lógica para filtrar productos según la cadena de búsqueda
+    this.arrayProductos = this.todosLosProductos.filter(producto =>
+      producto.nombreProducto.toLowerCase().includes(this.filtroBusqueda.toLowerCase())
+    );
+  }
+
 }

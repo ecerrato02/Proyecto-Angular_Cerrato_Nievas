@@ -6,6 +6,9 @@ import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 })
 export class UsuariosService {
   usuarios: any[][]
+
+  private sessionStorageKey = 'productos';
+
   constructor() {
     const usuariosRegistrados = sessionStorage.getItem('usuarios')
     this.usuarios = usuariosRegistrados ? JSON.parse(usuariosRegistrados):[[],[]]
@@ -22,5 +25,15 @@ export class UsuariosService {
         sessionStorage.setItem('inicio', 'inicio correcto')
       }
     }
+  }
+  getProducts(): any[] {
+    const productsJson = sessionStorage.getItem(this.sessionStorageKey);
+    return productsJson ? JSON.parse(productsJson) : [];
+  }
+
+  addProduct(product: any): void {
+    const products = this.getProducts();
+    products.push(product);
+    sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(products));
   }
 }
