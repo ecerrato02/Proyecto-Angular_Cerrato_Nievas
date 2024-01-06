@@ -3,6 +3,7 @@ import {NgIf} from "@angular/common";
 import { CatalogoComponent } from "../catalogo/catalogo.component";
 import { IdProductosService } from "../id-productos.service";
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-productos',
@@ -17,7 +18,11 @@ export class ProductosComponent implements OnInit {
   producto: any;
   mensajeError: string | null = null;
 
-  constructor(private route: ActivatedRoute, private idProductosService: IdProductosService) { }
+  constructor(private route: ActivatedRoute, private idProductosService: IdProductosService, private segura: DomSanitizer) { }
+
+  getSafeUrl(url: string) {
+    return this.segura.bypassSecurityTrustResourceUrl(url);
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -30,4 +35,6 @@ export class ProductosComponent implements OnInit {
       }
     });
   }
+
+  protected readonly Number = Number;
 }

@@ -1,4 +1,7 @@
 <div id="informacion-basica">
+  <div *ngIf="producto.descuentoProducto" id="descuento-producto">
+    <p id="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</p>
+  </div>
   <img id="imagen-juegos" src="{{producto.fotoProducto}}" alt="Imagen Producto">
   <h2>{{producto.nombreProducto}}</h2>
   <p>{{producto.descripcionProducto}}</p>
@@ -13,26 +16,27 @@
       <option *ngIf="producto.ps5Producto">PlayStation 5</option>
     </select>
   </div>
-  <div class="en-linea">
-    <p id="precio-producto">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
+  <p id="precio-producto">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
+  <div *ngIf="producto.descuentoProducto">
+    <p id="precio-anterior-producto">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
   </div>
+
 </div>
 <div id="espacio-derechoProductos">
-  <h4>CS2</h4>
+  <h4 class="subrayado">{{producto.nombreProducto}}:</h4>
   <p id="descripcion-larga">{{producto.descripcionLargarProducto}}</p>
   <div>
     <div class="hardware">
-      <p>Hardware Mínimo: </p>
+      <p class="subrayado negrita">Hardware Mínimo: </p>
       <ul>
-        <li>Sistema Operativo: Windows 10/11 o Ubuntu 20.04.</li>
-        <li>Procesador: CPU de 4 subprocesos - Intel® Core™ i5 750 o superior.</li>
-        <li>Memoria: 8 GB de RAM.</li>
-        <li>Gráficos: La tarjeta gráfica de ser de al menos 1 GB y debe ser compatible con DirectX 11 y Shader Model 5.0.</li>
-        <li>DirectX: Versión 11</li>
+        <li>Sistema Operativo: {{producto.soMinimoProducto}}</li>
+        <li>Procesador: {{producto.procesadorMinimoProducto}}</li>
+        <li>Memoria: {{producto.memoriaMinimoProducto}}</li>
+        <li>Gráficos: {{producto.graficosMinimoProducto}}</li>
       </ul>
     </div>
     <div class="hardware" *ngIf="producto.hardwareRecomendadoProducto">
-      <p>Hardware Recomendado: </p>
+      <p class="subrayado negrita">Hardware Recomendado: </p>
       <ul>
         <li>Sistema Operativo: </li>
         <li>Procesador: </li>
@@ -40,6 +44,9 @@
         <li>Gráficos: </li>
       </ul>
     </div>
+  </div>
+  <div id="video-producto">
+    <iframe width="1000" height="600" [src]="getSafeUrl(producto.videoProducto)" [title]="producto.nombreProducto" allow="accelerometer; gyroscope;" allowfullscreen></iframe>
   </div>
   <div id="final-pag"></div>
 </div>

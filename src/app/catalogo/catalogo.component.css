@@ -1,128 +1,4 @@
-body{
-  position: relative;
-  padding-bottom: 8em;
-  min-height: 100vh;
-}
 
-#tamano-logo{
-  width: 6em;
-}
-
-#lupa-busqueda{
-  width: 1em;
-  height: 1em;
-}
-
-.btn-outline-success{
-  width: 6em;
-  height: auto;
-}
-
-.btn-outline-success:hover{
-  transform: scale(1.08);
-}
-
-.inicio-sesion{
-  height: auto;
-  margin-left: .3em;
-  width: 12em;
-  border-radius: .3em;
-  border: 0.1em solid rgba(0, 51, 255, 0.45);
-  text-decoration: none;
-  color: black;
-  padding: .5em;
-}
-
-.inicio-sesion:hover{
-  background-color: rgba(0, 51, 255, 0.45);
-  color: white;
-  transform: scale(1.04);
-}
-
-footer{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  height: auto;
-  background-color: white;
-  margin: 0;
-  padding-right: 1%;
-  padding-left: 1%;
-}
-
-.logo-carrito{
-  width: 8em;
-  height: 7em;
-}
-
-/*Formularios */
-
-#Nombre{
-  margin-bottom: 10px;
-  float: right;
-}
-#Apellidos{
-  margin-bottom: 10px;
-  float: right;
-}
-#Telefono{
-  margin-bottom: 10px;
-  float: right;
-}
-#Hombre{
-  margin-bottom: 10px;
-}
-#Mujer{
-  margin-bottom: 10px;
-}
-#Otros{
-  margin-bottom: 10px;
-}
-#Email{
-  margin-bottom: 10px;
-  float: right;
-}
-#contra{
-  margin-bottom: 10px;
-  float: right;
-}
-#notif{
-  margin-bottom: 10px;
-  float: right;
-}
-#asunto{
-  margin-bottom: 10px;
-  float: right;
-}
-
-/* Inicio */
-
-.filtros{
-  padding: .5em;
-  padding-bottom: .1em;
-  float: right;
-  width: 22%;
-  position: relative;
-  margin-top: 0;
-  margin-right: .5em;
-  background-color: rgba(211, 211, 211, 0.35);
-}
-#novrec {
-  font-weight: bold;
-  padding: .6em .3em;
-  font-family: sans-serif;
-}
-
-.enlaces-limpios{
-  text-decoration: none;
-  color: black;
-}
-
-.enlaces-limpios:hover{
-  font-weight: bold;
-  transform: scale(1.02);
-  color: rgba(0, 0, 0, 0.68);
-}
 
 /*carrito*/
 
@@ -147,11 +23,10 @@ footer{
 }
 
 .separador{
-  padding-top: .5em;
-  height: 5em;
+  padding: 1em;
   display: inline-block;
   width: 100%;
-  background-color: rgba(141, 141, 141, 0.42);
+  background-color: rgba(173, 173, 173, 0.5);
 }
 
 .separador-dos{
@@ -161,11 +36,6 @@ footer{
   display: inline-block;
   width: 100%;
   background-color: rgba(141, 141, 141, 0.42);
-}
-
-#filtro{
-  float: right;
-  margin-right: 5em;
 }
 
 .todos-productos{
@@ -179,23 +49,58 @@ footer{
   margin: 0 auto;
 }
 
+.separador {
+  padding: 1em;
+  display: inline-block;
+  width: 100%;
+  background-color: rgba(173, 173, 173, 0.5);
+}
+
+.selector-categorias {
+  float: right;
+  margin-right: 1em;
+}
+
+#cat {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: .5em;
+}
+
+#filtro-cat {
+  width: 17em;
+  padding: .3em .8em;
+  border: none;
+  background-color: #FFF;
+  font-size: 18px;
+  color: #333;
+}
+
+#filtro-cat:focus {
+  outline: none;
+}
+
+.selector-categorias::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, #F7E7D3, #FFFAEE);
+}
+
 .productos{
   text-align: center;
   width: 18em;
+  height: 20em;
   margin-left: 4.5em;
   margin-top: 1.9em;
-  padding: 2em;
-  border-radius: .2em;
+  margin-bottom: 3em;
+  border-radius: .6em;
   transition: transform 0.3s ease-out;
-}
-
-.iconos{
-  width: 1.5em;
-  height: auto;
-}
-
-.iconos:hover{
-  transform: scale(1.05);
 }
 
 .productos:hover{
@@ -212,6 +117,7 @@ footer{
 .imagen-productos{
   width: 100%;
   height: auto;
+  border-radius: .6em .6em 0 0;
 }
 
 /* Since positioning the image, we need to help out the caption */
@@ -430,14 +336,34 @@ footer{
 }
 
 .porcentaje-descuento{
-  padding: .4em;
-  border-radius: .8em;
+  padding: .2em;
+  border-radius: .6em;
   background-color: red;
   color: white;
   font-weight: bold;
   position: absolute;
-  margin-left: 11em;
+  margin-left: 13.3em;
+  margin-top: -.2em;
   z-index: 1;
+  animation: latido 1s infinite;
+}
+
+@keyframes latido {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 #logo-inicio{
@@ -550,6 +476,8 @@ footer{
 
 .nombre-producto{
   margin-bottom: .5em;
+  margin-right: .5em;
+  margin-left: .5em;
 }
 
 .sumar-producto{
@@ -561,9 +489,10 @@ footer{
 }
 
 .centrar-sumarproducto{
-  margin-left: 4%;
+  margin-left: 32%;
   margin-top: 0.8em;
   display: none;
+  width: 100%;
 }
 
 .productos:hover .centrar-sumarproducto {

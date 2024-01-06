@@ -1,5 +1,5 @@
 #imagen-juegos{
-  width: 20em;
+  width: 30%;
   float: left;
   border-radius: 3em 0 0 3em;
   margin-right: 3em;
@@ -15,7 +15,15 @@
 }
 
 #descripcion-larga{
+  text-align: justify;
+}
 
+.subrayado{
+  text-decoration: underline;
+}
+
+.negrita{
+  font-weight: bold;
 }
 
 #espacio-derechoProductos{
@@ -28,8 +36,9 @@
   font-weight: bold;
   color: green;
   float: left;
-  margin-left: 4em;
-  margin-bottom: 8em;
+  margin-right: 4em;
+  font-size: 1.5em;
+  margin-top: .5em;
 }
 
 
@@ -37,10 +46,12 @@
   font-weight: bold;
   color: grey;
   text-decoration: line-through;
+  font-size: 1.5em;
+  margin-top: .5em;
 }
 
 .en-linea{
-  display: inline-block;
+  width: 70%;
 }
 
 .hardware{
@@ -52,4 +63,45 @@
   height: 1em;
   width: 100%;
   display: inline-block;
+}
+
+#descuento-producto{
+  position: absolute;
+  margin-left: 67%;
+  margin-top: -.4em;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: .6em;
+  border-radius: .8em;
+  animation: latido 1s infinite;
+}
+
+@keyframes latido {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#porcentaje-descuento{
+  margin-bottom: 0;
+}
+
+#video-producto{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

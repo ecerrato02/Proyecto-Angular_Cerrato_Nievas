@@ -8,6 +8,10 @@ export class productos{
   precioProducto = 0;
   descuentoProducto = false;
   porcentajeDescuentoProducto = 0;
+  soMinimoProducto = "";
+  procesadorMinimoProducto = "";
+  memoriaMinimoProducto = "";
+  graficosMinimoProducto = "";
   hardwareRecomendadoProducto = false;
   steamProducto = false;
   ubisoftProducto = false;
@@ -19,7 +23,8 @@ export class productos{
   procesadorRecomendadoProducto = "";
   memoriaRecomendadoProducto = "";
   graficosRecomendadoProducto = "";
-  constructor(newIdProducto: number, newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string){
+  videoProducto = "";
+  constructor(newIdProducto: number, newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string){
     this.idProducto = newIdProducto;
     this.fotoProducto = newFotoProducto;
     this.nombreProducto = newNombreProducto;
@@ -29,6 +34,10 @@ export class productos{
     this.precioProducto = newPrecioProducto;
     this.descuentoProducto = newDescuentoProducto;
     this.porcentajeDescuentoProducto = newPorcentajeDescuentoProducto;
+    this.soMinimoProducto = newSoMinimoProducto;
+    this.procesadorMinimoProducto = newProcesadorMinimoProducto;
+    this.memoriaMinimoProducto = newMemoriaMinimoProducto;
+    this.graficosMinimoProducto = newGraficosMinimoProducto;
     this.hardwareRecomendadoProducto = newHardwareRecomendadoProducto;
     this.steamProducto = newSteamProducto;
     this.ubisoftProducto = newUbisoftProducto;
@@ -40,5 +49,6 @@ export class productos{
     this.procesadorRecomendadoProducto = newProcesadorRecomendadoProducto;
     this.memoriaRecomendadoProducto = newMemoriaRecomendadoProducto;
     this.graficosRecomendadoProducto = newGraficosRecomendadoProducto;
+    this.videoProducto = newVideoProducto;
   }
 }

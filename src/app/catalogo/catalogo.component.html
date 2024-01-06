@@ -42,22 +42,22 @@
     <span class="visually-hidden">Siguiente</span>
   </button>
 </div>
-<div class="separador"></div>
-
-<div id="filtro">
-  <label>Categoría: </label>
-  <select id="filtro-cat" (change)="filtrado()">
-    <option value="0"></option>
-    <option value="1">FPS</option>
-    <option value="2">Survival</option>
-    <option value="3">Estrategia</option>
-  </select>
+<div class="separador">
+  <div class="selector-categorias">
+    <label id="cat" for="filtro-cat">Filtrar por categoría:</label>
+    <select id="filtro-cat" (change)="filtrado()">
+      <option value="0">Todos</option>
+      <option value="1">FPS</option>
+      <option value="2">Survival</option>
+      <option value="3">Estrategia</option>
+    </select>
+  </div>
 </div>
 
 <div class="todos-productos">
   <div *ngFor="let producto of arrayProductos" class="productos">
     <a (click)="verDetalleProducto(producto.idProducto)" class="productos-enlaces" routerLinkActive="Active">
-    <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% dto.</div>
+    <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</div>
     <img alt="Imagen Productos" class="imagen-productos" src='{{producto.fotoProducto}}'>
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>
     <div *ngIf="producto.descuentoProducto">
@@ -70,11 +70,11 @@
     <input type="hidden" value="{{producto.categoriaProducto}}">
     <input type="hidden" value="{{producto.idProducto}}">
   </a>
-    <div class="centrar-sumarproducto">
+    <!--<div class="centrar-sumarproducto">
       <button class="restar-producto">-</button>
       <input class="numero-productos" type="number" max="50" min="1" value="1">
       <button class="sumar-producto">+</button>
-    </div>
+    </div>-->
   </div>
 </div>
 <div class="separador-dos"></div>
