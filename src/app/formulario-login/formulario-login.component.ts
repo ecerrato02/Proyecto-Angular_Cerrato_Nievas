@@ -29,7 +29,8 @@ export class FormularioLoginComponent {
     this.userServ.login(emailElement, passwordElement)
     if (sessionStorage.getItem('inicio') === 'inicio correcto'){
       console.log(emailElement, passwordElement)
-      this.router.navigate(['/catalogo'])
+      this.router.navigate([''])
     }
+    else alert('Los parámetros son incorrectos, inténtalo de nuevo')
   }
 }
