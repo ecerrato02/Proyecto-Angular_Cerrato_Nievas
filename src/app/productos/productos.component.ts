@@ -4,12 +4,15 @@ import { CatalogoComponent } from "../catalogo/catalogo.component";
 import { IdProductosService } from "../id-productos.service";
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import {FormsModule} from "@angular/forms";
+import {productos} from "../bd/productos";
 
 @Component({
   selector: 'app-productos',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    FormsModule
   ],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
@@ -19,6 +22,10 @@ export class ProductosComponent implements OnInit {
   mensajeError: string | null = null;
 
   constructor(private route: ActivatedRoute, private idProductosService: IdProductosService, private segura: DomSanitizer) { }
+
+  agregarProductoAlCarrito(producto: productos) {
+    this.idProductosService.agregarAlCarrito(producto);
+  }
 
   getSafeUrl(url: string) {
     return this.segura.bypassSecurityTrustResourceUrl(url);
@@ -34,6 +41,7 @@ export class ProductosComponent implements OnInit {
         this.producto = null;
       }
     });
+
   }
 
   protected readonly Number = Number;

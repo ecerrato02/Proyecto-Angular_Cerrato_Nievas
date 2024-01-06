@@ -16,6 +16,99 @@
   transform: scale(1.08);
 }
 
+.trash-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.trash-icon i.fa-trash {
+  color: black;
+  font-size: 1em;
+}
+
+.trash-icon:hover i.fa-trash {
+  color: red;
+  animation: temblor 1s ease-in-out infinite;
+  animation-iteration-count: 1;
+}
+
+@keyframes temblor {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.producto-eliminado {
+  animation: desaparecer 1s ease-in-out;
+}
+
+#eliminar-una-unidad-btn.eliminar-una-unidad {
+  background-color: transparent;
+  color: black;
+  border: 0;
+  padding: 0.25em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.75em;
+  margin: 0.25em 0.125em;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#eliminar-una-unidad-btn.eliminar-una-unidad:hover {
+  color: #f44336;
+}
+
+.eliminar-una-unidad .icono-eliminar {
+  color: black;
+  font-size: 1em;
+}
+
+#eliminar-una-unidad-btn.eliminar-una-unidad:hover .icono-eliminar {
+  color: #f44336;
+}
+
+#agregar-una-unidad-btn.agregar-una-unidad {
+  background-color: transparent;
+  color: black;
+  border: 0;
+  padding: 0.25em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.75em;
+  margin: 0.25em 0.125em;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#agregar-una-unidad-btn.agregar-una-unidad:hover {
+  color: #4CAF50;
+}
+
+.agregar-una-unidad .icono-agregar {
+  color: black;
+  font-size: 1em;
+}
+
+#agregar-una-unidad-btn.agregar-una-unidad:hover .icono-agregar {
+  color: #4CAF50;
+}
+
+@keyframes desaparecer {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.precios{
+  margin-left: .5em;
+}
+
+.my-0{
+  width: 30%;
+}
+
 .inicio-sesion{
   height: auto;
   margin-left: .3em;
