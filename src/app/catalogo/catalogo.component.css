@@ -69,7 +69,7 @@
 .form-control{
   width: 15%;
   float: left;
-  height: 2.1em;
+  height: 2.15em;
   margin-right: 0;
   border-radius: 1em 0 0 1em;
   border: .1em solid rgba(0, 0, 0, 0.5);
@@ -79,7 +79,7 @@
 .btn-outline-success{
   border-radius: 0 1em 1em 0;
   margin-left: -.5em;
-  height: 2.1em;
+  height: 2.15em;
   padding: .1em;
   padding-bottom: .2em;
   border-left: 0 solid black;
