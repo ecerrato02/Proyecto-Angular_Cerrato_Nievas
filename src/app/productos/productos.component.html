@@ -28,6 +28,11 @@
     <button id="agregarAlCarrito" (click)="agregarProductoAlCarrito(producto)">AÑADIR AL CARRITO</button>
   </div>
 </div>
+<div id="espace">
+  <div *ngIf="agregadoCorrectamente" id="correctAdd">
+    <p>¡<span class="negrita">{{producto.nombreProducto}}</span> se ha agregado al carrito correctamente!</p>
+  </div>
+</div>
 <div id="espacio-derechoProductos">
   <h4 class="subrayado">{{producto.nombreProducto}}:</h4>
   <p id="descripcion-larga">{{producto.descripcionLargarProducto}}</p>

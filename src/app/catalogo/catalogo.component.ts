@@ -54,13 +54,11 @@ export class CatalogoComponent {
 
   filtroBusqueda: string = '';
   filtrarProductos() {
-    // Si el valor de búsqueda está vacío, mostrar todos los productos
     if (!this.filtroBusqueda.trim()) {
       this.arrayProductos = [...this.todosLosProductos];
       return;
     }
 
-    // Lógica para filtrar productos según la cadena de búsqueda
     this.arrayProductos = this.todosLosProductos.filter(producto =>
       producto.nombreProducto.toLowerCase().includes(this.filtroBusqueda.toLowerCase())
     );

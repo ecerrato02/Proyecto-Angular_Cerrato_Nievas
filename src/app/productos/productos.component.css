@@ -40,6 +40,21 @@
   font-size: 1.5em;
 }
 
+#espace{
+  margin-top: 2em;
+  height: 4em;
+}
+
+#correctAdd{
+  background-color: rgba(211, 211, 211, 0.34);
+  border: 0.001em solid black;
+  border-left: 0.3em solid green;
+  padding-left: .5em;
+  padding-right: .5em;
+  width: 25%;
+  margin: auto;
+  height: auto;
+}
 
 #precio-anterior-producto{
   font-weight: bold;

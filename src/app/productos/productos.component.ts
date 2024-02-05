@@ -20,11 +20,16 @@ import {productos} from "../bd/productos";
 export class ProductosComponent implements OnInit {
   producto: any;
   mensajeError: string | null = null;
+  agregadoCorrectamente = false;
 
   constructor(private route: ActivatedRoute, private idProductosService: IdProductosService, private segura: DomSanitizer) { }
 
   agregarProductoAlCarrito(producto: productos) {
     this.idProductosService.agregarAlCarrito(producto);
+    this.agregadoCorrectamente = true;
+    setTimeout(() => {
+      this.agregadoCorrectamente = false;
+    }, 5000);
   }
 
   getSafeUrl(url: string) {
