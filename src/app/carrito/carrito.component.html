@@ -34,7 +34,7 @@
             <h6 class="my-0">{{producto.nombreProducto}} - Cantidad: {{producto.cantidadProducto}}</h6>
             <p class="precios">{{Number(producto.precioProducto.toFixed(2)).toLocaleString('es-ES')}}€</p>
             <p class="">{{Number((producto.precioProducto * producto.cantidadProducto).toFixed(2)).toLocaleString('es-ES')}}€</p>
-            <button id="eliminar-una-unidad-btn" class="eliminar-una-unidad" (click)="eliminarUnaUnidad(producto.idProducto)">
+            <button id="eliminar-una-unidad-btn" class="eliminar-una-unidad" (click)="eliminarUnaUnidad(producto.idProducto, producto.cantidadProducto)">
               <i class="fa fa-minus-circle icono-eliminar"></i>
             </button>
             <button id="agregar-una-unidad-btn" class="agregar-una-unidad" (click)="agregarUnaUnidad(producto.idProducto)">

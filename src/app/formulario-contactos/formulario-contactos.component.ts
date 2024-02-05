@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-formulario-contactos',
@@ -8,17 +9,23 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
   imports: [
     RouterLink,
     RouterLinkActive,
-    RouterOutlet
+    RouterOutlet,
+    NgIf
   ],
   templateUrl: './formulario-contactos.component.html',
   styleUrl: './formulario-contactos.component.css'
 })
 export class FormularioContactosComponent {
+  constructor(private router: Router) {}
   @ViewChild('submitButton') submitButton!: ElementRef;
   @ViewChild('form') form!: ElementRef;
 
+  formularioEnviado = false;
+
   enviarFormulario() {
-    // Aquí puedes agregar lógica adicional antes de mostrar la alerta
-    alert('Se ha enviado este formulario');
+    this.formularioEnviado = true;
+    setTimeout(() => {
+      this.formularioEnviado = false;
+    }, 5000);
   }
 }

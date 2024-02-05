@@ -94,6 +94,8 @@ footer{
 #asunto{
   margin-bottom: 10px;
   float: right;
+  resize: none;
+  width: 11.8em;
 }
 
 /* Inicio */

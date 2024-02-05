@@ -1,49 +1,22 @@
-<div class="container">
-  <div class="forms">
-    <div class="form login">
-      <form>
+<section id="contact">
+  <div class="sectionheader">	<h1>CONTACTO</h1></div>
+  <article>
+    <p id="centrar">Bienvenido al formulario de contacto, podrás utilizar este formulario para ponerte en contacto con el personal administrativo de la web.</p>
 
-      <img src="./assets/logo-BD.png" width="70" height="70">
-      <span class="title"> Black Diamond </span>
-      <table align="center" id="table">
+    <label for="checkcontact" class="contactbutton"><div class="mail"></div></label><input id="checkcontact" type="checkbox">
 
-        <tr>
-          <td align="center"> <label > Nombre: </label>
-            <input type="text" id="Nombre" name="Nombre"> </td>
-        </tr>
-
-        <tr>
-          <td align="center"> <label > Apellidos: </label>
-            <input type="text" id="Apellidos" name="Apellidos"> </td>
-        </tr>
-
-        <tr>
-          <td align="center"> <label > Núm de tel: </label>
-            <input type="text" id="Telefono" name="Telefon"> </td>
-        </tr>
-
-        <tr>
-          <td align="center"> <label > Email: </label>
-            <input type="email" id="Email" name="Email"> </td>
-        </tr>
-
-        <tr>
-          <td align="center"> <label > Asunto: </label>
-            <textarea id="asunto" name="asunto"></textarea> </td>
-        </tr>
-
-        <p align="center"> Una vez enviada la petición, uno de nuestros operadores se pondrá en contacto con usted. </p>
-
-      </table>
-
-
-      <div class="input-field button">
-        <input #submitButton type="button" value="Enviar" (click)="enviarFormulario()" routerLink="" routerLinkActive="Active">
-      </div>
-      </form>
-
-    </div>
-  </div>
+    <form action="" method="post" class="contactform">
+      <p class="input_wrapper"><input type="text" name="contact_nom" value=""  id ="contact_nom"><label for="contact_nom">NOMBRE</label></p>
+      <p class="input_wrapper"><input type="text" name="contact_email" value=""  id ="contact_email"><label for="contact_email">CORREO</label></p>
+      <p class="input_wrapper"><input type="text" name="contact_sujet" value=""  id ="contact_sujet"><label for="contact_sujet">ASUNTO</label></p>
+      <p class="textarea_wrapper"><textarea name="contact_message" id="contact_message" placeholder="Describe tu problema..."></textarea></p>
+      <p class="submit_wrapper"><input type="submit" value="ENVIAR" (click)="enviarFormulario()"></p>
+    </form>
+  </article>
+</section>
+<div *ngIf="formularioEnviado">
+  <p>¡Tu solicitud de contacto se ha enviado correctamente!</p>
+  <p>¡Nos pondremos en contacto contigo con la mayor brevedad posible!</p>
 </div>
 <router-outlet></router-outlet>
 

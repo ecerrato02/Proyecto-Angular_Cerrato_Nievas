@@ -33,9 +33,12 @@ export class CarritoComponent {
     this.actualizarTotalCarrito();
   }
 
-  eliminarUnaUnidad(idProducto: number) {
+  eliminarUnaUnidad(idProducto: number, cantidadProducto: number) {
     this.idProductosService.eliminarUnaUnidadCarrito(idProducto);
     this.actualizarTotalCarrito();
+    if(cantidadProducto <= 1){
+      this.actualizarNumeroDeProductosDiferentes();
+    }
   }
 
   agregarUnaUnidad(idProducto: number) {

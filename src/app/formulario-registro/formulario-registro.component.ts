@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import {Router, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {UsuariosService} from "../usuarios.service"
 
 
@@ -7,7 +7,9 @@ import {UsuariosService} from "../usuarios.service"
   selector: 'app-formulario-registro',
   standalone: true,
   imports: [
-    RouterOutlet
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './formulario-registro.component.html',
   styleUrl: './formulario-registro.component.css'
