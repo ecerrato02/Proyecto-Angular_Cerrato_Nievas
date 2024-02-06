@@ -469,6 +469,15 @@ footer{
 .enlaces-footer{
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+.enlaces-footer a {
+  transition: transform 0.3s ease;
+}
+
+.enlaces-footer a:hover {
+  transform: scale(1.1);
 }
 
 .quienes-somos{

@@ -20,11 +20,11 @@ export class FormularioRegistroComponent {
 
   registrarUsuario() {
     // @ts-ignore
-    let email = document.getElementById('email').value
+    let username = document.getElementById('username').value
     // @ts-ignore
     let password = document.getElementById('password').value
-    if (email != '' && password != '') {
-      this.userServ.usuarioNuevo(email, password)
+    if (username != '' && password != '') {
+      this.userServ.usuarioNuevo(username, password)
       this.router.navigate(['/formulario-login'])
     }
     else alert('No se ha registrado el usuario, faltan parámetros')

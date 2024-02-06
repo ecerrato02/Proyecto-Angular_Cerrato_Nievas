@@ -14,21 +14,20 @@ import {UsuariosService} from "../usuarios.service";
   styleUrl: './formulario-login.component.css'
 })
 export class FormularioLoginComponent {
-  email: string;
+  username: string;
   password: string;
   constructor(private router: Router, private userServ: UsuariosService) {
-    this.email = 'email';
+    this.username = 'username';
     this.password = 'password';
   }
 
   login(): void{
     // @ts-ignore
-    const emailElement = document.getElementById('email').value;
+    const usernameElement = document.getElementById('username').value;
     // @ts-ignore
     const passwordElement = document.getElementById('password').value;
-    this.userServ.login(emailElement, passwordElement)
+    this.userServ.login(usernameElement, passwordElement)
     if (sessionStorage.getItem('inicio') === 'inicio correcto'){
-      console.log(emailElement, passwordElement)
       this.router.navigate([''])
     }
     else alert('Los parámetros son incorrectos, inténtalo de nuevo')
