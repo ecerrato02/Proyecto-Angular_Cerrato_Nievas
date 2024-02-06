@@ -10,12 +10,12 @@
       <p class="input_wrapper"><input type="text" name="contact_email" value=""  id ="contact_email"><label for="contact_email">CORREO</label></p>
       <p class="input_wrapper"><input type="text" name="contact_sujet" value=""  id ="contact_sujet"><label for="contact_sujet">ASUNTO</label></p>
       <p class="textarea_wrapper"><textarea name="contact_message" id="contact_message" placeholder="Describe tu problema..."></textarea></p>
-      <p class="submit_wrapper"><input type="submit" value="ENVIAR" (click)="enviarFormulario()"></p>
+      <p class="submit_wrapper"><a (click)="enviarFormulario()">ENVIAR</a></p>
     </form>
   </article>
 </section>
-<div *ngIf="formularioEnviado">
-  <p>¡Tu solicitud de contacto se ha enviado correctamente!</p>
+<div *ngIf="formularioEnviado" id="formSend">
+  <p id="sendCorrect">¡Tu solicitud de contacto se ha enviado correctamente!</p>
   <p>¡Nos pondremos en contacto contigo con la mayor brevedad posible!</p>
 </div>
 <router-outlet></router-outlet>

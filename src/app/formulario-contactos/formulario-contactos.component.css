@@ -190,6 +190,22 @@ body{
   transition: all 250ms ease;
   color: #5E5E5E;
 }
+
+#formSend{
+  margin: auto;
+  width: 28em;
+  background-color: rgba(236, 236, 236, 0.6);
+  border: 0.01em solid black;
+  border-left: .3em solid yellow;
+  padding: .5em;
+  text-align: justify;
+}
+
+#sendCorrect{
+  text-align: center;
+  font-weight: bold;
+}
+
 .textarea_wrapper textarea:focus {
   background: rgba(242, 56, 90, 0.05);
   box-shadow: inset 2px 2px 5px 0 #DADADA;
@@ -198,7 +214,7 @@ body{
 .submit_wrapper {
   text-align: center;
 }
-.submit_wrapper input {
+.submit_wrapper a {
   text-align: center;
   display: inline-block;
   width: 40%;
@@ -220,7 +236,7 @@ body{
   -o-transition: all 250ms ease;
   transition: all 250ms ease;
 }
-.submit_wrapper input:hover {
+.submit_wrapper a:hover {
   -webkit-box-shadow: 1px 1px 0 0 #595959,0px 0px 0 0 #595959,0px 0px 0 0 #595959;
   box-shadow: 1px 1px 0 0 #595959,0px 0px 0 0 #595959,0px 0px 0 0 #595959;
   margin-top: 22px;
