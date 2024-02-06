@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgIf} from "@angular/common";
+import {UsuariosService} from "../usuarios.service";
 
 
 declare const $: any;
@@ -21,9 +22,10 @@ export class NavComponent implements OnInit{
   username: string | null = "";
   protected readonly sessionStorage = sessionStorage;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UsuariosService) {}
   cerrarSesion() {
     sessionStorage.removeItem('inicio');
+    this.userService.changeUsername(null);
     this.router.navigate(['/formulario-login'])
   }
 
@@ -31,6 +33,7 @@ export class NavComponent implements OnInit{
     $(document).ready(function () {
       $('[data-bs-toggle="dropdown"]').dropdown();
     });
-    this.username = sessionStorage.getItem('nombreUsuario');
+
+    this.userService.currentUsername.subscribe(username => this.username = username);
   }
 }

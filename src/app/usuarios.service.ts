@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
   usuarios: any[][]
+  private usernameSource = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
+  currentUsername = this.usernameSource.asObservable();
 
   private sessionStorageKey = 'productos';
 
@@ -13,15 +15,25 @@ export class UsuariosService {
     const usuariosRegistrados = sessionStorage.getItem('usuarios')
     this.usuarios = usuariosRegistrados ? JSON.parse(usuariosRegistrados):[[],[]]
   }
-  usuarioNuevo(email: string, password: string){
-    this.usuarios[0].push(email)
+  usuarioNuevo(username: string, password: string){
+    this.usuarios[0].push(username)
     this.usuarios[1].push(password)
     sessionStorage.setItem('usuarios', JSON.stringify(this.usuarios))
     console.log(this.usuarios)
   }
-  login(email: string, password: string){
+
+  changeUsername(username: string | null) {
+    this.usernameSource.next(username);
+    if (username !== null) {
+      sessionStorage.setItem('username', username);
+    } else {
+      sessionStorage.removeItem('username');
+    }
+  }
+
+  login(username: string, password: string){
     for(let i = 0; i < this.usuarios[0].length; i++){
-      if (this.usuarios [0][i] === email && this.usuarios [1][i] === password){
+      if (this.usuarios [0][i] === username && this.usuarios [1][i] === password){
         sessionStorage.setItem('inicio', 'inicio correcto')
       }
     }

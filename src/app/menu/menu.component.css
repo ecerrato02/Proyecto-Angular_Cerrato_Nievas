@@ -419,11 +419,34 @@ footer{
   z-index: 1;
 }
 
-#logo-inicio{
-  margin-left: 20%;
-  margin-top: 5%;
+#pc{
+  margin-top: 9.5em;
+  margin-bottom: 8.5em;
+  float: left;
+}
+
+#consolas{
+  margin-top: 10.5em;
+  margin-bottom: 8.5em;
+  float: left;
+}
+
+#steam, #ubisoft, #playstation, #xbox {
+  width: 5em;
+  margin-left: 11em;
+  transition: transform 0.3s ease;
+}
+
+#steam:hover, #ubisoft:hover, #playstation:hover, #xbox:hover {
+  transform: scale(1.05);
+}
+
+#logo-inicio {
+  margin-left: 8em;
+  float: left;
+  margin-top: 6em;
   margin-bottom: 6em;
-  width: 60%;
+  width: 35em;
   transition: transform 0.3s ease;
 }
 
@@ -431,17 +454,39 @@ footer{
   transform: scale(1.01);
 }
 
+#imagen-inicio {
+  background-color: #1f1f1f;
+  width: 100%;
+  display: inline-block;
+}
+
+@media screen and (max-width: 1366px) {
+  #pc, #consolas{
+    margin-top: 8.3em;
+  }
+
+  #steam, #ubisoft, #playstation, #xbox {
+    margin-left: 6.2em;
+  }
+
+  #logo-inicio {
+    width: ;
+    margin-top: 6em;
+  }
+}
+
 #imagen-inicio{
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #1f1f1f;
+  display: inline-block;
 }
 
 .inicio-contenido{
   margin-left: 5em;
-  margin-top: 10em;
+  margin-top: 2em;
   margin-right: 5em;
   text-align: justify;
-  border-radius: 2em;
-  background-color: rgba(243, 243, 243, 0.6);
+  border-radius: .5em;
+  background-color: rgb(215, 215, 215);
   padding: 6em;
 }
 
@@ -463,13 +508,15 @@ footer{
 
 .separadorImagen{
   margin: auto;
+  margin-top: .6em;
   width: 40%;
-  border-top: 0.1em solid rgba(0, 0, 0, 0.3);
+  height: .2em;
+  background-color: rgb(51, 51, 51);
+  border-radius: 2em;
 }
 
 .separar-inicio{
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   width: 40%;
   border-top: 0.1em solid rgba(0, 0, 0, 0.3);
   margin-bottom: 1em;

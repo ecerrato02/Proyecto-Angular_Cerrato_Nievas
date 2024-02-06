@@ -16,7 +16,7 @@ import {UsuariosService} from "../usuarios.service";
 export class FormularioLoginComponent {
   username: string;
   password: string;
-  constructor(private router: Router, private userServ: UsuariosService) {
+  constructor(private router: Router, private userService: UsuariosService) {
     this.username = 'username';
     this.password = 'password';
   }
@@ -26,8 +26,9 @@ export class FormularioLoginComponent {
     const usernameElement = document.getElementById('username').value;
     // @ts-ignore
     const passwordElement = document.getElementById('password').value;
-    this.userServ.login(usernameElement, passwordElement)
+    this.userService.login(usernameElement, passwordElement)
     if (sessionStorage.getItem('inicio') === 'inicio correcto'){
+      this.userService.changeUsername(usernameElement); // Actualiza el nombre de usuario en el servicio
       this.router.navigate([''])
     }
     else alert('Los parámetros son incorrectos, inténtalo de nuevo')
