@@ -220,6 +220,7 @@ body{
   width: 40%;
   height: 50px;
   margin-top: 1em;
+  padding-top: .8em;
   margin-bottom: 6px;
   cursor: pointer;
   background: #000000;

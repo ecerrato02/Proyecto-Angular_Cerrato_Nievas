@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "fuenteGeneral";
+  src: url("./fonts/MuseoSans-300.otf");
+}
+
+*{
+  font-family: 'fuenteGeneral', serif;
+}
+
 body{
   position: relative;
   padding-bottom: 8em;
