@@ -431,12 +431,17 @@ footer{
 
 .inicio-contenido{
   margin-left: 5em;
+  margin-top: 10em;
   margin-right: 5em;
   text-align: justify;
+  border-radius: 2em;
+  background-color: rgba(243, 243, 243, 0.6);
+  padding: 6em;
 }
 
 .titulos-inicio{
   font-size: xx-large;
+
   margin-top: 2em;
   margin-bottom: 1em;
 }
