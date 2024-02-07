@@ -29,6 +29,9 @@
           <a class="nav-link" routerLink="formulario-contactos" routerLinkActive="Active">Contacto</a>
         </li>
       </ul>
+      <div *ngIf="sessionStorage.getItem('inicio') === 'inicio correcto'">
+        <a class="carrito-boton" routerLink="/carrito"><img class="carro-imagen" src="assets/carritoCompra.svg"></a>
+      </div>
       <form class="d-flex" role="search">
         <div *ngIf="sessionStorage.getItem('inicio') === 'inicio correcto'" class="dropdown perfil-container">
           <div>

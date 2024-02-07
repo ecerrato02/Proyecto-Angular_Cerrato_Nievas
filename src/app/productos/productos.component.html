@@ -24,8 +24,14 @@
   </div>
   <br>
   <div id="agregar-carrito">
-    <input id="cantidadAgregar" type="number" [(ngModel)]="producto.cantidadProducto" min="1" max="50" value="1">
-    <button id="agregarAlCarrito" (click)="agregarProductoAlCarrito(producto)">AÑADIR AL CARRITO</button>
+    <div *ngIf="sessionStorage.getItem('inicio') == 'inicio correcto'">
+      <input id="cantidadAgregar" type="number" [(ngModel)]="producto.cantidadProducto" min="1" max="50" value="1">
+      <button class="agregarAlCarrito" (click)="agregarProductoAlCarrito(producto)">AÑADIR AL CARRITO</button>
+    </div>
+    <div *ngIf="sessionStorage.getItem('inicio') != 'inicio correcto'">
+      <input id="cantidadAgregar" type="number" [(ngModel)]="producto.cantidadProducto" min="1" max="50" value="1">
+      <button class="agregarAlCarrito" routerLink="/formulario-login">AÑADIR AL CARRITO</button>
+    </div>
   </div>
 </div>
 <div id="espace">

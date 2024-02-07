@@ -15,11 +15,21 @@
 .btn-outline-success:hover{
   transform: scale(1.08);
 }
+.col-lg-4{
+  width: 40%;
+}
+.col-md-7{
+  width: 58%;
+}
 
 .trash-icon {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.negrita{
+  font-weight: bold;
 }
 
 .trash-icon i.fa-trash {

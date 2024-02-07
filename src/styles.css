@@ -142,22 +142,6 @@ footer{
   height: 1.5em;
 }
 
-.carrito-boton{
-  border-radius: .3em;
-  height: auto;
-  border: 0.1em solid rgba(0, 51, 255, 0.45);
-  margin-left: .3em;
-  width: 4.3em;
-  padding-top: .2em;
-  padding-left: .5em;
-  padding-right: .2em;
-}
-
-.carrito-boton:hover{
-  transform: scale(1.05);
-  background-color: rgba(0, 51, 255, 0.45);
-}
-
 .separador{
   height: 5em;
   display: inline-block;

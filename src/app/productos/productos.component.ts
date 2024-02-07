@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf} from "@angular/common";
-import { CatalogoComponent } from "../catalogo/catalogo.component";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import { IdProductosService } from "../id-productos.service";
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {productos} from "../bd/productos";
@@ -12,7 +11,9 @@ import {productos} from "../bd/productos";
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    NgOptimizedImage,
+    RouterLink
   ],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
@@ -50,4 +51,5 @@ export class ProductosComponent implements OnInit {
   }
 
   protected readonly Number = Number;
+  protected readonly sessionStorage = sessionStorage;
 }

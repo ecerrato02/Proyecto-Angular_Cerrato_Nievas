@@ -182,10 +182,8 @@ footer{
 }
 
 .carrito-boton{
-  border-radius: .3em;
   text-align: center;
   height: auto;
-  border: 0.1em solid rgba(161, 161, 161, 0.7);
   margin-left: .3em;
   width: 3.3em;
   padding-top: .3em;
@@ -193,9 +191,8 @@ footer{
   padding-right: .2em;
 }
 
-.carrito-boton:hover{
-  transform: scale(1.05);
-  background-color: rgba(161, 161, 161, 0.7);
+.carro-imagen:hover{
+  transform: scale(1.08);
 }
 
 .separador{
