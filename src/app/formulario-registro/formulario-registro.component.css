@@ -223,6 +223,12 @@ body, button, input {
   margin: 0 0.3125em;
 }
 
+#userPassIncorrect{
+  color: red;
+  font-weight: bold;
+  font-size: small;
+}
+
 @media screen and (max-width: 520px) {
   .screen-body {
     flex-direction: column;

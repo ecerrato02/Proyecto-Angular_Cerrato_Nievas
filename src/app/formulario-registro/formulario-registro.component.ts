@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {UsuariosService} from "../usuarios.service"
+import {NgIf} from "@angular/common";
 
 
 @Component({
@@ -9,12 +10,15 @@ import {UsuariosService} from "../usuarios.service"
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    NgIf
   ],
   templateUrl: './formulario-registro.component.html',
   styleUrl: './formulario-registro.component.css'
 })
 export class FormularioRegistroComponent {
+
+  parametersMissing = false;
   constructor(private router: Router, private userServ: UsuariosService) {
   }
 
@@ -26,7 +30,8 @@ export class FormularioRegistroComponent {
     if (username != '' && password != '') {
       this.userServ.usuarioNuevo(username, password)
       this.router.navigate(['/formulario-login'])
+    } else {
+      this.parametersMissing = true;
     }
-    else alert('No se ha registrado el usuario, faltan parámetros')
   }
 }
