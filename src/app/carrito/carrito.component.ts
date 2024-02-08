@@ -4,7 +4,7 @@ import {RouterOutlet} from "@angular/router";
 import {productos} from "../bd/productos";
 import { IdProductosService } from "../id-productos.service";
 import {NgForOf} from "@angular/common";
-import {FormsModule, ReactiveFormsModule, FormBuilder} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-carrito',
@@ -13,8 +13,7 @@ import {FormsModule, ReactiveFormsModule, FormBuilder} from "@angular/forms";
     RouterOutlet,
     NgForOf,
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
@@ -24,25 +23,9 @@ export class CarritoComponent {
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   totalCarrito = 0;
 
-  formulario: any;
-
-  constructor(public idProductosService: IdProductosService, private formBuilder: FormBuilder) {
+  constructor(public idProductosService: IdProductosService) {
     this.actualizarNumeroDeProductosDiferentes();
     this.actualizarTotalCarrito();
-    this.formulario = this.formBuilder.group({
-      nombre: "",
-      apellido: "",
-      direcion: "",
-      direcion2: "",
-      provincia: "",
-      ciudad: "",
-      cp: "",
-      pago: "",
-      nombretarjeta: "",
-      numerotarjeta: "",
-      fechacad: "",
-      cvv: "",
-    })
   }
 
   actualizarNumeroDeProductosDiferentes() {
@@ -53,7 +36,7 @@ export class CarritoComponent {
   eliminarUnaUnidad(idProducto: number, cantidadProducto: number) {
     this.idProductosService.eliminarUnaUnidadCarrito(idProducto);
     this.actualizarTotalCarrito();
-    if (cantidadProducto <= 1) {
+    if(cantidadProducto <= 1){
       this.actualizarNumeroDeProductosDiferentes();
     }
   }
@@ -86,29 +69,14 @@ export class CarritoComponent {
     }, 0);
   }
 
-  vaciarCarritoCompra() {
+  vaciarCarritoCompra(){
     this.idProductosService.vaciarCarrito();
     this.actualizarTotalCarrito();
     this.numeroDeProductosDiferentes = this.numeroDeProductosDiferentes - 1;
     this.actualizarNumeroDeProductosDiferentes();
-
-    console.log("")
-    this.enviarFormulario();
-    this.formulario.reset();
   }
 
-  formularioEnviado = false;
 
-  enviarFormulario() {
-    if (this.formulario != ""){
-      alert("Faltan parámetros obligatorios sin rellenar")
-      this.formularioEnviado = false;
-    }else {
-      this.formularioEnviado = true;
-      setTimeout(() => {
-        this.formularioEnviado = false;
-      }, 2000);
-    }
-  }
-    Number = Number;
+
+  protected readonly Number = Number;
 }
