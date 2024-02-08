@@ -420,20 +420,20 @@ footer{
 }
 
 #pc{
-  margin-top: 9.5em;
+  margin-top: 11em;
   margin-bottom: 8.5em;
   float: left;
 }
 
 #consolas{
-  margin-top: 10.5em;
+  margin-top: 11em;
   margin-bottom: 8.5em;
   float: left;
 }
 
 #steam, #ubisoft, #playstation, #xbox {
-  width: 5em;
-  margin-left: 11em;
+  width: 3em;
+  margin-left: 8em;
   transition: transform 0.3s ease;
 }
 
@@ -470,7 +470,7 @@ footer{
   }
 
   #logo-inicio {
-    width: ;
+    width: 20%;
     margin-top: 6em;
   }
 }
