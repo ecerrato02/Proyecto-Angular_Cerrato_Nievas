@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
-import {productos} from "../bd/productos";
 import { IdProductosService } from "../id-productos.service";
 import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -24,11 +23,28 @@ export class CarritoComponent {
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   totalCarrito = 0;
   carritoState: boolean = true;
+  mostrarPopup: boolean = false;
+  formularioCompleto: boolean = false;
 
   constructor(public idProductosService: IdProductosService, private router: Router) {
     this.actualizarNumeroDeProductosDiferentes();
     this.actualizarTotalCarrito();
     this.carritoEmpty();
+  }
+
+  verificarFormulario() {
+    const campos = document.querySelectorAll('input[required]');
+    const camposArray = Array.from(campos);
+
+    let formularioValido = true;
+
+    camposArray.forEach((campo: Element) => {
+      if (campo instanceof HTMLInputElement && !campo.value.trim()) {
+        formularioValido = false;
+      }
+    });
+
+    this.formularioCompleto = formularioValido;
   }
 
   actualizarNumeroDeProductosDiferentes() {
@@ -90,8 +106,5 @@ export class CarritoComponent {
     this.router.navigate(['/finalizar-compra']);
   }
 
-
-
   protected readonly Number = Number;
-  protected readonly PluginArray = PluginArray;
 }
