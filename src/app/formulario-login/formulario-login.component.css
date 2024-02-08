@@ -17,12 +17,6 @@ body, button, input {
   padding: 0.625em;
 }
 
-#userPassIncorrect{
-  color: red;
-  font-weight: bold;
-  font-size: small;
-}
-
 .link{
   font-size: small;
   text-decoration: none;
