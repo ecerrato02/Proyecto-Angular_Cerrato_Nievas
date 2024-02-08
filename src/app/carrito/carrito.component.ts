@@ -100,15 +100,12 @@ export class CarritoComponent {
   formularioEnviado = false;
 
   enviarFormulario() {
-    if (this.formulario != ""){
-      alert("Faltan parámetros obligatorios sin rellenar")
-      this.formularioEnviado = false;
-    }else {
+
       this.formularioEnviado = true;
       setTimeout(() => {
         this.formularioEnviado = false;
       }, 2000);
-    }
+
   }
     Number = Number;
 }
