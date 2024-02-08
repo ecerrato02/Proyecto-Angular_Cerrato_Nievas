@@ -26,6 +26,6 @@ export class FormularioContactosComponent {
     this.formularioEnviado = true;
     setTimeout(() => {
       this.formularioEnviado = false;
-    }, 2000);
+    }, 5000);
   }
 }
