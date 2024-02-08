@@ -1,28 +1,19 @@
-@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-body{
-  background: #F0F0F0;
-  font-family: Open Sans ,sans-serif;
-  line-height:1.5em;
+#tamano-logo{
+  width: 6em;
 }
-#contact {
-  width: 500px;
-  margin:2em auto;
-  background:white;
-  position: relative;
+
+#lupa-busqueda{
+  width: 1em;
+  height: 1em;
 }
-#contact::after {
-  content: "";
-  display: block;
-  height: 30px;
-  width: 90%;
-  left: 5%;
-  bottom: 0;
-  position: absolute;
-  -webkit-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 100%;
-  z-index: -1;
+
+.btn-outline-success{
+  width: 6em;
+  height: auto;
+}
+
+.btn-outline-success:hover{
+  transform: scale(1.08);
 }
 .col-lg-4{
   width: 40%;
@@ -30,246 +21,640 @@ body{
 .col-md-7{
   width: 58%;
 }
-#contact article {
-  padding: 1em;
+
+.trash-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .negrita{
   font-weight: bold;
 }
-#contact h1 {
-  background: #000000;
-  font-family: Oswald ,sans-serif;
-  font-size: 1.75em;
-  padding: 0.6em 0 0.6em 0.4em;
-  color: white;
-  text-shadow: 0 0.06em 0 #424242;
-  position: relative;
-}
-.contactbutton {
-  background: #000000;
-  -webkit-box-shadow: 1px 1px 0 0 #595959,2px 2px 0 0 #595959,3px 3px 0 0 #595959;
-  box-shadow: 1px 1px 0 0 #595959,2px 2px 0 0 #595959,3px 3px 0 0 #595959;
-  text-align: center;
-  display: block;
-  width: 100%;
-  height: 50px;
-  margin-top: 20px;
-  margin-bottom: 2px;
-  cursor: pointer;
-}
-.contactbutton:hover {
-  -webkit-box-shadow: 1px 1px 0 0 #595959,0px 0px 0 0 #595959,0px 0px 0 0 #595959;
-  box-shadow: 1px 1px 0 0 #595959,0px 0px 0 0 #595959,0px 0px 0 0 #595959;
-  margin-top: 22px;
-  margin-left: 2px;
-  margin-bottom: 0px;
-}
-.mail {
-  margin-top: 11px;
-  font-size: 15px;
-  display: inline-block;
-  border-top: 2em solid transparent;
-  border-left: 2.6em solid rgba(255, 255, 255, 0.9);
-  height: 0;
-  width: 0;
-  position: relative;
-}
-.mail:before {
-  content: '';
-  top: -2.5em;
-  left: -2.95em;
-  display: block;
-  position: absolute;
-  border-top: 1.2em solid rgba(255, 255, 255, 0.9);
-  border-left: 1.6em solid transparent;
-  border-right: 1.6em solid transparent;
-  border-bottom: 1em solid transparent;
-  font-size: 0.8em;
-}
-.mail::after {
-  display: block;
-  content: "";
-  position: absolute;
-  border-top: 2em solid transparent;
-  border-right: 2.6em solid rgba(255, 255, 255, 0.9);
-  height: 0;
-  width: 0;
-  left: -2.18em;
-  bottom: 0;
-}
-#checkcontact{
-  position: absolute;
-  left: -9999px;
-}
-.contactform {
-  overflow: hidden;
-  max-height: 0px;
-  -webkit-transition: all linear 1s;
-  -moz-transition: all linear 1s;
-  -o-transition: all linear 1s;
-  -ms-transition: all linear 1s;
-  transition: all linear 1s;
-}
-#checkcontact:checked + .contactform {
-  max-height: 1000px;
-}
-.input_wrapper {
-  position: relative;
-}
-.textarea_wrapper textarea {
-  margin-top: 20px;
-  display: block;
-  width: 100%;
-  background: white;
-  border: 1px solid #DADADA;
-  box-shadow: 0 0 1px 0 #E4E4E4;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 1em;
-  -webkit-transition: all 250ms ease;
-  -moz-transition: all 250ms ease;
-  -ms-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-  color: #5E5E5E;
-}
-.input_wrapper input[type="text"] {
-  margin-top: 1em;
-  display: block;
-  width: 100%;
-  background: white;
-  border: 1px solid #DADADA;
-  box-shadow: 0 0 1px 0 #E4E4E4;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 1em;
-  -webkit-transition: all 250ms ease;
-  -moz-transition: all 250ms ease;
-  -ms-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-  color: #5E5E5E;
-  text-indent: 15%;
-}
-.input_wrapper input[type="text"]:focus {
-  background: rgba(242, 56, 90, 0.05);
-  box-shadow: inset 2px 2px 5px 0 #DADADA;
-  outline: none;
-  text-indent: 0;
-}
-.input_wrapper label {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background: #000000;
-  color: white;
-  font-family: Oswald ,sans-serif;
-  box-sizing: border-box;
-  width: 15%;
-  text-align: center;
-  line-height: 2.8em;
-  -webkit-transition: all 250ms ease;
-  -moz-transition: all 250ms ease;
-  -ms-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-}
-.input_wrapper input[type="text"]:focus + label {
-  left: 85%;
-}
-.textarea_wrapper textarea {
-  margin-top: 20px;
-  display: block;
-  width: 100%;
-  min-height:150px;
-  background: white;
-  border: 1px solid #DADADA;
-  box-shadow: 0 0 1px 0 #E4E4E4;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 1em;
-  -webkit-transition: all 250ms ease;
-  -moz-transition: all 250ms ease;
-  -ms-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-  color: #5E5E5E;
+
+.trash-icon i.fa-trash {
+  color: black;
+  font-size: 1em;
 }
 
-#formSend{
-  margin: auto;
-  width: 28em;
-  background-color: rgba(236, 236, 236, 0.6);
-  border: 0.01em solid black;
-  border-left: .3em solid yellow;
+.trash-icon:hover i.fa-trash {
+  color: red;
+  animation: temblor 1s ease-in-out infinite;
+  animation-iteration-count: 1;
+}
+
+@keyframes temblor {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.producto-eliminado {
+  animation: desaparecer 1s ease-in-out;
+}
+
+#eliminar-una-unidad-btn.eliminar-una-unidad {
+  background-color: transparent;
+  color: black;
+  border: 0;
+  padding: 0.25em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.75em;
+  margin: 0.25em 0.125em;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#eliminar-una-unidad-btn.eliminar-una-unidad:hover {
+  color: #f44336;
+}
+
+.eliminar-una-unidad .icono-eliminar {
+  color: black;
+  font-size: 1em;
+}
+
+#eliminar-una-unidad-btn.eliminar-una-unidad:hover .icono-eliminar {
+  color: #f44336;
+}
+
+#agregar-una-unidad-btn.agregar-una-unidad {
+  background-color: transparent;
+  color: black;
+  border: 0;
+  padding: 0.25em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.75em;
+  margin: 0.25em 0.125em;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#agregar-una-unidad-btn.agregar-una-unidad:hover {
+  color: #4CAF50;
+}
+
+.agregar-una-unidad .icono-agregar {
+  color: black;
+  font-size: 1em;
+}
+
+#agregar-una-unidad-btn.agregar-una-unidad:hover .icono-agregar {
+  color: #4CAF50;
+}
+
+@keyframes desaparecer {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.precios{
+  margin-left: .5em;
+}
+
+.my-0{
+  width: 30%;
+}
+
+.inicio-sesion{
+  height: auto;
+  margin-left: .3em;
+  width: 12em;
+  border-radius: .3em;
+  border: 0.1em solid rgba(0, 51, 255, 0.45);
+  text-decoration: none;
+  color: black;
   padding: .5em;
+}
+
+.inicio-sesion:hover{
+  background-color: rgba(0, 51, 255, 0.45);
+  color: white;
+  transform: scale(1.04);
+}
+
+footer{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: auto;
+  background-color: white;
+  margin: 0;
+  padding-right: 1%;
+  padding-left: 1%;
+}
+
+.logo-carrito{
+  width: 10em;
+  height: 10em;
+}
+
+#logoCarritoVacio{
+  width: 14em;
+  height: 14em;
+}
+
+/*Formularios */
+
+#Nombre{
+  margin-bottom: 10px;
+  float: right;
+}
+#Apellidos{
+  margin-bottom: 10px;
+  float: right;
+}
+#Telefono{
+  margin-bottom: 10px;
+  float: right;
+}
+#Hombre{
+  margin-bottom: 10px;
+}
+#Mujer{
+  margin-bottom: 10px;
+}
+#Otros{
+  margin-bottom: 10px;
+}
+#Email{
+  margin-bottom: 10px;
+  float: right;
+}
+#contra{
+  margin-bottom: 10px;
+  float: right;
+}
+#notif{
+  margin-bottom: 10px;
+  float: right;
+}
+#asunto{
+  margin-bottom: 10px;
+  float: right;
+}
+
+/* Inicio */
+
+.filtros{
+  padding: .5em;
+  padding-bottom: .1em;
+  float: right;
+  width: 22%;
+  position: relative;
+  margin-top: 0;
+  margin-right: .5em;
+  background-color: rgba(211, 211, 211, 0.35);
+}
+#novrec {
+  font-weight: bold;
+  padding: .6em .3em;
+  font-family: sans-serif;
+}
+
+.enlaces-limpios{
+  text-decoration: none;
+  color: black;
+}
+
+.enlaces-limpios:hover{
+  font-weight: bold;
+  transform: scale(1.02);
+  color: rgba(0, 0, 0, 0.68);
+}
+
+/*carrito*/
+
+.carro-imagen{
+  height: 1.5em;
+}
+
+.carrito-boton{
+  border-radius: .3em;
+  height: auto;
+  border: 0.1em solid rgba(0, 51, 255, 0.45);
+  margin-left: .3em;
+  width: 4.3em;
+  padding-top: .2em;
+  padding-left: .5em;
+  padding-right: .2em;
+}
+
+.carrito-boton:hover{
+  transform: scale(1.05);
+  background-color: rgba(0, 51, 255, 0.45);
+}
+
+.separador{
+  height: 5em;
+  display: inline-block;
+  width: 100%;
+  background-color: rgba(141, 141, 141, 0.42);
+}
+
+.todos-productos{
+  display: flex;
+  flex-direction: row;
+  float: left;
+}
+
+.productos{
+  text-align: center;
+  width: 18em;
+  margin-left: 4.5em;
+  margin-bottom: 2em;
+  margin-top: 1.9em;
+  padding: 2em;
+  border-radius: .2em;
+}
+
+.iconos{
+  width: 1.5em;
+  height: auto;
+}
+
+.iconos:hover{
+  transform: scale(1.05);
+}
+
+.productos:hover{
+  transform: scale(1.03);
+  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.productos-enlaces{
+  color: black;
+  text-decoration: none;
+}
+
+.imagen-productos{
+  width: 100%;
+  height: auto;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+}
+
+.boton-vermas{
+  margin-bottom: 3em;
+}
+
+
+#formulario{
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.container{
+  margin-top: 3em;
+  position: relative;
+  width: 100%;
+  background: #FFFF;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding-bottom: 1.5em;
+}
+
+.container .form{
+  padding: 30px;
+}
+.container .form .title {
+  position: relative;
+  font-size: 30px;
+  font-weight: 600;
+  color: #2f286a;
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: center;
+  margin-left: 90px;
+}
+
+.form .title::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 25px;
+}
+
+.form .input-field{
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.input-field input{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0 35px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  border-bottom: 2px solid #ccc;
+  border-top: 2px solid transparent;
+}
+
+.input-field textarea{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  border-bottom: 2px solid #ccc;
+  border-top: 2px solid transparent;
+}
+
+.input-field input:is(:focus, :valid){
+  border-bottom-color: #2f286a ;
+}
+
+.input-field textarea:is(:focus, :valid){
+  border-bottom-color: #2f286a ;
+}
+
+.input-field i{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 20px;
+}
+
+.input-field input:is(:focus, :valid)~ i{
+  color: #72c8b4 ;
+}
+
+.input-field textarea:is(:focus, :valid)~ i{
+  color: #72c8b4 ;
+}
+
+.input-field i.icon{
+  left: 0;
+
+}
+.input-field i.showHidePw{
+  right: 0;
+}
+
+.form .checkbox-text{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.checkbox-text .checkbox-content{
+  display: flex;
+  align-items: center;
+}
+.checkbox-content input{
+  margin: 0 8px -2px 4px;
+  accent-color:  #2f286a;
+}
+
+.form .text{
+  color: #2f286a;
+  font-size: 14px;
+}
+.form a.text{
+  color: #2f286a;
+  text-decoration: none;
+  font-size: 15px;
+}
+.form a:hover{
+  text-decoration: underline;
+}
+.form .button{
+  margin-top: 35px;
+}
+.form .button input{
+  border-radius: 4px;
+  color: #FFFF;
+  background: linear-gradient(100deg, #B3E1D6, #433D78);
+  letter-spacing: 1px;
+  font-size: 1.3em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.button input:hover{
+  background: #95cb6e;
+}
+.form .login-signup{
+  margin-top: 30px;
+  text-align: center;
+}
+.condiciones{
+  margin: auto;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.divcond{
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 75%;
+  background-color: rgba(240, 240, 240, 0.27);
+  padding-left: 3em;
+  padding-right: 3em;
+  text-align:justify ;
+}
+
+.condlist{
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-bottom: 0.3em;
+}
+
+.descripcion{
+  display: inline-block;
+}
+
+.precio{
+  float: right;
+  margin-right: .3em;
+  font-weight: bold;
+  margin-top: -1em;
+  color: green;
+}
+
+.precio-anterior{
+  float: right;
+  margin-right: 2em;
+  font-weight: bold;
+  margin-top: -1em;
+  color: grey;
+  text-decoration: line-through;
+}
+
+.porcentaje-descuento{
+  padding: .4em;
+  border-radius: .8em;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  margin-left: 11em;
+  z-index: 1;
+}
+
+#logo-inicio{
+  margin-left: 20%;
+  margin-bottom: 6em;
+  width: 60%;
+}
+
+#imagen-inicio{
+  background-color: rgba(211, 211, 211, 0.3);
+}
+
+.inicio-contenido{
+  margin-left: 5em;
+  margin-right: 5em;
   text-align: justify;
 }
 
-#sendCorrect{
+.titulos-inicio{
+  font-size: xx-large;
+}
+
+.titulo-centrado{
   text-align: center;
+}
+
+.separar-inicio{
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  border-top: 0.1em solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 3em;
+  margin-top: 2em;
+}
+
+.faq{
+  text-decoration: none;
+  color: black;
   font-weight: bold;
 }
 
+.faq:hover{
+  transform: scale(1.02);
+}
 
-.textarea_wrapper textarea:focus {
-  background: rgba(242, 56, 90, 0.05);
-  box-shadow: inset 2px 2px 5px 0 #DADADA;
-  outline: none;
+.logo-footer{
+  width: 3em;
 }
-.submit_wrapper {
+
+.enlaces-footer{
+  display: flex;
+  flex-direction: column;
+}
+
+.quienes-somos{
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.fotos-ceo{
+  width: 8em;
+  border-radius: 50%;
+  border: 0.01em solid black;
+}
+
+#edu-nievas{
   text-align: center;
 }
-.submit_wrapper a {
+
+#eduardo{
   text-align: center;
-  display: inline-block;
-  width: 40%;
-  height: 50px;
-  margin-top: 1em;
-  padding-top: .8em;
-  margin-bottom: 6px;
-  cursor: pointer;
-  background: #000000;
+}
+
+#luis{
+  text-align: center;
+}
+
+.nombre-ceo{
+  margin-top: 1.4em;
+  font-weight: bold;
+}
+
+.cargo{
+  margin-top: -0.5em;
+  font-weight: bold;
+}
+
+.fondo-claro{
+  background-color: black;
   color: white;
-  font-family: Oswald ,sans-serif;
-  font-size: 1em;
-  border: none;
-  -webkit-box-shadow: 1px 1px 0 0 #595959,2px 2px 0 0 #595959,3px 3px 0 0 #595959;
-  box-shadow: 1px 1px 0 0 #595959,2px 2px 0 0 #595959,3px 3px 0 0 #595959;
-  -webkit-appearance: none;
-  -webkit-transition: all 250ms ease;
-  -moz-transition: all 250ms ease;
-  -ms-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-}
-.submit_wrapper a:hover {
-  -webkit-box-shadow: 1px 1px 0 0 #595959,0px 0px 0 0 #595959,0px 0px 0 0 #595959;
-  box-shadow: 1px 1px 0 0 #595959,0px 0px 0 0 #595959,0px 0px 0 0 #595959;
-  margin-top: 22px;
-  margin-left: 2px;
-  margin-bottom: 0px;
 }
 
-#contact_message{
-  resize: none;
+.fondo-oscuro{
+  background-color: grey;
 }
 
-#centrar{
-  text-align: center;
+.restar-producto{
+  background-color: red;
+  font-weight: bold;
+  float: left;
+  width: 1.8em;
+  height: 1.8em;
 }
 
-@media (max-width: 500px){
-  #contact {
-    width: 100%;
-  }
-  .input_wrapper label {
-    line-height: 3.5em;
-    font-size: 0.8em;
-  }
+.numero-productos{
+  float: left;
+  width: 3em;
+}
+
+.sumar-producto{
+  background-color: green;
+  font-weight: bold;
+  float: left;
+  width: 1.8em;
+  height: 1.8em;
+}
+
+#carritoVacio{
+  width: 5em;
+}
+
+.centrar-sumarproducto{
+  margin-left: 25%;
+  margin-top: 0.8em;
+  display: none;
+}
+
+.productos:hover .centrar-sumarproducto {
+  display: block;
+}
+
+.centrar-sumarproducto-descuento{
+  margin-left: 2%;
+  display: none;
+}
+
+.productos:hover .centrar-sumarproducto-descuento{
+  display: inline-block;
 }
