@@ -59,7 +59,7 @@
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Datos de facturación</h4>
-        <form class="needs-validation" novalidate="" [formGroup]="formulario" (ngSubmit)="vaciarCarritoCompra()" ngNativeValidate>
+        <form class="needs-validation" [formGroup]="formulario" (ngSubmit)="vaciarCarritoCompra()" ngNativeValidate>
           <div class="row g-3">
             <div class="col-sm-6">
               <label  for="nombre" class="form-label" >Nombre</label>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="col-md-5">
-              <label for="ciudad" class="form-label">Provincia</label>
+              <label for="provincia" class="form-label">Provincia</label>
               <select id="provincia" class="form-select"  required formControlName="provincia">
                 <option value="">Elegir...</option>
                 <option>Álava</option>
@@ -152,7 +152,7 @@
 
             <div class="col-md-4">
               <label for="ciudad" class="form-label">Ciudad</label>
-              <input id="ciudad"  type="text" class="form-control" formControlName="ciudad">
+              <input id="ciudad"  type="text" class="form-control" required formControlName="ciudad">
               <div class="invalid-feedback">
                 Please provide a valid state.
               </div>
