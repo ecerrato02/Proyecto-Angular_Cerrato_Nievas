@@ -1,1 +1,22 @@
-
+<div *ngIf="cargaEspera">
+  <div class="loader"></div>
+  <div class="finalizandoCompra">
+    <p>Finalizando compra... ({{this.tiempoEspera}}seg)</p>
+  </div>
+</div>
+<div *ngIf="!cargaEspera">
+  <div id="tick">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+  </div>
+  <div class="finalizandoCompra">
+    <p>!Compra finalizada¡</p>
+    <p>¡Muchas gracias por tu compra, {{this.username}}!</p>
+  </div>
+</div>

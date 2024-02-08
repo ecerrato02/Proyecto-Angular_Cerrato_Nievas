@@ -8,6 +8,8 @@ import{ FormularioLoginComponent} from './formulario-login/formulario-login.comp
 import{FormularioContactosComponent} from './formulario-contactos/formulario-contactos.component'
 import{FormularioRegistroComponent} from './formulario-registro/formulario-registro.component'
 import{ProductosComponent} from './productos/productos.component'
+import {FinalizarCompraComponent} from "./finalizar-compra/finalizar-compra.component";
+
 export const routes: Routes = [
   {path: '', component:MenuComponent},
   {path: 'catalogo', component:CatalogoComponent},
@@ -19,5 +21,6 @@ export const routes: Routes = [
   {path: 'formulario-registro', component:FormularioRegistroComponent},
   {path: 'productos', component:ProductosComponent},
   {path: 'productos/:id', component:ProductosComponent},
+  {path: 'finalizar-compra', component:FinalizarCompraComponent},
 
 ];
