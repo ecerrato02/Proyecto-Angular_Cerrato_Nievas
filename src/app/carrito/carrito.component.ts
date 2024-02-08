@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {productos} from "../bd/productos";
 import { IdProductosService } from "../id-productos.service";
 import {NgForOf} from "@angular/common";
@@ -25,7 +25,7 @@ export class CarritoComponent {
   totalCarrito = 0;
   carritoState: boolean = true;
 
-  constructor(public idProductosService: IdProductosService) {
+  constructor(public idProductosService: IdProductosService, private router: Router) {
     this.actualizarNumeroDeProductosDiferentes();
     this.actualizarTotalCarrito();
     this.carritoEmpty();
@@ -87,6 +87,7 @@ export class CarritoComponent {
     this.actualizarTotalCarrito();
     this.numeroDeProductosDiferentes = this.numeroDeProductosDiferentes - 1;
     this.actualizarNumeroDeProductosDiferentes();
+    this.router.navigate(['/finalizar-compra']);
   }
 
 
