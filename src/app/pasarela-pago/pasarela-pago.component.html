@@ -1,0 +1,63 @@
+<div *ngIf="tarjetaPagar">
+  <div class="container">
+    <h2 class="metodoPago">Pago con Tarjeta</h2>
+    <div class="credit-card" [ngClass]="{ 'flipped': isFlipped }">
+      <div class="front">
+        <div class="chip"></div>
+        <div class="number">{{ cardNumber }}</div>
+        <div class="info">
+          <div class="card-holder">
+            <label>TITULAR</label>
+            <div>{{ cardHolder.toUpperCase() }}</div>
+          </div>
+          <div class="expiry-date">
+            <label>VENCIMIENTO</label>
+            <div>{{ expiryDate }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="back">
+        <div class="cvv">***</div>
+      </div>
+    </div>
+    <form>
+      <div class="form-group">
+        <label for="cardNumber">Número de Tarjeta:</label>
+        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="1234 5678 9012 3456"
+               [(ngModel)]="cardNumber" (input)="formatCardNumber($event); camposIncorrectos()" maxlength="19" (keypress)="validateCardNumber($event)">
+      </div>
+      <div class="form-group">
+        <label for="cardName">Nombre en la Tarjeta:</label>
+        <input type="text" id="cardName" name="cardName" class="form-control" placeholder="Juan Pérez"
+               [(ngModel)]="cardHolder">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="expiryDate">Fecha de Vencimiento:</label>
+          <input type="text" id="expiryDate" name="expiryDate" class="form-control" placeholder="MM/YY"
+                 [(ngModel)]="expiryDate" (input)="formatExpiryDate($event); camposIncorrectos()" maxlength="5" (keypress)="validateExpiryDate($event)">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cvv">CVV:</label>
+          <input type="password" id="cvv" name="cvv" class="form-control cvv-field" placeholder="123" maxlength="3"
+                 [(ngModel)]="cvv" (keypress)="validateCVV($event)" (input)="camposIncorrectos()"
+                 (focus)="flipCard(true)" (blur)="flipCard(false)">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="validarCampos() && this.idProductosService.claveProducto()">Pagar</button>
+      <p *ngIf="rellenaTodosCampos" class="error">¡Debes rellenar todos los campos correctamente!</p>
+    </form>
+  </div>
+</div>
+<div *ngIf="paypalPagar">
+  <div class="container2">
+    <h2 class="metodoPago">Pago con PayPal</h2>
+    <a (click)="restablecerMetodoPago()"><img id="paypal" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png" alt="Logo PayPal">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="TU_ID_DE_BOTÓN_PAYPAL">
+      <input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+      <img id="tamano-paypal"  alt="PayPalPago" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+    </form></a>
+  </div>
+</div>

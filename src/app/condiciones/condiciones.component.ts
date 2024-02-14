@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-condiciones',
   standalone: true,
   imports: [
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './condiciones.component.html',
   styleUrl: './condiciones.component.css'

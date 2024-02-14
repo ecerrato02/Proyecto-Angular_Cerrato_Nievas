@@ -208,6 +208,14 @@ footer{
   padding-bottom: 1.5em;
 }
 
+.container2{
+  width: 20em;
+  background: #FFFF;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding-bottom: 1.5em;
+}
+
 .container .form{
   padding: 30px;
 }

@@ -1,5 +1,6 @@
 export class productos{
   idProducto = 0;
+  productNameUrl = "";
   fotoProducto = "";
   nombreProducto = "";
   descripcionProducto = "";
@@ -25,8 +26,11 @@ export class productos{
   graficosRecomendadoProducto = "";
   videoProducto = "";
   cantidadProducto = 0;
-  constructor(newIdProducto: number, newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string, newCantidadProducto: number){
+  claveProducto = "";
+  claves?: string[];
+  constructor(newIdProducto: number, newProductNameUrl: string,  newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string, newCantidadProducto: number, newClaveProducto: string, newClaves?: string[]){
     this.idProducto = newIdProducto;
+    this.productNameUrl = newProductNameUrl;
     this.fotoProducto = newFotoProducto;
     this.nombreProducto = newNombreProducto;
     this.descripcionProducto = newDescripcionProducto;
@@ -52,5 +56,7 @@ export class productos{
     this.graficosRecomendadoProducto = newGraficosRecomendadoProducto;
     this.videoProducto = newVideoProducto;
     this.cantidadProducto = newCantidadProducto;
+    this.claveProducto = newClaveProducto;
+    this.claves = newClaves;
   }
 }

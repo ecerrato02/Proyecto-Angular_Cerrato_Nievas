@@ -20,10 +20,17 @@
           </div>
           <img id="whiteLogo" alt="Logo Blanco" src="./assets/logo-BD-Blanco.png">
           <div class="app-contact">
-            <a class="link" routerLink="/formulario-contactos">CONTACTANOS</a>
+            <a class="link" routerLink="/contacto">CONTACTANOS</a>
           </div>
         </div>
         <div class="screen-body-item">
+          <div id="espacioSuperior" *ngIf="!camposLlenos"></div>
+          <div id="camposVacios" *ngIf="camposLlenos">
+            <p>Debes rellenar todos los campos</p>
+          </div>
+          <div id="camposVacios" *ngIf="mostrarMensajeAceptarPolitica">
+            <p>Debes aceptar la Política de Privacidad</p>
+          </div>
           <div class="app-form">
             <div class="app-form-group">
               <input class="app-form-control" type="email" id="email" name="Email" placeholder="CORREO ELECTRÓNICO" required>
@@ -37,6 +44,11 @@
             <div class="app-form-group">
               <input type="password" class="app-form-control" id="confirmPass" name="confirmPass" placeholder="CONFIRMAR CONTRASEÑA" required>
             </div>
+            <div>
+              <input id="terminos" type="checkbox" [(ngModel)]="aceptarPolitica">
+              <label id="terminosCondiciones" for="terminos">Acepto la <a routerLink="/privacy">Politica de Privacidad</a></label>
+            </div>
+            <div id="espacioSuperior"></div>
             <div class="app-form-group buttons">
               <button class="app-form-button" (click)="registrarUsuario()">REGISTRARSE</button>
             </div>
@@ -48,7 +60,7 @@
 </div>
 <div id="registrar">
   <p style="margin-bottom: 3px; margin-top: 2px; font-size: small">¿Ya tienes cuenta?</p>
-  <a routerLink="/formulario-login" routerLinkActive="Active" class="link2"><b>INICIAR SESIÓN</b></a>
+  <a routerLink="/login" routerLinkActive="Active" class="link2"><b>INICIAR SESIÓN</b></a>
 </div>
 <router-outlet></router-outlet>
 

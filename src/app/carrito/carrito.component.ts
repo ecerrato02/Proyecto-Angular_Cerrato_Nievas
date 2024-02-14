@@ -4,6 +4,7 @@ import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import { IdProductosService } from "../id-productos.service";
 import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import { MetodoPagoService } from "../metodo-pago.service";
 
 @Component({
   selector: 'app-carrito',
@@ -19,17 +20,21 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './carrito.component.css'
 })
 export class CarritoComponent {
-  numeroDeProductosDiferentes = 0;
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
-  totalCarrito = 0;
-  carritoState: boolean = true;
-  mostrarPopup: boolean = false;
   formularioCompleto: boolean = false;
 
-  constructor(public idProductosService: IdProductosService, private router: Router) {
-    this.actualizarNumeroDeProductosDiferentes();
-    this.actualizarTotalCarrito();
-    this.carritoEmpty();
+  constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService : MetodoPagoService) {
+    this.idProductosService.actualizarNumeroDeProductosDiferentes();
+    this.idProductosService.actualizarTotalCarrito();
+    this.idProductosService.carritoEmpty();
+  }
+
+  pagarTarjeta(){
+    this.MeotodPagoService.pagoTarjeta();
+  }
+
+  pagarPayPal() {
+    this.MeotodPagoService.pagoPayPal();
   }
 
   verificarFormulario() {
@@ -47,31 +52,18 @@ export class CarritoComponent {
     this.formularioCompleto = formularioValido;
   }
 
-  actualizarNumeroDeProductosDiferentes() {
-    this.numeroDeProductosDiferentes = this.idProductosService.arrayCarrito.length;
-    this.actualizarTotalCarrito();
-  }
-
   eliminarUnaUnidad(idProducto: number, cantidadProducto: number) {
     this.idProductosService.eliminarUnaUnidadCarrito(idProducto);
-    this.actualizarTotalCarrito();
+    this.idProductosService.actualizarTotalCarrito();
     if(cantidadProducto <= 1){
-      this.actualizarNumeroDeProductosDiferentes();
-      this.carritoState = false;
-    }
-  }
-
-  carritoEmpty(){
-    if(this.idProductosService.arrayCarrito.length > 0){
-      this.carritoState = true;
-    } else if (this.idProductosService.arrayCarrito.length <= 0){
-      this.carritoState = false;
+      this.idProductosService.actualizarNumeroDeProductosDiferentes();
+      this.idProductosService.carritoState = false;
     }
   }
 
   agregarUnaUnidad(idProducto: number) {
     this.idProductosService.agregarUnaUnidadCarrito(idProducto, 1);
-    this.actualizarTotalCarrito();
+    this.idProductosService.actualizarTotalCarrito();
   }
 
 
@@ -83,27 +75,19 @@ export class CarritoComponent {
       setTimeout(() => {
         this.idProductosService.arrayCarrito.splice(index, 1);
         delete this.animacionesEliminacion[idProducto];
-        this.actualizarTotalCarrito();
-        this.numeroDeProductosDiferentes = this.numeroDeProductosDiferentes - 1;
-        this.actualizarNumeroDeProductosDiferentes();
+        this.idProductosService.actualizarTotalCarrito();
+        this.idProductosService.numeroDeProductosDiferentes = this.idProductosService.numeroDeProductosDiferentes - 1;
+        this.idProductosService.actualizarNumeroDeProductosDiferentes();
       }, 1000);
-      this.carritoState = false;
+      if (this.idProductosService.arrayCarrito.length == 0){
+        this.idProductosService.carritoState = false;
+      }
     }
 
   }
 
-  actualizarTotalCarrito() {
-    this.totalCarrito = this.idProductosService.arrayCarrito.reduce((total, item) => {
-      return total + (item.precioProducto * item.cantidadProducto);
-    }, 0);
-  }
-
-  vaciarCarritoCompra(){
-    this.idProductosService.vaciarCarrito();
-    this.actualizarTotalCarrito();
-    this.numeroDeProductosDiferentes = this.numeroDeProductosDiferentes - 1;
-    this.actualizarNumeroDeProductosDiferentes();
-    this.router.navigate(['/finalizar-compra']);
+  finalizarCompra(){
+    this.router.navigate(['/pasarela-pago']);
   }
 
   protected readonly Number = Number;

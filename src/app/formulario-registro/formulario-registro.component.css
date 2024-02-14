@@ -45,6 +45,16 @@ body, button, input {
 
 #registrar{
   text-align: center;
+  margin-bottom: 5em;
+}
+
+#espacioSuperior{
+  height: 2.5em;
+}
+
+#camposVacios{
+  color: red;
+  text-align: center;
 }
 
 .screen {
@@ -221,6 +231,18 @@ body, button, input {
   width: 1.25em;
   height: 1.25em;
   margin: 0 0.3125em;
+}
+
+#terminos{
+  margin-top: .8em;
+  width: .6em;
+}
+
+#terminosCondiciones{
+  color: #888;
+  margin-left: .5em;
+  font-size: x-small;
+  margin-bottom: 1em;
 }
 
 @media screen and (max-width: 520px) {

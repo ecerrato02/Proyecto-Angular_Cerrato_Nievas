@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 import { productos } from '../bd/productos';
@@ -23,7 +23,7 @@ import {FormsModule} from "@angular/forms";
 })
 
 
-export class CatalogoComponent {
+export class CatalogoComponent implements OnInit{
   arrayProductos: any[] = [];
   todosLosProductos: any[] = [];
 

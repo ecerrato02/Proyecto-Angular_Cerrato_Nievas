@@ -26,11 +26,11 @@
           </ul>
         </li>-->
         <li class="nav-item">
-          <a class="nav-link" routerLink="formulario-contactos" routerLinkActive="Active">Contacto</a>
+          <a class="nav-link" routerLink="contacto" routerLinkActive="Active">Contacto</a>
         </li>
       </ul>
       <div *ngIf="sessionStorage.getItem('inicio') === 'inicio correcto'">
-        <a class="carrito-boton" routerLink="/carrito"><img class="carro-imagen" src="assets/carritoCompra.svg"></a>
+        <a class="carrito-boton" routerLink="carrito"><img class="carro-imagen" src="assets/carritoCompra.svg"></a>
       </div>
       <form class="d-flex" role="search">
         <div *ngIf="sessionStorage.getItem('inicio') === 'inicio correcto'" class="dropdown perfil-container">
@@ -45,7 +45,7 @@
             </ul>
           </div>
         </div>
-        <a *ngIf="sessionStorage.getItem('inicio') != 'inicio correcto'" class="inicio-sesion" routerLink="formulario-login">Iniciar Sesión</a>
+        <a *ngIf="sessionStorage.getItem('inicio') != 'inicio correcto'" class="inicio-sesion" routerLink="login">Iniciar Sesión</a>
       </form>
       <div *ngIf="sessionStorage.getItem('inicio') === 'inicio correcto'" id="usernameScreen">
         <p id="nombreUsuario">{{this.username}}</p>

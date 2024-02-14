@@ -5,6 +5,11 @@ body{
   font-family: Open Sans ,sans-serif;
   line-height:1.5em;
 }
+
+#espacioInferior{
+  height: 3em;
+}
+
 #contact {
   width: 500px;
   margin:2em auto;

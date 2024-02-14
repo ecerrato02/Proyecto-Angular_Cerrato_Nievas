@@ -45,6 +45,16 @@ body, button, input {
 
 #registrar{
   text-align: center;
+  margin-bottom: 5em;
+}
+
+#camposVacios{
+  color: red;
+  text-align: center;
+}
+
+#espacioSuperior{
+  height: 2.5em;
 }
 
 .screen {

@@ -1,0 +1,47 @@
+#claveProducto{
+  width: 60%;
+  background-color: #eeeeee;
+  margin: auto;
+  margin-top: 6em;
+  padding: 2em;
+}
+
+#imagenPlataforma{
+  position: absolute;
+  margin-left: 26.5%;
+}
+
+.negrita{
+  font-weight: bold;
+}
+
+.logo-plataforma{
+  width: 2em;
+  text-align: center;
+}
+
+.contenedor{
+  background-color: #a4a4a4;
+  margin: auto;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#separador{
+  width: 100%;
+  height: 3em;
+}
+
+#clave{
+  background-color: white;
+  margin-top: 1.8em;
+  padding: 2em;
+}
+
+#numeroClave{
+  text-align: center;
+}

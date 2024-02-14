@@ -1,21 +1,65 @@
-#imagen-juegos{
-  width: 30%;
-  float: left;
-  border-radius: 3em 0 0 3em;
-  margin-right: 3em;
-}
-
-#informacion-basica{
+#informacion-basica {
   width: 70%;
-  background-color: rgba(204, 204, 204, 0.3);
-  display: inline-block;
+  position: relative;
   margin-left: 14%;
   margin-top: 2em;
+  overflow: hidden;
+  display: flex;
+}
+
+#imagen-juegos {
+  width: 45%;
+  height: auto;
   border-radius: 3em 0 0 3em;
+}
+
+#justificado{
+  text-align: justify;
+}
+
+.cantidad-container {
+  display: flex;
+  align-items: center;
+}
+
+.cantidad-container .agregarAlCarrito {
+  margin-left: .6em;
+}
+
+.boton {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.incrementar {
+  border-radius: 0 5px 5px 0;
+}
+
+.decrementar {
+  border-radius: 5px 0 0 5px;
+}
+
+.campo-cantidad {
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+.contenido {
+  width: 60%;
+  background-color: rgba(204, 204, 204, 0.3);
+  padding: 1em;
 }
 
 #descripcion-larga{
   text-align: justify;
+  line-height: 1.6;
 }
 
 .subrayado{
@@ -27,49 +71,110 @@
 }
 
 #espacio-derechoProductos{
-  margin-left: 2em;
-  margin-right: 2em;
+  background-color: #f9f9f9;
+  padding: 2em;
+  border-radius: 1em;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+  margin: auto;
   margin-top: 3em;
+  margin-bottom: 8em;
+  width: 80%;
+  animation: aparecer 1s;
 }
 
-#precio-producto{
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+#espacio-derechoProductos h4 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+#precio-producto {
   font-weight: bold;
   color: green;
-  float: left;
-  margin-right: 4em;
+  margin-right: .7em;
   font-size: 1.5em;
 }
 
 #espace{
-  margin-top: 2em;
-  height: 4em;
+  margin-top: 3em;
+  text-align: center;
 }
 
 #correctAdd{
-  background-color: rgba(211, 211, 211, 0.34);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 1em;
   border: 0.001em solid black;
   border-left: 0.3em solid green;
+  padding: 1.25em;
   padding-left: .5em;
   padding-right: .5em;
   width: 25%;
   margin: auto;
   height: auto;
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+  animation: entrada 1s;
 }
 
-#precio-anterior-producto{
+@keyframes entrada {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#precio-anterior-producto {
+  margin-top: 0;
   font-weight: bold;
   color: grey;
   text-decoration: line-through;
   font-size: 1.5em;
 }
 
-.en-linea{
-  width: 70%;
+.en-linea {
+  display: flex;
+  align-items: center;
+}
+
+.en-linea label {
+  margin-right: .8em;
+}
+
+.en-linea select {
+  padding: .4em;
+  border: 0.01em solid #ccc;
+  border-radius: 5px;
 }
 
 .hardware{
   width: 46%;
   float: left;
+  margin-top: 2em;
+  border-top: 0.1em solid #ccc;
+  padding-top: 2em;
+}
+
+.hardware p{
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.hardware ul li {
+  margin-bottom: 0.5em;
 }
 
 #final-pag{
@@ -79,15 +184,34 @@
 }
 
 #agregar-carrito{
-  width: 20%;
   float: left;
   margin-top: -1.1em;
 }
 
 .agregarAlCarrito{
-  background-color: green;
+  padding: 0.8em 1.2em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: .4em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+}
+
+.error{
+  color: red;
   font-weight: bold;
-  border-left: none;
+}
+
+.agregarAlCarrito:hover{
+  transform: scale(1.05);
+}
+
+.icono-carrito {
+  margin-right: .5em;
 }
 
 #cantidadAgregar{
@@ -106,15 +230,18 @@
   transform: scale(1.05);
 }
 
-#precios-productos{
-  width: 25%;
-  float: left;
+#precios-productos {
+  margin-top: .5em;
+  display: flex;
+  align-items: center;
 }
 
 #descuento-producto{
   position: absolute;
-  margin-left: 67%;
-  margin-top: -.4em;
+  margin-left: 80%;
+  z-index: 1;
+  margin-top: 1.5em;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.5);
   background-color: red;
   color: white;
   font-weight: bold;
@@ -150,4 +277,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 15em;
 }
+
+

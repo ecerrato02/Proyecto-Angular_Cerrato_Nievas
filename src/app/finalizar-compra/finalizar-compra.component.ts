@@ -32,13 +32,12 @@ export class FinalizarCompraComponent implements OnInit{
       }
     }, 1000);
     setTimeout(() => {
-      this.volverInicio()
+      this.obtenerClave()
     }, 10000);
   }
 
-  volverInicio(){
-    this.router.navigate(['']);
-
+  obtenerClave(){
+    this.router.navigate(['/clave']);
   }
 
   ngOnInit() {

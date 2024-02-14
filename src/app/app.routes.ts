@@ -9,6 +9,10 @@ import{FormularioContactosComponent} from './formulario-contactos/formulario-con
 import{FormularioRegistroComponent} from './formulario-registro/formulario-registro.component'
 import{ProductosComponent} from './productos/productos.component'
 import {FinalizarCompraComponent} from "./finalizar-compra/finalizar-compra.component";
+import {PasarelaPagoComponent} from "./pasarela-pago/pasarela-pago.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {ClaveProductoComponent} from "./clave-producto/clave-producto.component";
+import {PaginaErrorComponent} from "./pagina-error/pagina-error.component";
 
 export const routes: Routes = [
   {path: '', component:MenuComponent},
@@ -16,11 +20,16 @@ export const routes: Routes = [
   {path: 'condiciones', component:CondicionesComponent},
   {path: 'faq', component:FaqComponent},
   {path: 'carrito', component:CarritoComponent},
-  {path: 'formulario-login', component:FormularioLoginComponent},
-  {path: 'formulario-contactos', component:FormularioContactosComponent},
-  {path: 'formulario-registro', component:FormularioRegistroComponent},
+  {path: 'login', component:FormularioLoginComponent},
+  {path: 'contacto', component:FormularioContactosComponent},
+  {path: 'registro', component:FormularioRegistroComponent},
   {path: 'productos', component:ProductosComponent},
   {path: 'productos/:id', component:ProductosComponent},
   {path: 'finalizar-compra', component:FinalizarCompraComponent},
+  {path: 'pasarela-pago', component:PasarelaPagoComponent},
+  {path: 'privacy', component:PrivacyPolicyComponent},
+  {path: 'clave', component:ClaveProductoComponent},
+  {path: '404', component:PaginaErrorComponent},
+  { path: '**', redirectTo: '/404' },
 
 ];

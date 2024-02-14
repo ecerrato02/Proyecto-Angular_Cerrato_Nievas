@@ -1,11 +1,11 @@
-<div *ngIf="!carritoState">
+<div *ngIf="!this.idProductosService.carritoState">
   <div class="py-5 text-center">
     <img id="logoCarritoVacio" src="assets/logo-BD.png" alt="" width="72" height="57">
     <p class="lead">¡El carrito de la compra está vacio! Ve a la <a routerLink="/catalogo">tienda</a></p>
     <img id="carritoVacio" src="./assets/carrito-negro.png">
   </div>
 </div>
-<div *ngIf="carritoState">
+<div *ngIf="this.idProductosService.carritoState">
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
       <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
@@ -34,7 +34,7 @@
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary negrita">Tu carrito</span>
-            <span class="badge bg-primary rounded-pill">{{numeroDeProductosDiferentes}}</span>
+            <span class="badge bg-primary rounded-pill">{{this.idProductosService.numeroDeProductosDiferentes}}</span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm negrita">Producto:
@@ -59,7 +59,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span class="negrita">Total: </span>
-              <strong>{{Number(totalCarrito.toFixed(2)).toLocaleString('es-ES')}}€</strong>
+              <strong>{{Number(this.idProductosService.totalCarrito.toFixed(2)).toLocaleString('es-ES')}}€</strong>
             </li>
           </ul>
         </div>
@@ -175,62 +175,23 @@
 
             <hr class="my-4">
 
-            <h4 class="mb-3">Payment</h4>
+            <h4 class="mb-3">Metodo de pago</h4>
 
             <div class="my-3">
               <div class="form-check">
-                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required (input)="verificarFormulario()">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" (click)="pagarTarjeta()" checked="" required (input)="verificarFormulario()">
                 <label class="form-check-label" for="credit">Tarjeta</label>
               </div>
               <div class="form-check">
-                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required (input)="verificarFormulario()">
-                <label class="form-check-label" for="debit">Financiación</label>
-              </div>
-              <div class="form-check">
-                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required (input)="verificarFormulario()">
+                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required (click)="pagarPayPal()"  (input)="verificarFormulario()">
                 <label class="form-check-label" for="paypal">PayPal</label>
-              </div>
-            </div>
-
-            <div class="row gy-3">
-              <div class="col-md-6">
-                <label for="cc-name" class="form-label">Nombre de la tarjeta</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required (input)="verificarFormulario()">
-                <small class="text-body-secondary">Nombre completo tal como aparece en la tarjeta.</small>
-                <div class="invalid-feedback">
-                  Se requiere el nombre de la tarjeta
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="cc-number" class="form-label">Numero de la tarjeta</label>
-                <input type="number" maxlength="16" class="form-control" id="cc-number" placeholder="" required (input)="verificarFormulario()">
-                <div class="invalid-feedback">
-                  El número de la tarjeta de crédito es necesario.
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <label for="cc-expiration" class="form-label">Fecha de caducidad</label>
-                <input type="month" class="form-control" id="cc-expiration" placeholder="" required (input)="verificarFormulario()">
-                <div class="invalid-feedback">
-                  La fecha de caducidad de la tarjeta es necesaria.
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <label for="cc-cvv" class="form-label">CVV</label>
-                <input type="password" maxlength="3" class="form-control" id="cc-cvv" placeholder="" required (input)="verificarFormulario()">
-                <div class="invalid-feedback">
-                  El número de seguridad es necesario.
-                </div>
               </div>
             </div>
 
             <hr class="my-4">
 
 
-            <button (click)="vaciarCarritoCompra()" class="w-100 btn btn-primary btn-lg" type="submit" [disabled]="!formularioCompleto">Finalizar Compra</button>
+            <button (click)="finalizarCompra()" class="w-100 btn btn-primary btn-lg" type="submit" [disabled]="!formularioCompleto">Finalizar Compra</button>
           </form>
         </div>
       </div>

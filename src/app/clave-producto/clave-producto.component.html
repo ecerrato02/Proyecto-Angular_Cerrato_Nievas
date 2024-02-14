@@ -1,0 +1,17 @@
+<div *ngFor="let producto of productosEnCesta">
+  <div id="claveProducto">
+    <h4>Esta es tu clave de <span class="negrita">{{producto.nombreProducto}}</span></h4>
+    <div id="imagenPlataforma">
+      <div class="contenedor">
+        <img class="logo-plataforma" *ngIf="this.xbox" src="./assets/xbox.png">
+        <img class="logo-plataforma" *ngIf="this.playstation" src="./assets/ps4.png">
+        <img class="logo-plataforma" *ngIf="this.ubisoft" src="./assets/ubi.png">
+        <img class="logo-plataforma" *ngIf="this.steam" src="./assets/steam.png">
+        <img class="logo-plataforma" *ngIf="this.switch" src="./assets/switch.png">
+      </div>
+    </div>
+    <div id="clave">
+      <h1 *ngFor="let clave of producto.claves" id="numeroClave">{{ clave }}</h1>
+    </div>
+  </div>
+</div>
