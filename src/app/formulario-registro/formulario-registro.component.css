@@ -48,11 +48,11 @@ body, button, input {
   margin-bottom: 5em;
 }
 
-#espacioSuperior{
+.espacioSuperior{
   height: 2.5em;
 }
 
-#camposVacios{
+.camposVacios{
   color: red;
   text-align: center;
 }

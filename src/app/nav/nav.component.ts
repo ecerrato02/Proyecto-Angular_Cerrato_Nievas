@@ -26,7 +26,7 @@ export class NavComponent implements OnInit{
   cerrarSesion() {
     sessionStorage.removeItem('inicio');
     this.userService.changeUsername(null);
-    this.router.navigate(['/formulario-login'])
+    this.router.navigate(['/login'])
   }
 
   ngOnInit() {
