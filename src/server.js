@@ -34,9 +34,19 @@ app.get('/prueba', async(req, res) =>{
   const email =  req.body.email
   const contra = req.body.contra
   const tiendas= tienda.doc(nombre)
-  await tiendas.set({
-    nombre: nombre,
-    email: email,
-    contraseña: contra
-  })
+    let userFinder = await tienda.where("nombre", "==", nombre).get()
+    let emailFinder = await tienda.where("email", "==", email).get()
+    if(userFinder.empty){
+      if (emailFinder.empty) {
+        await tiendas.set({
+          nombre: nombre,
+          email: email,
+          contraseña: contra
+        })
+      }
+      res.json("true")
+    }else{
+      console.log("Un usuario se ha intentado conectar con un nombre ya existente")
+      res.json("false")
+    }
 })

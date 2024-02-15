@@ -27,8 +27,13 @@ export class UsuariosService {
   registro(nombre: string, email: string, contra: string, contraConfirm: string) {
     if (contra === contraConfirm){
       if (contra.length >= 8 && contra.length <=32 ) {
-        this.http.post<any>("http://localhost:3080/prueba2", {nombre: nombre, email: email, contra: contra}).subscribe()
-        this.router.navigate(['/login'])
+        this.http.post<any>("http://localhost:3080/prueba2", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+          if(boolean === "true"){
+            this.router.navigate(['/login'])
+          }else {
+            alert("Ese nombre de ususario ya existe")
+          }
+        })
       }else{alert("La contraseña debe ser de más de 8 carácteresy menos de 32")}
     }else{alert("La contraseñas no coinciden")}
   }
