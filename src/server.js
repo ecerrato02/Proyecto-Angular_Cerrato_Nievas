@@ -1,12 +1,11 @@
 const express = require ('express')
 const app = express()
 const cors = require('cors');
-const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore} = require('firebase-admin/firestore');
-const serviceAccount = require('C:\\Users\\eduar\\IdeaProjects\\Proyecto-Angular_Cerrato_Nievas\\proyectolea-138e0-firebase-adminsdk-u5k4o-bcd6f093b9.json');
+const admin =  require("firebase-admin");
 
-initializeApp({
-  credential: cert(serviceAccount)
+admin.initializeApp({
+  credential: admin.credential.cert(require("..\\proyectolea-138e0-firebase-adminsdk-u5k4o-bcd6f093b9.json"))
 });
 
 const db = getFirestore();
@@ -18,10 +17,26 @@ port = 3080
 app.listen(port, () => {
   console.log(`puerto de server::${port}`)
 })
-const tienda = db.collection('BlackDiamond').doc('User')
+const tienda = db.collection('BlackDiamond')
 app.get('/prueba', async(req, res) =>{
+  const nombre =  req.body.nombre
   const docUser = await tienda.get();
-  const usuarios = docUser.data();
-  res.json (usuarios);
-  console.log(usuarios);
+  let userFinder = await tienda.where(docUser, "==", nombre).get()
+  if(userFinder.empty){
+    res.json(true)
+
+  }else{
+    res.json(false)}
+})
+
+  app.post('/prueba2', async (req, res) =>{
+  const nombre =  req.body.nombre
+  const email =  req.body.email
+  const contra = req.body.contra
+  const tiendas= tienda.doc(nombre)
+  await tiendas.set({
+    nombre: nombre,
+    email: email,
+    contraseña: contra
+  })
 })
