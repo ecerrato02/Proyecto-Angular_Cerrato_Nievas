@@ -1,0 +1,43 @@
+.form-group {
+  margin-bottom: 1.25em;
+}
+
+label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 50%;
+  padding: 0.625em;
+  font-size: 1em;
+  border-radius: 0.3125em;
+  border: 0.0625em solid #ccc;
+}
+
+.btn-right{
+  margin-left: 45%;
+}
+
+.btn-right-reset{
+  margin-left: 34.7%;
+}
+
+.btn{
+  margin-top: 1em;
+  margin-right: 2em;
+}
+
+#logo{
+  float: right;
+  width: 20em;
+  margin-right: 10%;
+}
+
+.form-row {
+  display: flex;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-right: 0.625em;
+}

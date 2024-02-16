@@ -13,6 +13,7 @@ import {PasarelaPagoComponent} from "./pasarela-pago/pasarela-pago.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {ClaveProductoComponent} from "./clave-producto/clave-producto.component";
 import {PaginaErrorComponent} from "./pagina-error/pagina-error.component";
+import {PerfilComponent} from "./perfil/perfil.component";
 
 export const routes: Routes = [
   {path: '', component:MenuComponent},
@@ -29,7 +30,7 @@ export const routes: Routes = [
   {path: 'pasarela-pago', component:PasarelaPagoComponent},
   {path: 'privacy', component:PrivacyPolicyComponent},
   {path: 'clave', component:ClaveProductoComponent},
+  {path: 'perfil', component:PerfilComponent},
   {path: '404', component:PaginaErrorComponent},
   { path: '**', redirectTo: '/404' },
-
 ];
