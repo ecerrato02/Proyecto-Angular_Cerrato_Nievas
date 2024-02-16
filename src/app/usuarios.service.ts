@@ -1,25 +1,41 @@
-import { Injectable } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {Router} from "@angular/router";
 
-@Injectable({
-  providedIn: 'root'
+
+
+@Component({
+  standalone: true,
+  imports: [HttpClientModule],
+  template: ``
 })
+@Injectable({
+  providedIn: 'root',
+})
+
 export class UsuariosService {
+
   usuarios: any[][]
   private usernameSource = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
   currentUsername = this.usernameSource.asObservable();
 
-  private sessionStorageKey = 'productos';
-
-  constructor() {
+  constructor(private router: Router, private http: HttpClient) {
     const usuariosRegistrados = sessionStorage.getItem('usuarios')
-    this.usuarios = usuariosRegistrados ? JSON.parse(usuariosRegistrados):[[],[]]
+    this.usuarios = usuariosRegistrados ? JSON.parse(usuariosRegistrados) : [[], []]
   }
-  usuarioNuevo(username: string, password: string){
-    this.usuarios[0].push(username)
-    this.usuarios[1].push(password)
-    sessionStorage.setItem('usuarios', JSON.stringify(this.usuarios))
-    console.log(this.usuarios)
+  registro(nombre: string, email: string, contra: string, contraConfirm: string) {
+    if (contra === contraConfirm){
+      if (contra.length >= 8 && contra.length <=32 ) {
+        this.http.post<any>("http://localhost:3080/prueba2", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+          if(boolean === "true"){
+            this.router.navigate(['/login'])
+          }else {
+            alert("Ese nombre de ususario ya existe")
+          }
+        })
+      }else{alert("La contraseña debe ser de más de 8 carácteresy menos de 32")}
+    }else{alert("La contraseñas no coinciden")}
   }
 
   changeUsername(username: string | null) {
@@ -31,21 +47,11 @@ export class UsuariosService {
     }
   }
 
-  login(username: string, password: string){
-    for(let i = 0; i < this.usuarios[0].length; i++){
-      if (this.usuarios [0][i] === username && this.usuarios [1][i] === password){
+  login(username: string, password: string) {
+    for (let i = 0; i < this.usuarios[0].length; i++) {
+      if (this.usuarios [0][i] === username && this.usuarios [1][i] === password) {
         sessionStorage.setItem('inicio', 'inicio correcto')
       }
     }
-  }
-  getProducts(): any[] {
-    const productsJson = sessionStorage.getItem(this.sessionStorageKey);
-    return productsJson ? JSON.parse(productsJson) : [];
-  }
-
-  addProduct(product: any): void {
-    const products = this.getProducts();
-    products.push(product);
-    sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(products));
   }
 }

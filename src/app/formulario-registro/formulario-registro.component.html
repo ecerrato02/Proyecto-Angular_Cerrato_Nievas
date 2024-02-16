@@ -24,21 +24,21 @@
           </div>
         </div>
         <div class="screen-body-item">
-          <div id="espacioSuperior" *ngIf="!camposLlenos"></div>
-          <div id="camposVacios" *ngIf="camposLlenos">
+          <div class="espacioSuperior" *ngIf="!camposLlenos"></div>
+          <div class="camposVacios" *ngIf="camposLlenos">
             <p>Debes rellenar todos los campos</p>
           </div>
-          <div id="camposVacios" *ngIf="mostrarMensajeAceptarPolitica">
+          <div class="camposVacios" *ngIf="mostrarMensajeAceptarPolitica">
             <p>Debes aceptar la Política de Privacidad</p>
           </div>
           <div class="app-form">
-            <div class="app-form-group">
-              <input class="app-form-control" type="email" id="email" name="Email" placeholder="CORREO ELECTRÓNICO" required>
-            </div>
-            <div class="app-form-group">
               <input class="app-form-control" id="username" name="username" placeholder="NOMBRE DE USUARIO" required>
             </div>
             <div class="app-form-group">
+              <div class="app-form-group">
+                <input class="app-form-control" type="email" id="email" name="email" placeholder="CORREO ELECTRÓNICO" required>
+              </div>
+              <div class="app-form-group">
               <input type="password" class="app-form-control" id="password" name="Contraseña" placeholder="CONTRASEÑA" required>
             </div>
             <div class="app-form-group">
@@ -48,7 +48,7 @@
               <input id="terminos" type="checkbox" [(ngModel)]="aceptarPolitica">
               <label id="terminosCondiciones" for="terminos">Acepto la <a routerLink="/privacy">Politica de Privacidad</a></label>
             </div>
-            <div id="espacioSuperior"></div>
+            <div class="espacioSuperior"></div>
             <div class="app-form-group buttons">
               <button class="app-form-button" (click)="registrarUsuario()">REGISTRARSE</button>
             </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet, Router} from "@angular/router";
 import {UsuariosService} from "../usuarios.service";
 import {NgIf} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-formulario-login',
@@ -10,7 +11,8 @@ import {NgIf} from "@angular/common";
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    NgIf
+    NgIf,
+    HttpClientModule,
   ],
   templateUrl: './formulario-login.component.html',
   styleUrl: './formulario-login.component.css'
