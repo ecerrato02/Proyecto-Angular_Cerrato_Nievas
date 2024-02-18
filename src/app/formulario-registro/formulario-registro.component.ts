@@ -1,10 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import { Component} from '@angular/core';
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {UsuariosService} from "../usuarios.service"
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
-import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
 @Component({
   selector: 'app-formulario-registro',
   standalone: true,
@@ -24,7 +23,7 @@ export class FormularioRegistroComponent {
   aceptarPolitica = false;
   mostrarMensajeAceptarPolitica = false;
   camposLlenos = false;
-  constructor(private router: Router, private userServ: UsuariosService) {
+  constructor(public userServ: UsuariosService) {
   }
 
   registrarUsuario() {
