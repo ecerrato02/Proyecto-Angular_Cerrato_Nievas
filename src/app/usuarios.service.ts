@@ -34,7 +34,7 @@ export class UsuariosService {
             alert("Ese nombre de ususario ya existe")
           }
         })
-      }else{alert("La contraseña debe ser de más de 8 carácteresy menos de 32")}
+      }else{alert("La contraseña debe ser de más de 8 carácteres y menos de 32")}
     }else{alert("La contraseñas no coinciden")}
   }
 
