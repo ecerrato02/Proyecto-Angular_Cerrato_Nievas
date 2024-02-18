@@ -24,8 +24,6 @@ export class NavComponent implements OnInit{
 
   constructor(private router: Router, private userService: UsuariosService) {}
   cerrarSesion() {
-    sessionStorage.removeItem('inicio');
-    this.userService.changeUsername(null);
     this.router.navigate(['/login'])
   }
 

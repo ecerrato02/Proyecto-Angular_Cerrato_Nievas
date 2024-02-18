@@ -28,6 +28,18 @@
           <div class="camposVacios" *ngIf="camposLlenos">
             <p>Debes rellenar todos los campos</p>
           </div>
+          <div class="camposVacios" *ngIf="this.userServ.usuarioCorreoYaExiste">
+            <p>¡Ya tienes cuenta! <a routerLink="/login">Iniciar Sesión</a></p>
+          </div>
+          <div class="camposVacios" *ngIf="this.userServ.contrasenaCorta">
+            <p>¡La contraseña es demasiado corta debe tener al menos 8 caracteres!</p>
+          </div>
+          <div class="camposVacios" *ngIf="this.userServ.contrasenaLarga">
+            <p>¡La contraseña es demasiado larga debe tener menos de 32 caracteres!</p>
+          </div>
+          <div class="camposVacios" *ngIf="this.userServ.contrasenaNoCoincide">
+            <p>¡Las contraseñas no coinciden!</p>
+          </div>
           <div class="camposVacios" *ngIf="mostrarMensajeAceptarPolitica">
             <p>Debes aceptar la Política de Privacidad</p>
           </div>

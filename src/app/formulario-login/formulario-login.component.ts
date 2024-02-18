@@ -31,15 +31,6 @@ export class FormularioLoginComponent {
     const usernameElement = document.getElementById('username').value;
     // @ts-ignore
     const passwordElement = document.getElementById('password').value;
-    this.userService.login(usernameElement, passwordElement)
-    if (sessionStorage.getItem('inicio') === 'inicio correcto'){
-      this.userService.changeUsername(usernameElement); // Actualiza el nombre de usuario en el servicio
-      this.router.navigate([''])
-    } else{
-      this.parametrosIncorrectos = true;
-      setTimeout(() => {
-        this.parametrosIncorrectos = false;
-      }, 5000);
-    }
+    this.userService.login(usernameElement);
   }
 }
