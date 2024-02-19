@@ -16,60 +16,42 @@ import {Router} from "@angular/router";
 
 export class UsuariosService {
 
-  loggedIn = false;
-  usuarioCorreoYaExiste = false;
-  contrasenaCorta = false;
-  contrasenaLarga = false;
-  contrasenaNoCoincide = false;
-  usernamePassIncorrect = false;
+  usuarios: any[][]
   private usernameSource = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
   currentUsername = this.usernameSource.asObservable();
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {
+    const usuariosRegistrados = sessionStorage.getItem('usuarios')
+    this.usuarios = usuariosRegistrados ? JSON.parse(usuariosRegistrados) : [[], []]
+  }
   registro(nombre: string, email: string, contra: string, contraConfirm: string) {
     if (contra === contraConfirm){
-      if (contra.length >= 8) {
-        if (contra.length <=32){
-          this.http.post<any>("http://localhost:3080/api/registro", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
-            if(boolean === "true"){
-              this.router.navigate(['/login'])
-            }else {
-              this.usuarioCorreoYaExiste = true;
-              setTimeout(() => {
-                this.usuarioCorreoYaExiste = false;
-              }, 5000);
-            }
-          })
-        } else{
-          this.contrasenaLarga = true;
-          setTimeout(() =>{
-            this.contrasenaLarga = false;
-          }, 5000);
-        }
-      }else{
-        this.contrasenaCorta = true;
-        setTimeout(() =>{
-          this.contrasenaCorta = false;
-        }, 5000);
-      }
-    }else{
-      this.contrasenaNoCoincide = true;
-      setTimeout(() => {
-        this.contrasenaNoCoincide = false;
-      }, 5000);
+      if (contra.length >= 8 && contra.length <=32 ) {
+        this.http.post<any>("http://localhost:3080/prueba2", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+          if(boolean === "true"){
+            this.router.navigate(['/login'])
+          }else {
+            alert("Ese nombre de ususario ya existe")
+          }
+        })
+      }else{alert("La contraseña debe ser de más de 8 carácteres y menos de 32")}
+    }else{alert("La contraseñas no coinciden")}
+  }
+
+  changeUsername(username: string | null) {
+    this.usernameSource.next(username);
+    if (username !== null) {
+      sessionStorage.setItem('username', username);
+    } else {
+      sessionStorage.removeItem('username');
     }
   }
 
-  login(password: string) {
-    this.http.get<any>("http://localhost:3080/api/login").subscribe((pass) => {
-      if (pass === password){
-        this.loggedIn = true;
-      } else{
-        this.usernamePassIncorrect = true;
-        setTimeout(() => {
-          this.usernamePassIncorrect = false;
-        }, 5000);
+  login(username: string, password: string) {
+    for (let i = 0; i < this.usuarios[0].length; i++) {
+      if (this.usuarios [0][i] === username && this.usuarios [1][i] === password) {
+        sessionStorage.setItem('inicio', 'inicio correcto')
       }
-    })
+    }
   }
 }

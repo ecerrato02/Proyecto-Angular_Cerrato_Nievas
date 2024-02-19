@@ -4,6 +4,8 @@ import {UsuariosService} from "../usuarios.service"
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
+import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
+import {HttpClientModule} from "@angular/common/http";
 @Component({
   selector: 'app-formulario-registro',
   standalone: true,
