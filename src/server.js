@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'ehernandez1@espriusalt.cat', // Correo de la empresa (NO CAMBIAR)
-    pass: 'gvnu kpnl wwdd enoo' // contraseña (NO CAMBIAR)
+    pass: 'ywdw hjbf mvfw kmsq' // contraseña (NO CAMBIAR)
   }
 });
 
@@ -58,7 +58,7 @@ app.post('/prueba2', async (req, res) => {
         verificacion: false,
       });
       let mailOptions = {
-        from: 'blackdiamond.brandcontact@gmail.com',
+        from: 'ehernandez1@espriusalt.cat',
         to: email,
         subject: '¡Verifica tu correo electrónico!',
         html: `<p>¡Gracias por registrarte en nuestra tienda! Haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
