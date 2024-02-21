@@ -3,8 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Router} from "@angular/router";
 
-
-
 @Component({
   standalone: true,
   imports: [HttpClientModule],
@@ -27,7 +25,7 @@ export class UsuariosService {
   registro(nombre: string, email: string, contra: string, contraConfirm: string) {
     if (contra === contraConfirm){
       if (contra.length >= 8 && contra.length <=32 ) {
-        this.http.post<any>("http://localhost:3080/prueba2", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+        this.http.post<any>("http://172.16.10.1:3080/prueba2", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
           if(boolean === "true"){
             this.router.navigate(['/login'])
           }else {
