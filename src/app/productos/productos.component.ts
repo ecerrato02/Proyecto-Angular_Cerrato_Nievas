@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import { IdProductosService } from "../id-productos.service";
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {productos} from "../bd/productos";
+import { UsuariosService } from "../usuarios.service";
 
 @Component({
   selector: 'app-productos',
@@ -23,8 +24,13 @@ export class ProductosComponent implements OnInit {
   mensajeError: string | null = null;
   agregadoCorrectamente = false;
   plataformaSeleccionada = '';
+  loggedIn = false;
 
-  constructor(private route: ActivatedRoute, private idProductosService: IdProductosService, private segura: DomSanitizer) {}
+  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService) {
+    this.usuariosService.loggedIn.subscribe((loggedIn: boolean) => {
+      this.loggedIn = loggedIn;
+    });
+  }
 
   sumar() {
     if (this.producto.cantidadProducto < 50) {
@@ -34,6 +40,10 @@ export class ProductosComponent implements OnInit {
 
   seleccionarPlataforma() {
     this.idProductosService.guardarPlataformaSeleccionada(this.plataformaSeleccionada);
+  }
+
+  irInicioSesion(){
+    this.router.navigate(['/login']);
   }
 
   restar() {

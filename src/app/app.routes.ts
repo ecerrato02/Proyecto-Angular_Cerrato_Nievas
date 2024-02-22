@@ -14,6 +14,7 @@ import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component"
 import {ClaveProductoComponent} from "./clave-producto/clave-producto.component";
 import {PaginaErrorComponent} from "./pagina-error/pagina-error.component";
 import {PerfilComponent} from "./perfil/perfil.component";
+import { RestablecerContrasenaComponent } from "./restablecer-contrasena/restablecer-contrasena.component";
 
 export const routes: Routes = [
   {path: '', component:MenuComponent},
@@ -31,6 +32,8 @@ export const routes: Routes = [
   {path: 'privacy', component:PrivacyPolicyComponent},
   {path: 'clave', component:ClaveProductoComponent},
   {path: 'perfil', component:PerfilComponent},
+  {path: 'restablecer-contrasena', component:RestablecerContrasenaComponent},
+  {path: 'restablecer-contrasena/:resetToken', component:RestablecerContrasenaComponent},
   {path: '404', component:PaginaErrorComponent},
   { path: '**', redirectTo: '/404' },
 ];

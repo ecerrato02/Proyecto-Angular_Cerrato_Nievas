@@ -1,0 +1,15 @@
+#centrarTitulo{
+  text-align: center;
+}
+
+.container{
+  width: 60%;
+}
+
+.form-control{
+  margin-top: .5em;
+}
+
+.boton-contra{
+  margin-top: 2em;
+}

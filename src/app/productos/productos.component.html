@@ -28,7 +28,7 @@
     </div>
     <br>
     <div id="agregar-carrito">
-      <div *ngIf="sessionStorage.getItem('inicio') == 'inicio correcto'">
+      <div *ngIf="loggedIn">
         <div class="cantidad-container">
           <button class="boton decrementar" (click)="restar()">-</button>
           <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
@@ -38,12 +38,12 @@
           </button>
         </div>
       </div>
-      <div *ngIf="sessionStorage.getItem('inicio') != 'inicio correcto'">
+      <div *ngIf="!loggedIn">
         <div class="cantidad-container">
           <button class="boton decrementar" (click)="restar()">-</button>
           <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
           <button class="boton incrementar" (click)="sumar()">+</button>
-          <button class="agregarAlCarrito" (click)="plataformaSeleccionada && agregarProductoAlCarrito(producto)">
+          <button class="agregarAlCarrito" (click)="plataformaSeleccionada && irInicioSesion()">
             <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
           </button>
         </div>
@@ -89,4 +89,3 @@
 <div *ngIf="mensajeError" class="error">
   {{ mensajeError }}
 </div>
-

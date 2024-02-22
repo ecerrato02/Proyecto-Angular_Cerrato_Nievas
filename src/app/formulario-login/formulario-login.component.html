@@ -1,75 +1,41 @@
-<!--<div class="container">
-  <div class="forms">
-    <div class="form login">
-      <img src="./assets/logo-BD.png" alt="logo" width="70" height="70">
-      <span class="title"> Black Diamond </span>
-
-      <form>
-        <div class="input-field">
-          <input id="email" type="email" placeholder="Introduce tu email" required>
-          <i class="fa-solid fa-user icon"></i>
-        </div>
-
-        <div class="input-field">
-          <input id="password" type="password" placeholder="Contraseña" required>
-          <i class="fa-solid fa-lock icon"></i>
-        </div>
-
-        <div class="input-field button">
-          <input type="button" value="Iniciar Sesión" (click)="login()">
-        </div>
-      </form>
-
-      <div class="login-signup">
-					<span class="text"> ¿No tienes una cuenta?
-						<br>
-						<a routerLink="/formulario-registro" routerLinkActive="Active" class="text signup-text"><b>Crea una cuenta</b></a>
-					</span>
+<div class="contenedorForm">
+  <div class="screen">
+    <div class="screen-header">
+      <div class="screen-header-left">
+        <div class="screen-header-button close"></div>
+        <div class="screen-header-button maximize"></div>
+        <div class="screen-header-button minimize"></div>
+      </div>
+      <div class="screen-header-right">
+        <div class="screen-header-ellipsis"></div>
+        <div class="screen-header-ellipsis"></div>
+        <div class="screen-header-ellipsis"></div>
       </div>
     </div>
-  </div>
-</div>-->
-
-<div>
-  <div class="contenedorForm">
-    <div class="screen">
-      <div class="screen-header">
-        <div class="screen-header-left">
-          <div class="screen-header-button close"></div>
-          <div class="screen-header-button maximize"></div>
-          <div class="screen-header-button minimize"></div>
+    <div class="screen-body">
+      <div class="screen-body-item left">
+        <div class="app-title">
+          <span>INICIAR SESIÓN</span>
         </div>
-        <div class="screen-header-right">
-          <div class="screen-header-ellipsis"></div>
-          <div class="screen-header-ellipsis"></div>
-          <div class="screen-header-ellipsis"></div>
+        <img id="whiteLogo" alt="Logo Blanco" src="./assets/logo-BD-Blanco.png">
+        <div class="app-contact">
+          <a class="link" routerLink="/contacto">CONTACTANOS</a>
         </div>
       </div>
-      <div class="screen-body">
-        <div class="screen-body-item left">
-          <div class="app-title">
-            <span>INICIAR SESIÓN</span>
-          </div>
-          <img id="whiteLogo" alt="Logo Blanco" src="./assets/logo-BD-Blanco.png">
-          <div class="app-contact">
-            <a class="link" routerLink="/contacto">CONTACTANOS</a>
-          </div>
+      <div class="screen-body-item">
+        <div id="espacioSuperior" *ngIf="!parametrosIncorrectos"></div>
+        <div id="camposVacios" *ngIf="parametrosIncorrectos">
+          <p>Debes rellenar todos los campos</p>
         </div>
-        <div class="screen-body-item">
-          <div id="espacioSuperior" *ngIf="!parametrosIncorrectos"></div>
-          <div id="camposVacios" *ngIf="parametrosIncorrectos">
-            <p>Debes rellenar todos los campos</p>
+        <div class="app-form">
+          <div class="app-form-group">
+            <input [(ngModel)]="username" class="app-form-control" id="username" placeholder="NOMBRE DE USUARIO">
           </div>
-          <div class="app-form">
-            <div class="app-form-group">
-              <input class="app-form-control" id="username" placeholder="NOMBRE DE USUARIO">
-            </div>
-            <div class="app-form-group">
-              <input type="password" id="password" class="app-form-control" placeholder="CONTRASEÑA">
-            </div>
-            <div class="app-form-group buttons">
-              <button class="app-form-button" (click)="login()">ENTRAR</button>
-            </div>
+          <div class="app-form-group">
+            <input [(ngModel)]="password" type="password" id="password" class="app-form-control" placeholder="CONTRASEÑA">
+          </div>
+          <div class="app-form-group buttons">
+            <button class="app-form-button" (click)="login()">ENTRAR</button>
           </div>
         </div>
       </div>

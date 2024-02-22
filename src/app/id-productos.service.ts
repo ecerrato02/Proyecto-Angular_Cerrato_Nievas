@@ -17,6 +17,7 @@ export class IdProductosService {
 
   constructor(private router: Router) {
     this.cargarProductos();
+    this.cargarCarritoDesdeLocalStorage();
   }
 
   private cargarProductos(){
@@ -31,6 +32,19 @@ export class IdProductosService {
 
     // @ts-ignore
     this.arrayProductos.push(productoUno, productoDos, productoTres, productoCuatro, productoCinco, productoSeis, productoSiete, productoOcho);
+  }
+
+
+  cargarCarritoDesdeLocalStorage() {
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado) {
+      this.arrayCarrito = JSON.parse(carritoGuardado);
+      this.actualizarNumeroDeProductosDiferentes();
+    }
+  }
+
+  guardarCarritoEnLocalStorage() {
+    localStorage.setItem('carrito', JSON.stringify(this.arrayCarrito));
   }
 
   obtenerProductos() {
@@ -78,6 +92,7 @@ export class IdProductosService {
       }
       this.arrayCarrito.push(productoParaCarrito);
     }
+    this.guardarCarritoEnLocalStorage()
   }
 
   generarClaveProducto(): string {
@@ -123,6 +138,7 @@ export class IdProductosService {
     this.actualizarTotalCarrito();
     this.numeroDeProductosDiferentes = this.numeroDeProductosDiferentes - 1;
     this.actualizarNumeroDeProductosDiferentes();
+    localStorage.removeItem('carrito');
   }
 
  claveProducto(){
@@ -139,5 +155,6 @@ export class IdProductosService {
 
   vaciarCarrito() {
     this.arrayCarrito = [];
+    localStorage.removeItem('carrito');
   }
 }

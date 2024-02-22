@@ -19,19 +19,20 @@ declare const $: any;
   styleUrl: './nav.component.css'
 })
 export class NavComponent implements OnInit{
-  username: string | null = "";
-  protected readonly sessionStorage = sessionStorage;
+  username: string | null = null;
+  loggedIn: boolean = false;
 
   constructor(private router: Router, private userService: UsuariosService) {}
-  cerrarSesion() {
-    this.router.navigate(['/login'])
-  }
 
   ngOnInit() {
     $(document).ready(function () {
       $('[data-bs-toggle="dropdown"]').dropdown();
     });
-
     this.userService.currentUsername.subscribe(username => this.username = username);
+    this.userService.loggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
+  }
+
+  cerrarSesion(): void {
+    this.userService.logout();
   }
 }

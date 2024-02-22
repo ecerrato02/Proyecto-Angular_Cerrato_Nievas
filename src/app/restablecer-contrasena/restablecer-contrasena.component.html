@@ -1,0 +1,18 @@
+<div class="container">
+  <h2 id="centrarTitulo">Restablecer Contraseña</h2>
+  <form (ngSubmit)="cambiarContrasena(username.value, newPassword.value, confirmPassword.value)">
+    <div>
+      <label for="username">Nombre de usuario:</label>
+      <input class="form-control" type="text" id="username" name="username" required #username>
+    </div>
+    <div>
+      <label for="newPassword">Nueva contraseña:</label>
+      <input class="form-control" type="password" id="newPassword" name="newPassword" required #newPassword>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirmar contraseña:</label>
+      <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" required #confirmPassword>
+    </div>
+    <button class="btn btn-primary boton-contra" type="submit">Cambiar contraseña</button>
+  </form>
+</div>
