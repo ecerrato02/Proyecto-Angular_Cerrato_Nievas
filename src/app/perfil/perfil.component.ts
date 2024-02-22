@@ -66,9 +66,6 @@ export class PerfilComponent implements OnInit{
         } else {
           alert('La contraseña o el correo electrónico actual son incorrectos.');
         }
-      },
-      error: (error) => {
-        console.error('Error al verificar la contraseña y el correo electrónico:', error);
       }
     });
     this.isEditing = false;

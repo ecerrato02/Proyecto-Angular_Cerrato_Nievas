@@ -99,6 +99,43 @@ app.get('/api/user/:username', async (req, res) => {
   }
 });
 
+app.put('/api/user2/:username', async (req, res) => {
+  const username = req.params.username;
+  const newEmail = req.body.email;
+
+  await tienda.doc(username).update({ email: newEmail, verificacion: false });
+
+  let mailOptions = {
+    from: 'ehernandez1@espriusalt.cat',
+    to: newEmail,
+    subject: '¡Verifica tu nuevo correo electrónico!',
+    html: `<p>¡Gracias por actualizar tu correo electrónico en nuestra tienda! Haz clic en el siguiente enlace para verificar tu nuevo correo electrónico:</p>
+           <a href="http://localhost:3080/verificar/${username}">Verificar correo electrónico</a>`
+  };
+  await transporter.sendMail(mailOptions, (error, response) => {
+    error ? console.log(error) : console.log(response);
+  });
+
+  res.json({ success: true });
+
+});
+
+app.post('/api/verify', async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const userSnapshot = await tienda.where('email', '==', email).get();
+  if (userSnapshot.empty) {
+    return res.json({ success: false, message: 'Correo electrónico incorrecto' });
+  }
+  const userData = userSnapshot.docs[0].data();
+  if (userData.contraseña !== password) {
+    return res.json({ success: false, message: 'Contraseña incorrecta' });
+  }
+  res.json({ success: true });
+
+});
+
 app.get('/verificar/:nombre', async (req, res) => {
   const nombre = req.params.nombre;
   await tienda.doc(nombre).update({ verificacion: true });
