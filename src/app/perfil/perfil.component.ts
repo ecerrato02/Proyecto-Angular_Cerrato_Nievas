@@ -38,13 +38,13 @@ export class PerfilComponent implements OnInit{
   }
 
   saveProfile() {
-    this.http.post<any>('http://localhost:3080/api/verify', {
+    this.http.post<any>('http://172.16.10.1:3080/api/verify', {
       email: this.email,
       password: this.password
     }).subscribe({
       next: (response) => {
         if (response.success) {
-          this.http.put<any>('http://localhost:3080/api/user2/' + this.username, {
+          this.http.put<any>('http://172.16.10.1:3080/api/user2/' + this.username, {
             email: this.newEmail
           }).subscribe({
             next: (updateResponse) => {
