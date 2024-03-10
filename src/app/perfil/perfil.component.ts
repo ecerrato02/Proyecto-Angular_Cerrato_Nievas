@@ -38,36 +38,40 @@ export class PerfilComponent implements OnInit{
   }
 
   saveProfile() {
-    this.http.post<any>('http://172.16.10.1:3080/api/verify', {
-      email: this.email,
-      password: this.password
-    }).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.http.put<any>('http://172.16.10.1:3080/api/user2/' + this.username, {
-            email: this.newEmail
-          }).subscribe({
-            next: (updateResponse) => {
-              if (updateResponse.success) {
-                this.email = this.newEmail;
-                this.email = '';
-                this.password = '';
-                this.confirmPass = '';
-                this.isEditing = false;
-                alert('Correo electrónico actualizado correctamente.');
-              } else {
-                alert('Error al actualizar el correo electrónico.');
+    if (this.newEmail.includes('@') && this.newEmail.includes('.')) {
+      this.http.post<any>('http://localhost:3080/api/verify', {
+        email: this.email,
+        password: this.password
+      }).subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.http.put<any>('http://localhost:3080/api/user2/' + this.username, {
+              email: this.newEmail
+            }).subscribe({
+              next: (updateResponse) => {
+                if (updateResponse.success) {
+                  this.email = this.newEmail;
+                  this.email = '';
+                  this.password = '';
+                  this.confirmPass = '';
+                  this.isEditing = false;
+                  alert('Correo electrónico actualizado correctamente.');
+                } else {
+                  alert('Error al actualizar el correo electrónico.');
+                }
+              },
+              error: (error) => {
+                console.error('Error al actualizar el correo electrónico:', error);
               }
-            },
-            error: (error) => {
-              console.error('Error al actualizar el correo electrónico:', error);
-            }
-          });
-        } else {
-          alert('La contraseña o el correo electrónico actual son incorrectos.');
+            });
+          } else {
+            alert('La contraseña o el correo electrónico actual son incorrectos.');
+          }
         }
-      }
-    });
+      });
+    } else {
+      alert('Correo inválido.');
+    }
     this.isEditing = false;
   }
 

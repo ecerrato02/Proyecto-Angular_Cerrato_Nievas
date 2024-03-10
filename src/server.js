@@ -61,7 +61,7 @@ app.post('/api/register', async (req, res) => {
           to: email,
           subject: '¡Verifica tu correo electrónico!',
           html: `<p>¡Gracias por registrarte en nuestra tienda! Haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
-                 <a href="http://172.16.10.1:3080/verificar/${nombre}">Verificar correo electrónico</a>`
+                 <a href="http://localhost:3080/verificar/${nombre}">Verificar correo electrónico</a>`
         };
         await transporter.sendMail(mailOptions, (error, response) => {
           error ? console.log(error) : console.log(response);
@@ -110,7 +110,7 @@ app.put('/api/user2/:username', async (req, res) => {
     to: newEmail,
     subject: '¡Verifica tu nuevo correo electrónico!',
     html: `<p>¡Gracias por actualizar tu correo electrónico en nuestra tienda! Haz clic en el siguiente enlace para verificar tu nuevo correo electrónico:</p>
-           <a href="http://172.16.10.1:3080/verificar/${username}">Verificar correo electrónico</a>`
+           <a href="http://localhost:3080/verificar/${username}">Verificar correo electrónico</a>`
   };
   await transporter.sendMail(mailOptions, (error, response) => {
     error ? console.log(error) : console.log(response);
@@ -173,7 +173,7 @@ app.post('/api/reset-password', async (req, res) => {
 
   const resetToken = crypto.randomBytes(32).toString('hex');
 
-  const resetLink = `http://172.16.10.1:4200/restablecer-contrasena?token=${resetToken}`;
+  const resetLink = `http://localhost:4200/restablecer-contrasena?token=${resetToken}`;
   const mailOptions = {
     from: 'ehernandez1@espriusalt.cat', // Cambiar por tu dirección de correo electrónico
     to: email,

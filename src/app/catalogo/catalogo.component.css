@@ -46,7 +46,7 @@
   align-items: stretch;
   max-width: 100%;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .separador {
@@ -335,23 +335,6 @@
 
 .descripcion{
   display: inline-block;
-}
-
-.precio{
-  float: left;
-  margin-left: 40%;
-  font-weight: bold;
-  margin-top: -1em;
-  color: green;
-}
-
-.precio-anterior{
-  float: right;
-  margin-right: .3em;
-  font-weight: bold;
-  margin-top: -1em;
-  color: grey;
-  text-decoration: line-through;
 }
 
 .porcentaje-descuento{
