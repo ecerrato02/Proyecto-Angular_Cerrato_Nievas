@@ -37,7 +37,7 @@ export class UsuariosService {
     if (contra === contraConfirm){
       if (contra.length >= 8) {
         if (contra.length <=32){
-          this.http.post<any>("http://172.16.10.1:3080/api/register", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+          this.http.post<any>("http://localhost:3080/api/register", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
             if(boolean === "true"){
               this.router.navigate(['/login'])
             }else {
@@ -69,7 +69,7 @@ export class UsuariosService {
 
   loginUser(username: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.http.post<any>('http://172.16.10.1:3080/api/login', { username, password }).subscribe({
+      this.http.post<any>('http://localhost:3080/api/login', { username, password }).subscribe({
         next: (response) => {
           if (response.username) {
             this.loggedInSubject.next(true);
@@ -102,7 +102,7 @@ export class UsuariosService {
       if (newPassword !== confirmPassword) {
         reject(new Error('Las contraseñas no coinciden'));
       } else {
-        this.http.post<any>('http://172.16.10.1:3080/api/change-password', { username, newPassword, confirmPassword }).subscribe({
+        this.http.post<any>('http://localhost:3080/api/change-password', { username, newPassword, confirmPassword }).subscribe({
           next: (response) => {
             if (response.success) {
               resolve(response);
