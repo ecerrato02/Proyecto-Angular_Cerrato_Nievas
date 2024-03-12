@@ -37,7 +37,7 @@ export class UsuariosService {
     if (contra === contraConfirm){
       if (contra.length >= 8) {
         if (contra.length <=32){
-          this.http.post<any>("http://172.16.10.1:3080/api/register", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+          this.http.post<any>("http://localhost:3080/api/register", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
             if(boolean === "true"){
               this.router.navigate(['/login'])
             }else {

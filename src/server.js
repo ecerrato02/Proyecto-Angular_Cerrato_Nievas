@@ -59,7 +59,7 @@ app.post('/api/register', async (req, res) => {
           to: email,
           subject: '¡Verifica tu correo electrónico!',
           html: `<p>¡Gracias por registrarte en nuestra tienda! Haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
-                 <a href="http://172.16.10.1:3080/verificar/${nombre}">Verificar correo electrónico</a>`
+                 <a href="http://localhost:3080/verificar/${nombre}">Verificar correo electrónico</a>`
         };
         await transporter.sendMail(mailOptions, (error, response) => {
           error ? console.log(error) : console.log(response);
