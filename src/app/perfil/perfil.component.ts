@@ -29,6 +29,9 @@ export class PerfilComponent implements OnInit{
   isLoggedIn = false;
   newEmail = '';
 
+  userUsername: string | null = sessionStorage.getItem('username');
+
+
   constructor(private http: HttpClient, public userService: UsuariosService, private router: Router) {
   }
 
@@ -84,7 +87,8 @@ export class PerfilComponent implements OnInit{
 
   resetPassword() {
     this.http.post<any>('http://localhost:3080/api/reset-password', {
-      email: this.email
+      email: this.email,
+      username: this.userUsername
     }).subscribe({
       next: (response) => {
         if (response.success) {

@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {productos} from "../bd/productos";
 import { UsuariosService } from "../usuarios.service";
 import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-productos',
@@ -29,7 +30,7 @@ export class ProductosComponent implements OnInit {
   plataformaSeleccionada = '';
   loggedIn = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig) {
+  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig, private http: HttpClient) {
     config.max = 5;
     config.readonly = true;
     this.usuariosService.loggedIn.subscribe((loggedIn: boolean) => {
@@ -68,12 +69,21 @@ export class ProductosComponent implements OnInit {
   agregarProductoAlCarrito(producto: productos) {
     this.idProductosService.agregarAlCarrito(producto);
     this.agregadoCorrectamente = true;
+    this.agregadosCarritoLog(producto);
     setTimeout(() => {
       this.agregadoCorrectamente = false;
     }, 5000);
   }
 
+  agregadosCarritoLog(producto: productos){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha agregado x" + producto.cantidadProducto + " " + producto.nombreProducto + " a la cesta" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
+  }
 
+  eliminadosCarritoLog(producto: productos){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha eliminado x" + producto.cantidadProducto + " " + producto.nombreProducto + " de la cesta" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
+  }
 
   getSafeUrl(url: string) {
     return this.segura.bypassSecurityTrustResourceUrl(url);

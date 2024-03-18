@@ -6,7 +6,7 @@ const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
-const logger = require('./logger');
+const fs = require('node:fs');
 
 admin.initializeApp({
   credential: admin.credential.cert(require("..\\proyectolea-138e0-firebase-adminsdk-u5k4o-bcd6f093b9.json"))
@@ -64,16 +64,17 @@ app.post('/api/register', async (req, res) => {
           html: `<p>¡Gracias por registrarte en nuestra tienda! Haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
                  <a href="http://localhost:3080/verificar/${nombre}">Verificar correo electrónico</a>`
         };
+        logToFile(nombre,"se ha registrado correctamente");
         await transporter.sendMail(mailOptions, (error, response) => {
           error ? console.log(error) : console.log(response);
         });
         res.json("true");
       } else {
-        console.log("Un usuario se ha intentado conectar con un nombre ya existente");
+        logToFile( nombre,"es un usuario ya registrado");
         res.json("false");
       }
     } else {
-      console.log("Un usuario se ha intentado conectar con un nombre ya existente");
+      logToFile( nombre,"es un usuario ya registrado");
       res.json("false");
     }
   } catch (error) {
@@ -118,6 +119,7 @@ app.put('/api/user2/:username', async (req, res) => {
   });
 
   res.json({ success: true });
+  logToFile(username, "se ha cambiado el correo electrónico a " + newEmail);
 
 });
 
@@ -140,6 +142,7 @@ app.post('/api/verify', async (req, res) => {
 app.get('/verificar/:nombre', async (req, res) => {
   const nombre = req.params.nombre;
   await tienda.doc(nombre).update({ verificacion: true });
+  logToFile(nombre, "ha verificado el correo electrónico");
   res.send("¡Correo electrónico verificado con éxito!");
 });
 
@@ -155,18 +158,21 @@ app.post('/api/login', async (req, res) => {
       if (userData.verificacion === true) {
         res.json({ username: userData.nombre });
       } else {
-        res.status(400).json({ message: 'La cuenta no está verificada. Por favor, verifica tu correo electrónico.' });
+        res.status(400).json({ message: 'La cuenta no está verificada. Por favor, verifica tu correo electrónico' });
+        logToFile(username, "ha intentado iniciar sesión en la cuenta no verificada");
       }
     } else {
       res.status(400).json({ message: 'Credenciales inválidas' });
+      logToFile(username, "ha intentado iniciar sesión con credenciales inválidas");
     }
   } else {
     res.status(400).json({ message: 'Usuario no encontrado' });
+    logToFile(username, "ha intentado iniciar sesión pero este usuario no existe");
   }
 });
 
 app.post('/api/reset-password', async (req, res) => {
-  const { email, newPassword, confirmPassword } = req.body;
+  const { email, newPassword, confirmPassword, username } = req.body;
 
   if (newPassword !== confirmPassword) {
     return res.status(400).json({ success: false, message: 'Las contraseñas no coinciden' });
@@ -176,7 +182,7 @@ app.post('/api/reset-password', async (req, res) => {
 
   const resetLink = `http://localhost:4200/restablecer-contrasena?token=${resetToken}`;
   const mailOptions = {
-    from: 'ehernandez1@espriusalt.cat', // Cambiar por tu dirección de correo electrónico
+    from: 'ehernandez1@espriusalt.cat',
     to: email,
     subject: 'Restablecer contraseña - Black Diamond',
     html: `<p>Hola,</p>
@@ -185,6 +191,8 @@ app.post('/api/reset-password', async (req, res) => {
   };
 
   await transporter.sendMail(mailOptions);
+
+  logToFile(username, "ha solicitado un cambio de contraseña");
 
   res.json({ success: true });
 });
@@ -201,12 +209,34 @@ app.post('/api/change-password', async (req, res) => {
   await tienda.doc(username).update({ contraseña: hashedPassword });
 
   res.json({ success: true });
+
+  logToFile(username, "cambió su contraseña");
+
 });
 
-app.post('/api/logs', (req, res) => {
-  const { accion, usuario } = req.body;
-  logger.info(`[${new Date().toISOString()}] ${usuario}: ${accion}`);
-  res.sendStatus(200);
+function logToFile(username, information) {
+  const path = "C:\\logs\\logs.log";
+  const timestamp = new Date();
+  const dia = timestamp.getDate().toString().padStart(2, '0');
+  const mes = timestamp.getMonth() + 1;
+  const año = timestamp.getFullYear().toString();
+  const horas = timestamp.getHours().toString().padStart(2, '0');
+  const minutos = timestamp.getMinutes().toString().padStart(2, '0');
+  const segundos = timestamp.getSeconds().toString().padStart(2, '0');
+
+  const fechaFormateada = `${dia}/${mes}/${año} ${horas}:${minutos}:${segundos}`;
+  let logEntry = "[" + fechaFormateada + "] ";
+
+  if (username) {
+    logEntry += username + " ";
+  }
+
+  logEntry += information.toUpperCase() + ".\n";
+
+  fs.writeFileSync(path, logEntry, { flag: 'a+' });
+}
+
+app.post('/api/logs', async (req, res) => {
+  const { username, information } = req.body;
+  logToFile(username, information);
 });
-
-
