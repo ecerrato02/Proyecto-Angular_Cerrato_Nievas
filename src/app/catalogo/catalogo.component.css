@@ -39,6 +39,7 @@
 }
 
 .todos-productos{
+  user-select: none;
   display: flex;
   float: left;
   flex-direction: row;
@@ -120,6 +121,10 @@
   margin-bottom: 3em;
   border-radius: .6em;
   transition: transform 0.3s ease-out;
+}
+
+#myCarousel{
+  user-select: none;
 }
 
 .productos:hover{

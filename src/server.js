@@ -6,6 +6,7 @@ const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+const logger = require('./logger');
 
 admin.initializeApp({
   credential: admin.credential.cert(require("..\\proyectolea-138e0-firebase-adminsdk-u5k4o-bcd6f093b9.json"))
@@ -200,6 +201,12 @@ app.post('/api/change-password', async (req, res) => {
   await tienda.doc(username).update({ contraseña: hashedPassword });
 
   res.json({ success: true });
+});
+
+app.post('/api/logs', (req, res) => {
+  const { accion, usuario } = req.body;
+  logger.info(`[${new Date().toISOString()}] ${usuario}: ${accion}`);
+  res.sendStatus(200);
 });
 
 

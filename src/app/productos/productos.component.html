@@ -1,7 +1,7 @@
 <div *ngIf="producto.descuentoProducto" id="descuento-producto">
   <p id="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</p>
 </div>
-<div id="informacion-basica">
+<div id="informacion-basica" class="tw-animate-slide-in-top">
   <img id="imagen-juegos" src="{{producto.fotoProducto}}" alt="Imagen Producto">
   <div class="contenido">
     <h2>{{producto.nombreProducto}}</h2>
@@ -46,6 +46,7 @@
           <button class="agregarAlCarrito" (click)="plataformaSeleccionada && irInicioSesion()">
             <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
           </button>
+          <ngb-rating class="amarillo" [rate]="3" />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {productos} from "../bd/productos";
 import { UsuariosService } from "../usuarios.service";
+import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-productos',
@@ -14,10 +15,12 @@ import { UsuariosService } from "../usuarios.service";
     NgIf,
     FormsModule,
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    NgbRating
   ],
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  styleUrl: './productos.component.css',
+  providers: [NgbRatingConfig],
 })
 export class ProductosComponent implements OnInit {
   producto: any;
@@ -26,7 +29,9 @@ export class ProductosComponent implements OnInit {
   plataformaSeleccionada = '';
   loggedIn = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService) {
+  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = true;
     this.usuariosService.loggedIn.subscribe((loggedIn: boolean) => {
       this.loggedIn = loggedIn;
     });
