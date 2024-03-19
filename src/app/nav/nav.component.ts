@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {UsuariosService} from "../usuarios.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { IdProductosService } from "../id-productos.service";
+import {HttpClient} from "@angular/common/http";
 
 
 declare const $: any;
@@ -15,8 +14,7 @@ declare const $: any;
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    NgIf,
-    HttpClientModule
+    NgIf
   ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
@@ -24,9 +22,8 @@ declare const $: any;
 export class NavComponent implements OnInit{
   username: string | null = null;
   loggedIn: boolean = false;
-  carritoVacio: boolean = true;
 
-  constructor(private router: Router, private userService: UsuariosService, private http: HttpClient, public idProductosService: IdProductosService) {}
+  constructor(private router: Router, private userService: UsuariosService, private http: HttpClient) {}
 
   ngOnInit() {
     $(document).ready(function () {
@@ -34,16 +31,6 @@ export class NavComponent implements OnInit{
     });
     this.userService.currentUsername.subscribe(username => this.username = username);
     this.userService.loggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
-
-    this.comprobarCarrito();
-  }
-
-  comprobarCarrito() {
-    if (this.idProductosService.numeroDeProductosDiferentes > 0){
-      this.carritoVacio = false;
-    } else if (this.idProductosService.numeroDeProductosDiferentes === 0){
-      this.carritoVacio = true;
-    }
   }
 
   cerrarSesion() {

@@ -178,7 +178,7 @@ footer{
 /*carrito*/
 
 .carro-imagen{
-  height: 1.5em;
+  height: 1.2em;
 }
 
 .carrito-boton{
@@ -191,14 +191,8 @@ footer{
   padding-right: .2em;
 }
 
-.carrito:hover{
+.carro-imagen:hover{
   transform: scale(1.08);
-}
-
-.cantidadCesta{
-  max-height: 1.2em;
-  padding: .4em;
-  padding-top: .3em;
 }
 
 .separador{
