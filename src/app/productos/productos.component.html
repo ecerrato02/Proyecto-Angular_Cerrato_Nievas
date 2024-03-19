@@ -46,15 +46,12 @@
           <button class="agregarAlCarrito" (click)="plataformaSeleccionada && irInicioSesion()">
             <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
           </button>
+          <ngb-rating class="amarillo" [rate]="producto.starsProducto" />
         </div>
       </div>
     </div>
-    <br>
-    <br>
-    <ngb-rating class="amarillo" [rate]="producto.starsProducto" />
   </div>
 </div>
-
 
 <div id="espace">
   <div *ngIf="agregadoCorrectamente" id="correctAdd">

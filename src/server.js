@@ -214,11 +214,9 @@ app.post('/api/change-password', async (req, res) => {
 
 function logToFile(username, information) {
   const path = "C:\\logs\\logs.log";
-
   const timestamp = new Date();
   const dia = timestamp.getDate().toString().padStart(2, '0');
-  let mes = timestamp.getMonth() + 1;
-  mes = mes.toString().padStart(2, '0');
+  const mes = timestamp.getMonth() + 1;
   const año = timestamp.getFullYear().toString();
   const horas = timestamp.getHours().toString().padStart(2, '0');
   const minutos = timestamp.getMinutes().toString().padStart(2, '0');
