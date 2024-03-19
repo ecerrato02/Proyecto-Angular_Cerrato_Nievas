@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {UsuariosService} from "../usuarios.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { IdProductosService } from "../id-productos.service";
 
 
@@ -34,14 +34,7 @@ export class NavComponent implements OnInit{
     });
     this.userService.currentUsername.subscribe(username => this.username = username);
     this.userService.loggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
-    this.http.get<string[]>('http://172.16.10.1/api/imagenes').subscribe({
-      next: (data) => {
-        this.rutaImagenes = data;
-      },
-      error: (error) => {
-        console.error('Error al obtener las rutas de las imágenes:', error);
-      }
-    });
+
     this.comprobarCarrito();
   }
 
