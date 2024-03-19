@@ -122,16 +122,29 @@ export class IdProductosService {
       } else {
         this.arrayCarrito.splice(index, 1);
       }
+      this.guardarCarritoEnLocalStorage();
+      this.actualizarTotalCarrito();
+      this.actualizarNumeroDeProductosDiferentes();
     }
   }
 
-  agregarUnaUnidadCarrito(idProducto: number, cantidad: number) {
+  agregarUnaUnidadCarrito(idProducto: number) {
     const productoCompleto = this.obtenerProductoPorId(idProducto);
     if (productoCompleto) {
-      productoCompleto.cantidadProducto = cantidad;
-      this.agregarAlCarrito(productoCompleto);
+      const index = this.arrayCarrito.findIndex(p => p.idProducto === idProducto);
+      if (index !== -1) {
+        this.arrayCarrito[index].cantidadProducto++;
+      } else {
+        const productoParaAgregar = { ...productoCompleto };
+        productoParaAgregar.cantidadProducto = 1;
+        this.arrayCarrito.push(productoParaAgregar);
+      }
+      this.guardarCarritoEnLocalStorage();
+      this.actualizarTotalCarrito();
+      this.actualizarNumeroDeProductosDiferentes();
     }
   }
+
 
   vaciarCarritoCompra(){
     this.vaciarCarrito();
