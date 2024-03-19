@@ -26,14 +26,19 @@
           <a class="nav-link" routerLink="contacto" routerLinkActive="Active">Contacto</a>
         </li>
       </ul>
-      <div *ngIf="loggedIn">
-        <a class="carrito-boton" routerLink="carrito"><img class="carro-imagen" src="assets/carritoCompra.svg"></a>
+      <div class="carrito" *ngIf="loggedIn">
+        <a class="carrito-boton" routerLink="carrito">
+          <div *ngIf="!this.carritoVacio" class="cantidadCesta tw-absolute tw-mt-3 tw-ml-3 tw-bg-red-700 tw-rounded-full tw-w-auto tw-justify-center">
+            <p class="tw-leading-none tw-text-white tw-font-bold tw-text-xs">{{this.idProductosService.numeroDeProductosDiferentes}}</p>
+          </div>
+          <img class="carro-imagen tw-mr-2" src="assets/carritoCompra.svg">
+        </a>
       </div>
       <form class="d-flex" role="search">
         <div *ngIf="loggedIn" class="dropdown perfil-container">
           <div>
             <button class="btn" type="button" id="dropdownMenuButton">
-              <img class="perfil-icono" alt="Perfil" src="http://172.16.10.1:3080/imagenes/perfil-icono.png">
+              <img class="perfil-icono" alt="Perfil" src="./assets/perfil-icono.png">
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" routerLink="/perfil">Perfil</a></li>
