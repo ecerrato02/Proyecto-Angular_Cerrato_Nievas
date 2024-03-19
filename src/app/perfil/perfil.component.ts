@@ -29,6 +29,9 @@ export class PerfilComponent implements OnInit{
   isLoggedIn = false;
   newEmail = '';
 
+  userUsername: string | null = sessionStorage.getItem('username');
+
+
   constructor(private http: HttpClient, public userService: UsuariosService, private router: Router) {
   }
 

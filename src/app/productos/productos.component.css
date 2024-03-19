@@ -1,10 +1,11 @@
 #informacion-basica {
-  width: 70%;
+  width: 85%;
   position: relative;
-  margin-left: 14%;
+  margin: auto;
   margin-top: 2em;
   overflow: hidden;
   display: flex;
+  user-select: none;
 }
 
 #imagen-juegos {
@@ -36,10 +37,12 @@
 
 .incrementar {
   border-radius: 0 5px 5px 0;
+  user-select: none;
 }
 
 .decrementar {
   border-radius: 5px 0 0 5px;
+  user-select: none;
 }
 
 .campo-cantidad {
@@ -189,6 +192,7 @@
 }
 
 .agregarAlCarrito{
+  user-select: none;
   padding: 0.8em 1.2em;
   background-color: #4CAF50;
   color: white;
@@ -206,12 +210,19 @@
   font-weight: bold;
 }
 
+.amarillo{
+  color: #c2c200;
+  border-color: black;
+  user-select: none;
+}
+
 .agregarAlCarrito:hover{
   transform: scale(1.05);
 }
 
 .icono-carrito {
   margin-right: .5em;
+  user-select: none;
 }
 
 #cantidadAgregar{
@@ -237,6 +248,7 @@
 }
 
 #descuento-producto{
+  user-select: none;
   position: absolute;
   margin-left: 80%;
   z-index: 1;

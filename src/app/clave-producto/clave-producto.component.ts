@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { IdProductosService } from "../id-productos.service";
 import {productos} from "../bd/productos";
 import {NgForOf, NgIf} from "@angular/common";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-clave-producto',
@@ -23,7 +24,7 @@ export class ClaveProductoComponent implements OnInit{
   nombreProducto: string[] = [];
   productosEnCesta: productos[] = [];
 
-  constructor(public idProductosService: IdProductosService) {}
+  constructor(public idProductosService: IdProductosService, private http: HttpClient) {}
   ngOnInit() {
     this.obtenerPlataforma();
     this.nombreProducto = this.idProductosService.nombreProductos;
@@ -58,7 +59,13 @@ export class ClaveProductoComponent implements OnInit{
   }
 
   finalizado(){
+    this.compraFinalizadaLog()
     this.idProductosService.vaciarCarritoCompra();
+  }
+
+  compraFinalizadaLog(){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha finalizado su compra" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
 }

@@ -5,6 +5,8 @@ import { IdProductosService } from "../id-productos.service";
 import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import { MetodoPagoService } from "../metodo-pago.service";
+import {productos} from "../bd/productos";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-carrito',
@@ -23,7 +25,7 @@ export class CarritoComponent {
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   formularioCompleto: boolean = false;
 
-  constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService : MetodoPagoService) {
+  constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService : MetodoPagoService, private http: HttpClient) {
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.idProductosService.actualizarTotalCarrito();
     this.idProductosService.carritoEmpty();
@@ -52,19 +54,19 @@ export class CarritoComponent {
     this.formularioCompleto = formularioValido;
   }
 
-  eliminarUnaUnidad(idProducto: number, cantidadProducto: number) {
+  eliminarUnaUnidad(idProducto: number) {
     this.idProductosService.eliminarUnaUnidadCarrito(idProducto);
-    this.idProductosService.actualizarTotalCarrito();
-    if(cantidadProducto <= 1){
-      this.idProductosService.actualizarNumeroDeProductosDiferentes();
-      this.idProductosService.carritoState = false;
-    }
   }
 
   agregarUnaUnidad(idProducto: number) {
-    this.idProductosService.agregarUnaUnidadCarrito(idProducto, 1);
+    const index = this.idProductosService.arrayCarrito.findIndex(p => p.idProducto === idProducto);
+    const productoAgregado = this.idProductosService.arrayCarrito[index];
+
+    this.idProductosService.agregarUnaUnidadCarrito(idProducto);
     this.idProductosService.actualizarTotalCarrito();
+    this.unoAgregadoLog(productoAgregado);
   }
+
 
 
   eliminarTodasUnidades(idProducto: number) {
@@ -73,17 +75,36 @@ export class CarritoComponent {
       this.animacionesEliminacion[idProducto] = true;
 
       setTimeout(() => {
+        const productoEliminado = this.idProductosService.arrayCarrito[index];
         this.idProductosService.arrayCarrito.splice(index, 1);
         delete this.animacionesEliminacion[idProducto];
         this.idProductosService.actualizarTotalCarrito();
         this.idProductosService.numeroDeProductosDiferentes = this.idProductosService.numeroDeProductosDiferentes - 1;
         this.idProductosService.actualizarNumeroDeProductosDiferentes();
+        this.eliminadosCarritoLog(productoEliminado);
+        this.idProductosService.guardarCarritoEnLocalStorage();
       }, 1000);
-      if (this.idProductosService.arrayCarrito.length == 0){
+
+      if (this.idProductosService.arrayCarrito.length == 0) {
         this.idProductosService.carritoState = false;
       }
     }
+  }
 
+
+  eliminadosCarritoLog(productoEliminado: any){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha eliminado x" + productoEliminado.cantidadProducto + " " + productoEliminado.nombreProducto + " de la cesta" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
+  }
+
+  unoEliminadoLog(productoEliminado: any){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha eliminado x1 " + productoEliminado.nombreProducto + " de la cesta" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
+  }
+
+  unoAgregadoLog(productoEliminado: any){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha añadido x1 " + productoEliminado.nombreProducto + " a la cesta" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
   finalizarCompra(){

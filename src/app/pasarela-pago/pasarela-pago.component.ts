@@ -72,7 +72,7 @@ export class PasarelaPagoComponent {
     this.isFlipped = isFlipped;
   }
 
-  validarCampos(): boolean {
+  validarCampos() {
     if (this.cardNumber.length === 19 && this.cardHolder.length > 0 && this.expiryDate.length === 5 && this.cvv.length === 3) {
       return true;
     } else {

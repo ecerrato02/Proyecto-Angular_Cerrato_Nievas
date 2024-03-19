@@ -95,7 +95,7 @@ export class IdProductosService {
     this.guardarCarritoEnLocalStorage()
   }
 
-  generarClaveProducto(): string {
+  generarClaveProducto() {
     let claveProducto = "";
     for (let i = 0; i < 25; i++) {
       let numeroAleatorio = this.generarNumeroAleatorio();

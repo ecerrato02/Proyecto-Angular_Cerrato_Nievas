@@ -6,6 +6,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {productos} from "../bd/productos";
 import { UsuariosService } from "../usuarios.service";
+import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
+import {HttpClient} from "@angular/common/http";
+import { NavComponent } from "../nav/nav.component";
 
 @Component({
   selector: 'app-productos',
@@ -14,10 +17,12 @@ import { UsuariosService } from "../usuarios.service";
     NgIf,
     FormsModule,
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    NgbRating
   ],
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  styleUrl: './productos.component.css',
+  providers: [NgbRatingConfig],
 })
 export class ProductosComponent implements OnInit {
   producto: any;
@@ -26,10 +31,13 @@ export class ProductosComponent implements OnInit {
   plataformaSeleccionada = '';
   loggedIn = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService) {
+  constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig, private http: HttpClient, private nav: NavComponent) {
+    config.max = 5;
+    config.readonly = true;
     this.usuariosService.loggedIn.subscribe((loggedIn: boolean) => {
       this.loggedIn = loggedIn;
     });
+    this.nav.comprobarCarrito();
   }
 
   sumar() {
@@ -63,9 +71,17 @@ export class ProductosComponent implements OnInit {
   agregarProductoAlCarrito(producto: productos) {
     this.idProductosService.agregarAlCarrito(producto);
     this.agregadoCorrectamente = true;
+    this.agregadosCarritoLog(producto);
+    this.idProductosService.actualizarNumeroDeProductosDiferentes();
+    this.nav.comprobarCarrito();
     setTimeout(() => {
       this.agregadoCorrectamente = false;
     }, 5000);
+  }
+
+  agregadosCarritoLog(producto: productos){
+    const logData = { username: sessionStorage.getItem("username"), information: "ha agregado x" + producto.cantidadProducto + " " + producto.nombreProducto + " a la cesta" };
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
 

@@ -1,7 +1,7 @@
 <div *ngIf="producto.descuentoProducto" id="descuento-producto">
   <p id="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</p>
 </div>
-<div id="informacion-basica">
+<div id="informacion-basica" class="tw-animate-slide-in-top">
   <img id="imagen-juegos" src="{{producto.fotoProducto}}" alt="Imagen Producto">
   <div class="contenido">
     <h2>{{producto.nombreProducto}}</h2>
@@ -49,8 +49,12 @@
         </div>
       </div>
     </div>
+    <br>
+    <br>
+    <ngb-rating class="amarillo" [rate]="producto.starsProducto" />
   </div>
 </div>
+
 
 <div id="espace">
   <div *ngIf="agregadoCorrectamente" id="correctAdd">
