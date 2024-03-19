@@ -19,6 +19,7 @@ app.listen(port, () => {
   console.log(`Puerto del servidor: ${port}`);
 });
 
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -26,6 +27,7 @@ const transporter = nodemailer.createTransport({
     pass: 'ywdw hjbf mvfw kmsq' // contraseña (NO CAMBIAR)
   }
 });
+
 
 app.use(express.json());
 app.use(cors());
