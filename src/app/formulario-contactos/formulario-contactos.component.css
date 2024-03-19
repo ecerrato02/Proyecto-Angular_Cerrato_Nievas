@@ -10,6 +10,10 @@ body{
   height: 3em;
 }
 
+#information{
+  resize: none;
+}
+
 #contact {
   width: 500px;
   margin:2em auto;

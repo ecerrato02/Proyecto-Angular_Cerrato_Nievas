@@ -240,3 +240,19 @@ app.post('/api/logs', async (req, res) => {
   const { username, information } = req.body;
   logToFile(username, information);
 });
+
+app.post('/api/contactForm', async (req, res) => {
+  const { subject , email, information, name } = req.body
+
+  const path = "C:\\contactForms\\" + subject + " - " + name + ".txt";
+  const content = "Nombre: " + name + "\nAsunto: " + subject + "\nCorreo Electrónico: " + email + "\nInformación: " + information;
+
+  fs.writeFile(path, content, (error) => {
+    if (error) {
+      console.error('Error al crear el archivo:', error);
+      return;
+    }
+    logToFile(email, " ha enviado un formulario de contacto. Puedes consultar esta solicitud en " + path);
+  });
+
+})
