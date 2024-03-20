@@ -37,8 +37,9 @@
       <form class="d-flex" role="search">
         <div *ngIf="loggedIn" class="dropdown perfil-container">
           <div>
-            <button class="btn" type="button" id="dropdownMenuButton">
+            <button class="btn tw-mr-4 tw-mt-2" type="button" id="dropdownMenuButton">
               <img class="perfil-icono" alt="Perfil" src="./assets/perfil-icono.png">
+              <p id="nombreUsuario" class="tw-ml-8 test tw-mr-4">{{this.username}}</p>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" routerLink="/perfil">Perfil</a></li>
@@ -49,9 +50,6 @@
         </div>
         <a *ngIf="!loggedIn" class="inicio-sesion" routerLink="login">Iniciar Sesión</a>
       </form>
-      <div *ngIf="loggedIn" id="usernameScreen">
-        <p id="nombreUsuario">{{this.username}}</p>
-      </div>
     </div>
   </div>
 </nav>

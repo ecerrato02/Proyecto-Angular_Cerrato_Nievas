@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
-import { productos } from '../bd/productos';
 import { Router } from '@angular/router';
-import { ProductosComponent } from "../productos/productos.component";
 import { IdProductosService } from "../id-productos.service";
 import {FormsModule} from "@angular/forms";
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+
+const FILTER_PAG_REGEX = /[^0-9]/g;
 
 @Component({
   selector: 'app-catalogo',
@@ -16,7 +17,8 @@ import {FormsModule} from "@angular/forms";
     NgIf,
     RouterLink,
     RouterLinkActive,
-    FormsModule
+    FormsModule,
+    NgbPaginationModule
   ],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
@@ -24,6 +26,16 @@ import {FormsModule} from "@angular/forms";
 
 
 export class CatalogoComponent implements OnInit{
+  page = 1;
+
+  selectPage(page: string) {
+    this.page = parseInt(page, 10) || 1;
+  }
+
+  formatInput(input: HTMLInputElement) {
+    input.value = input.value.replace(FILTER_PAG_REGEX, '');
+  }
+
   arrayProductos: any[] = [];
   todosLosProductos: any[] = [];
 

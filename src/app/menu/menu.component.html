@@ -17,7 +17,7 @@
   <h3 class="titulos-inicio">¿Quiénes Somos?</h3>
   <div class="tw-w-full tw-flex">
     <div *ngFor="let ceo of ceos" [id]="ceo.id" class="tw-m-auto">
-      <img class="tw-max-w-44 tw-border-black tw-border-2 tw-rounded-full" [src]="ceo.imgUrl" [alt]="ceo.alt">
+      <img class="tw-max-w-44 tw-border-black tw-border-2 tw-rounded-full tw-select-none" placement="top" ngbTooltip="{{ceo.nombre}}" [src]="ceo.imgUrl" [alt]="ceo.alt">
       <p class="tw-font-bold tw-mt-3">{{ ceo.nombre }}</p>
       <p class="tw-font-bold">{{ ceo.cargo }}</p>
     </div>

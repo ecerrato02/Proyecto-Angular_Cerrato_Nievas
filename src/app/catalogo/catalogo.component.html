@@ -70,23 +70,33 @@
 </div>
 <div class="separador-dos"></div>
 <div class="separar-inicio"></div>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link disabled" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-    <li class="page-item"><a class="page-link" href="#">127</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<div class="tw-flex tw-justify-center tw-items-center">
+  <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true">
+    <ng-template ngbPaginationPages let-page let-pages="pages">
+      @if (pages.length > 0) {
+        <li class="ngb-custom-pages-item">
+          <div class="mb-3 d-flex flex-nowrap px-2">
+            <label id="paginationInputLabel" for="paginationInput" class="col-form-label me-2 ms-1">Page</label>
+            <input
+              #i
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              class="tw-border-2 tw-border-opacity-45 tw-border-blue-400 tw-rounded-lg tw-pl-0.5 focus:tw-outline-none focus:tw-border-opacity-75"
+              id="paginationInput"
+              [value]="page"
+              (keyup.enter)="selectPage(i.value)"
+              (blur)="selectPage(i.value)"
+              (input)="formatInput($any($event).target)"
+              aria-labelledby="paginationInputLabel paginationDescription"
+              style="width: 2.5rem"
+            />
+            <span id="paginationDescription" class="col-form-label text-nowrap px-2"> of {{ pages.length }}</span>
+          </div>
+        </li>
+      }
+    </ng-template>
+  </ngb-pagination>
+</div>
+
 <router-outlet></router-outlet>

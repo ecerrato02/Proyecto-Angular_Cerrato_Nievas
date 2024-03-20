@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
+import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 
 interface CEO {
@@ -13,10 +14,11 @@ interface CEO {
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [
-    NgIf,
-    NgForOf
-  ],
+    imports: [
+        NgIf,
+        NgForOf,
+        NgbTooltip
+    ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })

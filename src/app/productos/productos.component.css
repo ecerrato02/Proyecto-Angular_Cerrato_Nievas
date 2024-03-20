@@ -1,7 +1,7 @@
 #informacion-basica {
-  width: 70%;
+  width: 85%;
   position: relative;
-  margin-left: 14%;
+  margin: auto;
   margin-top: 2em;
   overflow: hidden;
   display: flex;
@@ -250,7 +250,7 @@
 #descuento-producto{
   user-select: none;
   position: absolute;
-  margin-left: 80%;
+  margin-left: 89%;
   z-index: 1;
   margin-top: 1.5em;
   box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.5);
