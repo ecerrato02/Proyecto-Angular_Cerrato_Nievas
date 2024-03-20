@@ -102,7 +102,7 @@ export class UsuariosService {
       if (newPassword !== confirmPassword) {
         reject(new Error('Las contraseñas no coinciden'));
       } else {
-        this.http.post<any>('http://localhost:3080/api/change-password', { username, newPassword, confirmPassword }).subscribe({
+        this.http.post<any>('http://172.16.10.1:3080/api/change-password', { username, newPassword, confirmPassword }).subscribe({
           next: (response) => {
             if (response.success) {
               resolve(response);

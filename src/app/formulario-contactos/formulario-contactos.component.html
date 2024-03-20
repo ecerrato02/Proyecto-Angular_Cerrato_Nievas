@@ -5,12 +5,19 @@
 
     <label for="checkcontact" class="contactbutton"><div class="mail"></div></label><input id="checkcontact" type="checkbox">
 
-    <form action="" method="post" class="contactform">
-      <p class="input_wrapper"><input type="text" name="name" value=""  id ="name" [(ngModel)]="name"><label for="name">NOMBRE</label></p>
-      <p class="input_wrapper"><input type="text" name="email" value=""  id ="email" [(ngModel)]="email"><label for="email">CORREO</label></p>
-      <p class="input_wrapper"><input type="text" name="subject" value=""  id ="subject" [(ngModel)]="subject"><label for="subject">ASUNTO</label></p>
-      <p class="textarea_wrapper"><textarea name="information" id="information" [(ngModel)]="information" placeholder="Describe tu problema..."></textarea></p>
-      <p class="submit_wrapper"><a (click)="enviarFormulario()">ENVIAR</a></p>
+    <form action="" method="post" class="contactform" (ngSubmit)="submitForm()" ngNativeValidate>
+      <p class="input_wrapper"><input type="text" name="name" value=""  id ="name" [(ngModel)]="name" required><label for="name">NOMBRE</label></p>
+      <p class="input_wrapper"><input type="text" name="email" value=""  id ="email" [(ngModel)]="email" required><label for="email">CORREO</label></p>
+      <p class="input_wrapper"><input type="text" name="subject" value=""  id ="subject" [(ngModel)]="subject" required><label for="subject">ASUNTO</label></p>
+      <p class="textarea_wrapper"><textarea name="information" id="information" [(ngModel)]="information" placeholder="Describe tu problema..." required></textarea></p>
+      <p class="form-group">
+      <re-captcha
+        (resolved)="onCaptchaResolved($event)"
+        siteKey="6LfrZJwpAAAAAHiCwqcdfgnz3kvpsY0ls5O5uvnR"
+      ></re-captcha>
+      </p>
+      <button id="enviar" type="submit" class="submit_wrapper">ENVIAR</button>
+
     </form>
   </article>
 </section>

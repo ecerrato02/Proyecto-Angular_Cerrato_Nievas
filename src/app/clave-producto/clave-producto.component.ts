@@ -65,7 +65,7 @@ export class ClaveProductoComponent implements OnInit{
 
   compraFinalizadaLog(){
     const logData = { username: sessionStorage.getItem("username"), information: "ha finalizado su compra" };
-    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
+    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
 }

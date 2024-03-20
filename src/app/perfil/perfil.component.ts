@@ -42,13 +42,13 @@ export class PerfilComponent implements OnInit{
 
   saveProfile() {
     if (this.newEmail.includes('@') && this.newEmail.includes('.')) {
-      this.http.post<any>('http://localhost:3080/api/verify', {
+      this.http.post<any>('http://172.16.10.1:3080/api/verify', {
         email: this.email,
         password: this.password
       }).subscribe({
         next: (response) => {
           if (response.success) {
-            this.http.put<any>('http://localhost:3080/api/user2/' + this.username, {
+            this.http.put<any>('http://172.16.10.1:3080/api/user2/' + this.username, {
               email: this.newEmail
             }).subscribe({
               next: (updateResponse) => {
@@ -86,7 +86,7 @@ export class PerfilComponent implements OnInit{
   }
 
   resetPassword() {
-    this.http.post<any>('http://localhost:3080/api/reset-password', {
+    this.http.post<any>('http://172.16.10.1:3080/api/reset-password', {
       email: this.email,
       username: this.userUsername
     }).subscribe({
@@ -106,7 +106,7 @@ export class PerfilComponent implements OnInit{
       if (loggedIn) {
         const usernameFromStorage = sessionStorage.getItem('username');
         if (usernameFromStorage) {
-          this.http.get<any>('http://localhost:3080/api/user/' + usernameFromStorage).subscribe({
+          this.http.get<any>('http://172.16.10.1:3080/api/user/' + usernameFromStorage).subscribe({
             next: (userData: { nombre: string; email: string; contraseña: string }) => {
               this.username = userData.nombre;
               this.email = userData.email;

@@ -43,12 +43,12 @@ export class FormularioLoginComponent {
   }
   sendLoginAttemptLog() {
     const logData = { information: 'Se ha intentado iniciar sesión' };
-    this.http.post<any>('http://localhost:3080/api/logs', logData)
+    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData)
   }
 
   loginLog() {
     const logData = { username: sessionStorage.getItem("username"), information: "ha iniciado sesión correctamente" };
-    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({
+    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({
       next: (response) => {
         console.log('Registro de inicio de sesión enviado al backend:', response);
       },

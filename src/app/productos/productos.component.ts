@@ -81,7 +81,7 @@ export class ProductosComponent implements OnInit {
 
   agregadosCarritoLog(producto: productos){
     const logData = { username: sessionStorage.getItem("username"), information: "ha agregado x" + producto.cantidadProducto + " " + producto.nombreProducto + " a la cesta" };
-    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
+    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
 
