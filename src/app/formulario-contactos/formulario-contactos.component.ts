@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router} from "@angular/router";
-
 import {NgIf} from "@angular/common";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RecaptchaModule} from "ng-recaptcha";
@@ -18,7 +17,6 @@ import { FormsModule} from "@angular/forms";
     FormsModule,
     RecaptchaModule,
     HttpClientModule,
-    FormsModule,
   ],
   templateUrl: './formulario-contactos.component.html',
   styleUrl: './formulario-contactos.component.css'
@@ -29,7 +27,7 @@ export class FormularioContactosComponent {
   email: string = '';
   subject: string = '';
   information: string = '';
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
   @ViewChild('submitButton') submitButton!: ElementRef;
   @ViewChild('form') form!: ElementRef;
