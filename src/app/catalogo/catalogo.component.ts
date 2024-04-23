@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IdProductosService } from "../id-productos.service";
 import {FormsModule} from "@angular/forms";
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import {productos} from "../bd/productos";
 
 const FILTER_PAG_REGEX = /[^0-9]/g;
 
@@ -46,8 +47,8 @@ export class CatalogoComponent implements OnInit{
     this.arrayProductos = [...this.todosLosProductos];
   }
 
-  verDetalleProducto(id: number) {
-    this.router.navigate(['/productos', id]).then(r => '/catalogo');
+  verDetalleProducto(producto: productos) {
+    this.router.navigate(['/productos', producto.productNameUrl]).then(r => '/catalogo');
   }
 
   filtrado() {

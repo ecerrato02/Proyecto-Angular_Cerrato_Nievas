@@ -26,7 +26,7 @@ export const routes: Routes = [
   {path: 'contacto', component:FormularioContactosComponent},
   {path: 'registro', component:FormularioRegistroComponent},
   {path: 'productos', component:ProductosComponent},
-  {path: 'productos/:id', component:ProductosComponent},
+  {path: 'productos/:productNameUrl', component:ProductosComponent},
   {path: 'finalizar-compra', component:FinalizarCompraComponent},
   {path: 'pasarela-pago', component:PasarelaPagoComponent},
   {path: 'privacy', component:PrivacyPolicyComponent},

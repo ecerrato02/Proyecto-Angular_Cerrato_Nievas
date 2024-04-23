@@ -92,13 +92,15 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const idProducto = params.get('id');
-      if (idProducto !== null) {
-        this.producto = this.idProductosService.obtenerProductoPorId(Number(idProducto));
-        this.idProductosService.nombreProductos = this.producto.nombreProducto;
+      const productNameUrl = params.get('productNameUrl');
+      if (productNameUrl) {
+        this.idProductosService.cargarProductos();
+        this.producto = this.idProductosService.obtenerProductoPorNombreUrl(productNameUrl);
+        if (!this.producto) {
+          this.mensajeError = 'Producto no encontrado.';
+        }
       } else {
-        this.mensajeError = "Producto no encontrado.";
-        this.producto = null;
+        this.mensajeError = 'Nombre del producto no proporcionado en la URL.';
       }
     });
   }

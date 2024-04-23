@@ -6,6 +6,10 @@
   height: 1.5em;
 }
 
+.image-gradientBottom{
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%)
+}
+
 .carrito-boton{
   border-radius: .3em;
   height: auto;
@@ -129,6 +133,7 @@
 
 .productos:hover{
   transform: scale(1.03) translateY(-5px);
+  filter: saturate(200%);
   box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.5);
   margin-bottom: -4em;
 }

@@ -47,9 +47,9 @@
 
 <div class="todos-productos">
   <div *ngFor="let producto of arrayProductos" class="productos">
-    <a (click)="verDetalleProducto(producto.idProducto)" class="productos-enlaces" routerLinkActive="Active">
+    <a (click)="verDetalleProducto(producto)" class="productos-enlaces" routerLinkActive="Active">
     <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</div>
-    <img alt="Imagen Productos" class="imagen-productos" src='{{producto.fotoProducto}}'>
+    <img alt="Imagen Productos" class="imagen-productos image-gradientBottom" src='{{producto.fotoProducto}}'>
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>
     <div *ngIf="producto.descuentoProducto" class="tw-flex tw-justify-around">
       <p class="tw-text-gray-400 tw-line-through tw-font-bold tw-text-xl">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
