@@ -4,10 +4,9 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {IdProductosService} from "./id-productos.service";
 
-
 @Component({
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [ HttpClientModule],
   template: ``
 })
 @Injectable({
@@ -67,6 +66,8 @@ export class UsuariosService {
     }
   }
 
+ admin = false; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+
   loginUser(username: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.http.post<any>('http://localhost:3080/api/login', { username, password }).subscribe({
@@ -74,6 +75,13 @@ export class UsuariosService {
           if (response.username) {
             this.loggedInSubject.next(true);
             sessionStorage.setItem('loggedIn', 'true');
+            this.admin = false;
+            if(username === 'admin' && password === 'admin') {
+              this.loggedInSubject.next(true);
+              sessionStorage.setItem('loggedIn', 'true');
+              console.log("Logeado como administrador")
+              this.admin = true;
+            }
             resolve(response);
           } else {
             reject(new Error('Error al iniciar sesión'));
@@ -93,6 +101,7 @@ export class UsuariosService {
   logout() {
     this.loggedInSubject.next(false);
     sessionStorage.removeItem('loggedIn');
+    this.admin = false;
     this.idProductosService.vaciarCarrito();
     this.router.navigate(['']);
   }
@@ -107,7 +116,7 @@ export class UsuariosService {
             if (response.success) {
               resolve(response);
             } else {
-              reject(new Error('Error al cambiar la contraseña mierdon'));
+              reject(new Error('Error al cambiar la contraseña!'));
             }
           }
         });
