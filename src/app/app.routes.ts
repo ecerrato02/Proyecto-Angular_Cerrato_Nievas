@@ -15,6 +15,8 @@ import {ClaveProductoComponent} from "./clave-producto/clave-producto.component"
 import {PaginaErrorComponent} from "./pagina-error/pagina-error.component";
 import {PerfilComponent} from "./perfil/perfil.component";
 import { RestablecerContrasenaComponent } from "./restablecer-contrasena/restablecer-contrasena.component";
+import {AdministrarProductosComponent} from "./administrar-productos/administrar-productos.component";
+import { AdminGuardService } from './admin-guard.service';
 
 export const routes: Routes = [
   {path: '', component:MenuComponent},
@@ -34,6 +36,7 @@ export const routes: Routes = [
   {path: 'perfil', component:PerfilComponent},
   {path: 'restablecer-contrasena', component:RestablecerContrasenaComponent},
   {path: 'restablecer-contrasena/:resetToken', component:RestablecerContrasenaComponent},
+  {path: 'administrar-productos', component:AdministrarProductosComponent, canActivate: [AdminGuardService]},
   {path: '404', component:PaginaErrorComponent},
   { path: '**', redirectTo: '/404' },
 ];

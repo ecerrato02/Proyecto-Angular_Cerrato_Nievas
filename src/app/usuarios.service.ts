@@ -36,7 +36,7 @@ export class UsuariosService {
     if (contra === contraConfirm){
       if (contra.length >= 8) {
         if (contra.length <=32){
-          this.http.post<any>("http://localhost:3080/api/register", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
+          this.http.post<any>("http://172.16.10.1:3080/api/register", {nombre: nombre, email: email, contra: contra}).subscribe((boolean ) => {
             if(boolean === "true"){
               this.router.navigate(['/login'])
             }else {
@@ -65,22 +65,18 @@ export class UsuariosService {
       }, 5000);
     }
   }
-
- admin = false; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
 
   loginUser(username: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.http.post<any>('http://localhost:3080/api/login', { username, password }).subscribe({
+      this.http.post<any>('http://172.16.10.1:3080/api/login', { username, password }).subscribe({
         next: (response) => {
           if (response.username) {
             this.loggedInSubject.next(true);
             sessionStorage.setItem('loggedIn', 'true');
-            this.admin = false;
-            if(username === 'admin' && password === 'admin') {
-              this.loggedInSubject.next(true);
-              sessionStorage.setItem('loggedIn', 'true');
-              console.log("Logeado como administrador")
-              this.admin = true;
+            if (response.admin) {
+              sessionStorage.setItem('isAdmin', 'true');
+              console.log(sessionStorage.getItem('isAdmin'))
             }
             resolve(response);
           } else {
@@ -101,7 +97,9 @@ export class UsuariosService {
   logout() {
     this.loggedInSubject.next(false);
     sessionStorage.removeItem('loggedIn');
-    this.admin = false;
+    if (sessionStorage.getItem('isAdmin') === 'true') {
+      sessionStorage.setItem('isAdmin', 'false');
+    }
     this.idProductosService.vaciarCarrito();
     this.router.navigate(['']);
   }

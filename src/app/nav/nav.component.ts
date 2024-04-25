@@ -4,6 +4,8 @@ import {NgIf} from "@angular/common";
 import {UsuariosService} from "../usuarios.service";
 import {HttpClient} from "@angular/common/http";
 import { IdProductosService } from "../id-productos.service";
+import {canActivate} from "@angular/fire/auth-guard";
+import {AdminGuardService} from "../admin-guard.service";
 
 
 declare const $: any;
@@ -24,8 +26,9 @@ export class NavComponent implements OnInit{
   username: string | null = null;
   loggedIn: boolean = false;
   carritoVacio: boolean = true;
+  admin: any;
 
-  constructor(private router: Router, private userService: UsuariosService, private http: HttpClient, public idProductosService: IdProductosService) {}
+  constructor(private router: Router, protected userService: UsuariosService, private http: HttpClient, public idProductosService: IdProductosService, protected adminGuard: AdminGuardService) {}
 
   ngOnInit() {
     $(document).ready(function () {
@@ -34,6 +37,8 @@ export class NavComponent implements OnInit{
     this.userService.currentUsername.subscribe(username => this.username = username);
     this.userService.loggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
     this.comprobarCarrito();
+
+    this.admin = sessionStorage.getItem('isAdmin');
   }
 
   comprobarCarrito() {
@@ -53,4 +58,7 @@ export class NavComponent implements OnInit{
     const logData = { username: sessionStorage.getItem("username"), information: "ha cerrado sesión" };
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
+
+  protected readonly canActivate = canActivate;
+  protected readonly sessionStorage = sessionStorage;
 }

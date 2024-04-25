@@ -44,6 +44,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" routerLink="/perfil">Perfil</a></li>
               <li><hr class="dropdown-divider"></li>
+              <li *ngIf="sessionStorage.getItem('isAdmin') === 'true'"><a class="dropdown-item" routerLink="administrar-productos">Productos</a></li>
               <li><a class="dropdown-item" href="" (click)="cerrarSesion()">Cerrar Sesión</a></li>
             </ul>
           </div>
