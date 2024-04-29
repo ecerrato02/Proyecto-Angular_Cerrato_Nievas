@@ -44,10 +44,10 @@ export class AdministrarProductosComponent {
 
   }
 
-  async agregarProducto() {
+  async agregarProducto() {0
     console.log(this.productNameUrl)
     try {
-      const intentarAnadir = this.http.post('http://localhost:3020/afegirProducte', {
+      const intentarAnadir = this.http.post('http://172.16.10.1:3080/api/afegirProducte', {
         productNameUrl: this.productNameUrl,
         fotoProducto: this.fotoProducto,
         nombreProducto: this.nombreProducto,
@@ -76,7 +76,6 @@ export class AdministrarProductosComponent {
         stock: this.stock
       }).subscribe();
       console.log('Producto agregado:', intentarAnadir);
-      this.onFileSelected(this.fotoProducto);
     } catch (error) {
       console.error('Error al agregar producto:', error);
     }

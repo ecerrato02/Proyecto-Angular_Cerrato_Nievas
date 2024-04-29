@@ -34,12 +34,8 @@ app.get('/afegirComanda' ,async (req, res) => {
 })
 
 app.get('/llistatProductes', async(req, res) => {
-  let verNombre = await bdd.productos.findAll();
-  verNombre.forEach(producto =>{
-    console.log(producto.nombreProducto)
-  })
-  let verTodo = await bdd.pedidos.findAll();
-  console.log(verTodo)
+  let resultados = await bdd.productos.findAll();
+  res.json(resultados)
 })
 
 

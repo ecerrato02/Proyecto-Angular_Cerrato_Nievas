@@ -6,6 +6,7 @@ import { IdProductosService } from "../id-productos.service";
 import {FormsModule} from "@angular/forms";
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import {productos} from "../bd/productos";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 const FILTER_PAG_REGEX = /[^0-9]/g;
 
@@ -17,6 +18,7 @@ const FILTER_PAG_REGEX = /[^0-9]/g;
     NgForOf,
     NgIf,
     RouterLink,
+    HttpClientModule,
     RouterLinkActive,
     FormsModule,
     NgbPaginationModule
@@ -40,11 +42,15 @@ export class CatalogoComponent implements OnInit{
   arrayProductos: any[] = [];
   todosLosProductos: any[] = [];
 
-  constructor(private idProductosService: IdProductosService, private router: Router) { }
+  constructor(private idProductosService: IdProductosService, private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
     this.todosLosProductos = this.idProductosService.obtenerProductos();
-    this.arrayProductos = [...this.todosLosProductos];
+    this.http.get<any>('http://172.16.10.1:3080/api/llistatProductes').subscribe((data)=>{
+      this.arrayProductos = (Object.values(data));
+    })
+    console.log(this.arrayProductos);
+
   }
 
   verDetalleProducto(producto: productos) {
