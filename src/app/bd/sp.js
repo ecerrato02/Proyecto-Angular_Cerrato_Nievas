@@ -47,7 +47,7 @@ const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 app.post('/api/upload', upload.single('image'), (req, res) => {
-  fs.rename(req.file.path, 'ruta/a/carpeta/deseada/' + req.file.filename, function(err) {
+  fs.rename(req.file.path, '.\\src\\assets\\Imagenes' + req.file.filename, function(err) {
     if (err) throw err;
     console.log('Imagen guardada en la carpeta deseada');
   });
