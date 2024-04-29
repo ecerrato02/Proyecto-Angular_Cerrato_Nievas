@@ -25,13 +25,13 @@ export class CarritoComponent {
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   formularioCompleto: boolean = false;
 
-  constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService : MetodoPagoService, private http: HttpClient) {
+  constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService: MetodoPagoService, private http: HttpClient) {
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.idProductosService.actualizarTotalCarrito();
     this.idProductosService.carritoEmpty();
   }
 
-  pagarTarjeta(){
+  pagarTarjeta() {
     this.MeotodPagoService.pagoTarjeta();
   }
 
@@ -67,8 +67,6 @@ export class CarritoComponent {
     this.unoAgregadoLog(productoAgregado);
   }
 
-
-
   eliminarTodasUnidades(idProducto: number) {
     const index = this.idProductosService.arrayCarrito.findIndex(p => p.idProducto === idProducto);
     if (index !== -1) {
@@ -91,24 +89,49 @@ export class CarritoComponent {
     }
   }
 
-
-  eliminadosCarritoLog(productoEliminado: any){
-    const logData = { username: sessionStorage.getItem("username"), information: "ha eliminado x" + productoEliminado.cantidadProducto + " " + productoEliminado.nombreProducto + " de la cesta" };
+  eliminadosCarritoLog(productoEliminado: any) {
+    const logData = {
+      username: sessionStorage.getItem("username"),
+      information: "ha eliminado x" + productoEliminado.cantidadProducto + " " + productoEliminado.nombreProducto + " de la cesta"
+    };
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
-  unoEliminadoLog(productoEliminado: any){
-    const logData = { username: sessionStorage.getItem("username"), information: "ha eliminado x1 " + productoEliminado.nombreProducto + " de la cesta" };
+  unoEliminadoLog(productoEliminado: any) {
+    const logData = {
+      username: sessionStorage.getItem("username"),
+      information: "ha eliminado x1 " + productoEliminado.nombreProducto + " de la cesta"
+    };
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
-  unoAgregadoLog(productoEliminado: any){
-    const logData = { username: sessionStorage.getItem("username"), information: "ha añadido x1 " + productoEliminado.nombreProducto + " a la cesta" };
+  unoAgregadoLog(productoEliminado: any) {
+    const logData = {
+      username: sessionStorage.getItem("username"),
+      information: "ha añadido x1 " + productoEliminado.nombreProducto + " a la cesta"
+    };
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
-  finalizarCompra(){
-    this.router.navigate(['/pasarela-pago']);
+   compra = {
+    usuarioPedido: sessionStorage.getItem("username"),
+    precioTotal: this.idProductosService.totalCarrito
+  };
+  guardarCompra() {
+    this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', this.compra)
+      .subscribe(
+        response => {
+          console.log('Pedido guardado correctamente:', response);
+          // Navegar a la pasarela de pago o a otra página
+          this.router.navigate(['/pasarela-pago']);
+        },
+        error => {
+          console.error('Error al agregar pedido:', error);
+        }
+      );
+  }
+  finalizarCompra() {
+    this.guardarCompra()
   }
 
   protected readonly Number = Number;

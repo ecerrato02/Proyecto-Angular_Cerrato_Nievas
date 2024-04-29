@@ -46,7 +46,7 @@ export class CatalogoComponent implements OnInit{
 
   ngOnInit() {
     this.todosLosProductos = this.idProductosService.obtenerProductos();
-    this.http.get<any>('http://172.16.10.1:3080/api/llistatProductes').subscribe((data)=>{
+    this.http.get<any>('http://localhost:3080/api/llistatProductes').subscribe((data)=>{
       this.arrayProductos = (Object.values(data));
     })
     console.log(this.arrayProductos);
@@ -82,5 +82,4 @@ export class CatalogoComponent implements OnInit{
       producto.nombreProducto.toLowerCase().includes(this.filtroBusqueda.toLowerCase())
     );
   }
-
 }
