@@ -47,7 +47,7 @@
 
 <div class="todos-productos">
   <div *ngFor="let producto of arrayProductos" class="productos">
-    <a (click)="verDetalleProducto(producto)" class="productos-enlaces" routerLinkActive="Active">
+    <a href="{{producto.productNameUrl}}" class="productos-enlaces" routerLinkActive="Active">
     <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</div>
     <img alt="Imagen Productos" class="imagen-productos image-gradientBottom" src='{{producto.fotoProducto}}'>
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>

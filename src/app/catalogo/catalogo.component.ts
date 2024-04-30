@@ -53,10 +53,6 @@ export class CatalogoComponent implements OnInit{
 
   }
 
-  verDetalleProducto(producto: productos) {
-    this.router.navigate(['/productos', producto.productNameUrl]).then(r => '/catalogo');
-  }
-
   filtrado() {
     const catSeleccion = document.getElementById("filtro-cat") as HTMLSelectElement;
     const valSeleccion = catSeleccion.value;

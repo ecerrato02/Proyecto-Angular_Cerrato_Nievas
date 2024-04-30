@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
 @font-face {
   font-family: "fuenteGeneral";
   src: url("./fonts/MuseoSans-300.otf");
@@ -54,7 +62,6 @@ body{
 }
 
 footer{
-  position: absolute;
   width: 100%;
   bottom: 0;
   height: auto;

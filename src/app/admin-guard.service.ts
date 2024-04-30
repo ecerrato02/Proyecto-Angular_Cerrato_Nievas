@@ -7,7 +7,7 @@ import { UsuariosService } from './usuarios.service';
 })
 export class AdminGuardService {
 
-  constructor(private userService: UsuariosService, private router: Router) {}
+  constructor(private router: Router) {}
 
   canActivate = (): boolean => {
     if (sessionStorage.getItem('isAdmin') === 'true') {

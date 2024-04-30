@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class IdProductosService {
-  private arrayProductos: productos[] = [];
+  arrayProductos: productos[] = [];
   arrayCarrito: productos[] = [];
   totalCarrito = 0;
   carritoState: boolean = true;

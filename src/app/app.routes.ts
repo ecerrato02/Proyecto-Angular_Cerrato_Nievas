@@ -17,6 +17,7 @@ import {PerfilComponent} from "./perfil/perfil.component";
 import { RestablecerContrasenaComponent } from "./restablecer-contrasena/restablecer-contrasena.component";
 import {AdministrarProductosComponent} from "./administrar-productos/administrar-productos.component";
 import { AdminGuardService } from './admin-guard.service';
+import {AdminVentasComponent} from "./admin-ventas/admin-ventas.component";
 import { FormularioProductosComponent } from './formulario-productos/formulario-productos.component';
 
 
@@ -29,8 +30,7 @@ export const routes: Routes = [
   {path: 'login', component:FormularioLoginComponent},
   {path: 'contacto', component:FormularioContactosComponent},
   {path: 'registro', component:FormularioRegistroComponent},
-  {path: 'productos', component:ProductosComponent},
-  {path: 'productos/:productNameUrl', component:ProductosComponent},
+  {path: 'producto', component:ProductosComponent},
   {path: 'finalizar-compra', component:FinalizarCompraComponent},
   {path: 'pasarela-pago', component:PasarelaPagoComponent},
   {path: 'privacy', component:PrivacyPolicyComponent},
@@ -38,8 +38,12 @@ export const routes: Routes = [
   {path: 'perfil', component:PerfilComponent},
   {path: 'restablecer-contrasena', component:RestablecerContrasenaComponent},
   {path: 'restablecer-contrasena/:resetToken', component:RestablecerContrasenaComponent},
-  {path: 'administrar-productos', component:AdministrarProductosComponent, canActivate: [AdminGuardService]},
-  {path: 'formulario-productos', component:FormularioProductosComponent, canActivate: [AdminGuardService]},
+  {path: 'productos', component:FormularioProductosComponent},
+  {path: 'admin', component:AdministrarProductosComponent},
   {path: '404', component:PaginaErrorComponent},
+  {path: 'admin-ventas', component:AdminVentasComponent},
+  {path: ':productNameUrl', component:ProductosComponent},
   { path: '**', redirectTo: '/404' },
+
+  //, canActivate: [AdminGuardService]
 ];

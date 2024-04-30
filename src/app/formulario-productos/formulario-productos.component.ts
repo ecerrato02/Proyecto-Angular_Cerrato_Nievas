@@ -2,6 +2,15 @@ import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule, HttpClient} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import {
+  NgbAccordionBody,
+  NgbAccordionButton, NgbAccordionCollapse,
+  NgbAccordionDirective,
+  NgbAccordionHeader,
+  NgbAccordionItem, NgbAccordionModule
+} from "@ng-bootstrap/ng-bootstrap";
+import {IdProductosService} from "../id-productos.service";
+import {RouterLinkActive} from "@angular/router";
 
 
 @Component({
@@ -9,7 +18,7 @@ import {CommonModule} from "@angular/common";
   standalone: true,
   imports: [HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule, NgbAccordionDirective, NgbAccordionItem, NgbAccordionHeader, NgbAccordionButton, NgbAccordionCollapse, NgbAccordionBody, NgbAccordionModule, RouterLinkActive
   ],
   templateUrl: './formulario-productos.component.html',
   styleUrl: './formulario-productos.component.css'
@@ -43,7 +52,7 @@ export class FormularioProductosComponent {
   videoProducto: string = '';
   stock: number = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public idProd: IdProductosService) {
 
   }
 

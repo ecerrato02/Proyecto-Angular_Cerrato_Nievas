@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const port = 3020;
 const bodyParser = require('body-parser');
+const sequelize = require('sequelize');
 const fs = require('node:fs');
 
 // Parse application/json
@@ -50,3 +51,8 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 
   res.send('Imagen recibida y guardada');
 });
+
+app.get('/api/allIdProducts', async(req, res) => {
+  let idProductos = await bdd.productos.findAll({attributes: [[sequelize.col('idProductos'), 'idProductos']]})
+  res.json(idProductos);
+})
