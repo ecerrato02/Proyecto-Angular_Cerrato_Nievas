@@ -347,6 +347,11 @@
   display: inline-block;
 }
 
+.image-out-of-stock {
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
 .porcentaje-descuento{
   padding: .2em;
   border-radius: .6em;

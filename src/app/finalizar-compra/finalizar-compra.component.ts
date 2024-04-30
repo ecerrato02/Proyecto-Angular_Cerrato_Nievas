@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {UsuariosService} from "../usuarios.service";
+import {IdProductosService} from "../id-productos.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-finalizar-compra',
@@ -18,7 +20,7 @@ export class FinalizarCompraComponent implements OnInit{
   username: string | null = "";
 
 
-  constructor(private router: Router, private userService: UsuariosService) {
+  constructor(private router: Router, private userService: UsuariosService, private idProductosService: IdProductosService, private http: HttpClient) {
     this.bajarTiempoEspera();
   }
 
@@ -35,6 +37,7 @@ export class FinalizarCompraComponent implements OnInit{
       this.obtenerClave()
     }, 10000);
   }
+
 
   obtenerClave(){
     this.router.navigate(['/clave']);

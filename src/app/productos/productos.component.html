@@ -2,7 +2,7 @@
   <p id="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</p>
 </div>
 <div id="informacion-basica" class="tw-animate-slide-in-top">
-  <img id="imagen-juegos" src="{{producto.fotoProducto}}" alt="Imagen Producto">
+  <img [ngStyle]="{ 'filter': producto.stock === 0 ? 'grayscale(100%)' : 'none' }" id="imagen-juegos" src="{{producto.fotoProducto}}" alt="Imagen Producto">
   <div class="contenido">
     <h2>{{producto.nombreProducto}}</h2>
     <p id="justificado">{{producto.descripcionProducto}}</p>
@@ -33,7 +33,7 @@
           <button class="boton decrementar" (click)="restar()">-</button>
           <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
           <button class="boton incrementar" (click)="sumar()">+</button>
-          <button class="agregarAlCarrito" (click)="plataformaSeleccionada && agregarProductoAlCarrito(producto)">
+          <button class="agregarAlCarrito" (click)="plataformaSeleccionada && agregarProductoAlCarrito(producto)" [disabled]="producto.stock === 0">
             <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
           </button>
         </div>

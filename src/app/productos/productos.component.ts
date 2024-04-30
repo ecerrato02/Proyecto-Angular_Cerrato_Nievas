@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import { IdProductosService } from "../id-productos.service";
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -18,7 +18,8 @@ import { NavComponent } from "../nav/nav.component";
     FormsModule,
     NgOptimizedImage,
     RouterLink,
-    NgbRating
+    NgbRating,
+    NgStyle
   ],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css',
@@ -30,6 +31,8 @@ export class ProductosComponent implements OnInit {
   agregadoCorrectamente = false;
   plataformaSeleccionada = '';
   loggedIn = false;
+  stockDisponible = true;
+  private arrayProductos: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig, private http: HttpClient, private nav: NavComponent) {
     config.max = 5;
@@ -90,6 +93,12 @@ export class ProductosComponent implements OnInit {
     return this.segura.bypassSecurityTrustResourceUrl(url);
   }
 
+  checkStock() {
+    for (const producto of this.arrayProductos) {
+      producto.sinStock = producto.stock === 0;
+    }
+  }
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const productNameUrl = params.get('productNameUrl');
@@ -99,10 +108,22 @@ export class ProductosComponent implements OnInit {
         if (!this.producto) {
           this.mensajeError = 'Producto no encontrado.';
         }
+        if (this.producto && this.producto.stock === 0) {
+          this.stockDisponible = false;
+        }
       } else {
         this.mensajeError = 'Nombre del producto no proporcionado en la URL.';
       }
     });
+    this.http.get<any>('http://169.254.118.225:3080/api/llistatProductes').subscribe(
+      (data: productos[]) => {
+        this.arrayProductos = (Object.values(data));
+        this.checkStock();
+      },
+      error => {
+        console.log('Error fetching productos:', error);
+      }
+    );
   }
 
   protected readonly Number = Number;

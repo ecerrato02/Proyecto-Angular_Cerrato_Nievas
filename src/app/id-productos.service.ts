@@ -18,6 +18,7 @@ export class IdProductosService {
   constructor(private router: Router) {
     this.cargarProductos();
     this.cargarCarritoDesdeLocalStorage();
+
   }
 
   cargarProductos(){
@@ -42,6 +43,7 @@ export class IdProductosService {
       this.actualizarNumeroDeProductosDiferentes();
     }
   }
+
 
   guardarCarritoEnLocalStorage() {
     localStorage.setItem('carrito', JSON.stringify(this.arrayCarrito));

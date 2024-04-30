@@ -47,9 +47,9 @@
 
 <div class="todos-productos">
   <div *ngFor="let producto of arrayProductos" class="productos">
-    <a href="{{producto.productNameUrl}}" class="productos-enlaces" routerLinkActive="Active">
+    <a [routerLink]="producto.sinStock ? null : producto.productNameUrl" [ngClass]="{ 'disabled-link': producto.sinStock }" class="productos-enlaces">
     <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</div>
-    <img alt="Imagen Productos" class="imagen-productos image-gradientBottom" src='{{producto.fotoProducto}}'>
+    <img alt="Imagen Productos" class="imagen-productos image-gradientBottom" src='{{producto.fotoProducto}}' [ngClass]="{'image-out-of-stock': producto.sinStock}">
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>
     <div *ngIf="producto.descuentoProducto" class="tw-flex tw-justify-around">
       <p class="tw-text-gray-400 tw-line-through tw-font-bold tw-text-xl">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
@@ -58,6 +58,7 @@
     <div *ngIf="!producto.descuentoProducto">
       <p class="tw-text-center tw-text-green-600 tw-font-bold tw-text-xl">{{producto.precioProducto.toLocaleString('es-ES')}}€</p>
     </div>
+      <div *ngIf="producto.sinStock" class="tw-flex tw-justify-center tw-items-center tw-text-gray-400 tw-font-bold tw-text-xl">Sin Stock</div>
     <input type="hidden" value="{{producto.categoriaProducto}}">
     <input type="hidden" value="{{producto.idProducto}}">
   </a>

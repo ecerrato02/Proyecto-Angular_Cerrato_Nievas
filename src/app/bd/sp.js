@@ -53,6 +53,10 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 });
 
 app.get('/api/allIdProducts', async(req, res) => {
-  let idProductos = await bdd.productos.findAll({attributes: [[sequelize.col('idProductos'), 'idProductos']]})
-  res.json(idProductos);
+  let resultados = await bdd.productos.findAll();
+  let ids = [];
+  resultados.forEach(productosId =>{
+    ids.push(productosId.idProducto);
+  })
+  res.send(ids);
 })

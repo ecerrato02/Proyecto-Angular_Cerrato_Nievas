@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import { Router } from '@angular/router';
 import { IdProductosService } from "../id-productos.service";
 import {FormsModule} from "@angular/forms";
@@ -21,7 +21,8 @@ const FILTER_PAG_REGEX = /[^0-9]/g;
     HttpClientModule,
     RouterLinkActive,
     FormsModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgClass
   ],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
@@ -30,6 +31,7 @@ const FILTER_PAG_REGEX = /[^0-9]/g;
 
 export class CatalogoComponent implements OnInit{
   page = 1;
+  stockProductos: number[] | undefined;
 
   selectPage(page: string) {
     this.page = parseInt(page, 10) || 1;
@@ -39,6 +41,12 @@ export class CatalogoComponent implements OnInit{
     input.value = input.value.replace(FILTER_PAG_REGEX, '');
   }
 
+  checkStock() {
+    for (const producto of this.arrayProductos) {
+      producto.sinStock = producto.stock === 0;
+    }
+  }
+
   arrayProductos: any[] = [];
   todosLosProductos: any[] = [];
 
@@ -46,10 +54,15 @@ export class CatalogoComponent implements OnInit{
 
   ngOnInit() {
     this.todosLosProductos = this.idProductosService.obtenerProductos();
-    this.http.get<any>('http://localhost:3080/api/llistatProductes').subscribe((data)=>{
-      this.arrayProductos = (Object.values(data));
-    })
-    console.log(this.arrayProductos);
+    this.http.get<any>('http://169.254.118.225:3080/api/llistatProductes').subscribe(
+      (data: productos[]) => {
+        this.arrayProductos = (Object.values(data));
+        this.checkStock();
+      },
+      error => {
+        console.log('Error fetching productos:', error);
+      }
+    );
 
   }
 

@@ -113,25 +113,8 @@ export class CarritoComponent {
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
-   compra = {
-    usuarioPedido: sessionStorage.getItem("username"),
-    precioTotal: this.idProductosService.totalCarrito
-  };
-  guardarCompra() {
-    this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', this.compra)
-      .subscribe(
-        response => {
-          console.log('Pedido guardado correctamente:', response);
-          // Navegar a la pasarela de pago o a otra página
-          this.router.navigate(['/pasarela-pago']);
-        },
-        error => {
-          console.error('Error al agregar pedido:', error);
-        }
-      );
-  }
   finalizarCompra() {
-    this.guardarCompra()
+    this.router.navigate(['/pasarela-pago']);
   }
 
   protected readonly Number = Number;

@@ -60,12 +60,31 @@ export class ClaveProductoComponent implements OnInit{
 
   finalizado(){
     this.compraFinalizadaLog()
+    this.guardarCompra(this.precioTotal, this.usuarioPedido, this.productosCarrito);
     this.idProductosService.vaciarCarritoCompra();
   }
 
+  usuarioPedido = sessionStorage.getItem("username");
+  precioTotal = this.idProductosService.totalCarrito;
+  productosCarrito = this.idProductosService.arrayCarrito;
+
+
+  guardarCompra(precioTotal: any, usuarioPedido: any, productosCarrito: any) {
+    this.http.post<any>('http://169.254.118.225:3080/api/afegirComanda', { usuarioPedido: usuarioPedido, precioTotal: precioTotal, productosCarrito: productosCarrito })
+      .subscribe(
+        response => {
+          console.log('Pedido guardado correctamente:', response);
+        },
+        error => {
+          console.error('Error al agregar pedido:', error);
+        }
+      );
+  }
+
   compraFinalizadaLog(){
-    const logData = { username: sessionStorage.getItem("username"), information: "ha finalizado su compra" };
-    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
+    let username = sessionStorage.getItem("username")
+    const logData = { username: username, information: "ha finalizado su compra" };
+    this.http.post<any>('http://169.254.118.225:3080/api/logs', logData).subscribe({});
   }
 
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLinkActive, RouterOutlet} from "@angular/router";
 import {IdProductosService} from "../id-productos.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-administrar-productos',
@@ -13,10 +14,22 @@ import {IdProductosService} from "../id-productos.service";
   styleUrl: './administrar-productos.component.css'
 })
 export class AdministrarProductosComponent implements OnInit {
+  productos: any[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
+  obtenerProductos() {
+    this.http.get<any[]>('http://169.254.118.225:3080/api/llistatProductes').subscribe(
+      (response: any[]) => {
+        this.productos = response;
+    }, error => {
+        console.log('Error fetching productos:', error);
+    });
+
+  }
+
+  ngOnInit() {
+    this.obtenerProductos();
     const list = document.querySelectorAll(".navigation2 li");
 
     function activeLink(this: HTMLElement) {

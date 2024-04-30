@@ -35,7 +35,7 @@ export class AdminVentasComponent implements OnInit {
 
   async getAllID() {
     let ids: number[] = [];
-    this.http.get<number>('http://localhost:3020/api/allIdProducts').subscribe((data) => {
+    this.http.get<number>('http://172.16.10.1:3080/api/allIdProducts').subscribe((data) => {
       ids.push(data);
     });
     console.log(ids);
