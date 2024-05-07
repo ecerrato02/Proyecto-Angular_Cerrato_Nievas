@@ -64,7 +64,7 @@
         <td class="tw-text-center border border-slate-600">{{producto.ps5Producto}}</td>
         <td class="tw-text-center border border-slate-600">{{producto.xboxProducto}}</td>
         <td class="tw-text-center border border-slate-600">{{producto.switchProducto}}</td>
-        <td class="tw-text-center border border-slate-600">TEST</td>
+        <td class="tw-text-center border border-slate-600">{{producto.stock}}</td>
       </tr>
     </tbody>
   </table>
@@ -86,7 +86,7 @@
               </div>
               <div class="panel-body">
 
-                <form class="form-horizontal" role="form" ngNativeValidate>
+                <form (ngSubmit)="onSubmit()" class="form-horizontal" role="form" ngNativeValidate>
 
                   <div class="form-group">
                     <label for="productNameUrl" class="col-sm-3 control-label">ProductNameUrl</label>
@@ -95,7 +95,7 @@
                     </div>
                   </div> <!-- form-group // -->
                   <div class="form-group">
-                    <label for="fotoProducto" class="col-sm-3 control-label">Foto del producto</label>
+                    <label for="fotoProducto" (change)="onFileSelected($event)" class="col-sm-3 control-label">Foto del producto</label>
                     <div class="col-sm-3">
                       <input type="File" class="form-control" name="qty" [(ngModel)]="fotoProducto" id="fotoProducto" placeholder="Obligatorio" required>
                     </div>

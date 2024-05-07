@@ -30,7 +30,6 @@ export const routes: Routes = [
   {path: 'login', component:FormularioLoginComponent},
   {path: 'contacto', component:FormularioContactosComponent},
   {path: 'registro', component:FormularioRegistroComponent},
-  {path: 'producto', component:ProductosComponent},
   {path: 'finalizar-compra', component:FinalizarCompraComponent},
   {path: 'pasarela-pago', component:PasarelaPagoComponent},
   {path: 'privacy', component:PrivacyPolicyComponent},
@@ -38,12 +37,13 @@ export const routes: Routes = [
   {path: 'perfil', component:PerfilComponent},
   {path: 'restablecer-contrasena', component:RestablecerContrasenaComponent},
   {path: 'restablecer-contrasena/:resetToken', component:RestablecerContrasenaComponent},
-  {path: 'productos', component:FormularioProductosComponent},
-  {path: 'admin', component:AdministrarProductosComponent},
+  {path: 'productos', component:FormularioProductosComponent, canActivate: [AdminGuardService]},
+  {path: 'admin', component:AdministrarProductosComponent, canActivate: [AdminGuardService]},
   {path: '404', component:PaginaErrorComponent},
-  {path: 'admin-ventas', component:AdminVentasComponent},
+  {path: 'admin-ventas', component:AdminVentasComponent, canActivate: [AdminGuardService]},
   {path: ':productNameUrl', component:ProductosComponent},
-  { path: '**', redirectTo: '/404' },
+  {path: '**', redirectTo: '/404'},
+
 
   //, canActivate: [AdminGuardService]
 ];

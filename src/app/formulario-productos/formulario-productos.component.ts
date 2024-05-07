@@ -95,24 +95,31 @@ export class FormularioProductosComponent {
 
   selectedFile: File | null = null;
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.onUpload()
+  onSubmit() {
+    if (!this.selectedFile) {
+      alert('Por favor seleccione una imagen');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('productNameUrl', this.productNameUrl);
+    formData.append('image', this.selectedFile);
+
+    this.http.post<any>('http://172.16.10.1:3080/api/upload', formData).subscribe(
+      response => {
+        console.log('Imagen subida exitosamente:', response);
+        alert('Imagen subida exitosamente');
+      },
+      error => {
+        console.error('Error al subir imagen:', error);
+        alert('Error al subir imagen');
+      }
+    );
   }
 
-  onUpload() {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('image', this.selectedFile);
-
-      this.http.post<any>('http://172.16.10.1:3080/api/upload', formData).subscribe(
-        response => {
-          console.log('Image uploaded successfully!', response);
-        },
-        error => {
-          console.error('Error uploading image:', error);
-        }
-      );
-    }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.fotoProducto = file.name;
+    this.selectedFile = file;
   }
 }

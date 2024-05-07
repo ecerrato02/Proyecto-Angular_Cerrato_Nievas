@@ -47,7 +47,7 @@
 
 <div class="todos-productos">
   <div *ngFor="let producto of arrayProductos" class="productos">
-    <a [routerLink]="producto.sinStock ? null : producto.productNameUrl" [ngClass]="{ 'disabled-link': producto.sinStock }" class="productos-enlaces">
+    <a [ngClass]="{ 'disabled-link': producto.sinStock }" (click)="verDetalleProducto(producto)" class="productos-enlaces">
     <div *ngIf="producto.descuentoProducto" class="porcentaje-descuento">{{producto.porcentajeDescuentoProducto * 100}}% DTO.</div>
     <img alt="Imagen Productos" class="imagen-productos image-gradientBottom" src='{{producto.fotoProducto}}' [ngClass]="{'image-out-of-stock': producto.sinStock}">
     <h3 class="nombre-producto">{{producto.nombreProducto}}</h3>

@@ -115,7 +115,7 @@ export class ProductosComponent implements OnInit {
         this.mensajeError = 'Nombre del producto no proporcionado en la URL.';
       }
     });
-    this.http.get<any>('http://169.254.118.225:3080/api/llistatProductes').subscribe(
+    this.http.get<any>('http://172.16.10.1:3080/api/llistatProductes').subscribe(
       (data: productos[]) => {
         this.arrayProductos = (Object.values(data));
         this.checkStock();

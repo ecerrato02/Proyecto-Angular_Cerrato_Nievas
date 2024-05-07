@@ -19,7 +19,7 @@ export class AdministrarProductosComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   obtenerProductos() {
-    this.http.get<any[]>('http://169.254.118.225:3080/api/llistatProductes').subscribe(
+    this.http.get<any[]>('http://172.16.10.1:3080/api/llistatProductes').subscribe(
       (response: any[]) => {
         this.productos = response;
     }, error => {
