@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NgxEchartsDirective} from "ngx-echarts";
 import {EChartsOption} from "echarts";
 import {RouterLinkActive} from "@angular/router";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {firstValueFrom} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-admin-ventas',
@@ -13,114 +13,92 @@ import {firstValueFrom} from "rxjs";
     RouterLinkActive
   ],
   templateUrl: './admin-ventas.component.html',
-  styleUrl: './admin-ventas.component.css'
+  styleUrl: './admin-ventas.component.css',
 })
 export class AdminVentasComponent implements OnInit {
-  options: EChartsOption[] = [];
+  options: EChartsOption = {};
+  productNames: { [key: string]: string } = {};
 
-  async obtenerVentasUltimosNDias(id: number){
-    let nums: number[] = []
-    for (let i = 0; i < 30; i++){
-      let req = new HttpParams().set('id', id).set('dias', i);
-      let num: any = await firstValueFrom(this.http.get<number>('http://172.16.10.1/api/sales', {params: req}));
-      nums.push(parseInt(num[0].total));
-    }
-    for (let i = 0; i < 30; i++){
-      if(isNaN(nums[i])) {
-        nums[i] = 0;
-      }
-    }
-    return nums;
-  }
-
-  async getAllID() {
-    let ids: number[] = [];
-    this.http.get<number>('http://172.16.10.1:3080/api/allIdProducts').subscribe((data) => {
-      ids.push(data);
-    });
-    console.log(ids);
-    return ids;
-  }
-
-
-
-  constructor(private http: HttpClient) {
-    this.getAllID().then();
-    // for(let i = 0; )
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getAllID().then(r =>
-    console.log(this.getAllID()))
-    let dailySalesData: any[] | undefined = [];
-    let monthlySalesData: any[] | undefined = [];
+    // Primero, obtenemos los nombres de los productos
+    this.getProductNames().subscribe(
+      (productNames: { [key: string]: string }) => {
+        this.productNames = productNames;
 
-    // try {
-    //   dailySalesData = await this.http.get<any[]>('http://172.16.10.1/api/daily-sales').toPromise();
-    //   monthlySalesData = await this.http.get<any[]>('http://172.16.10.1/api/monthly-sales').toPromise();
-    // } catch (error) {
-    //   console.error('Error fetching data', error);
-    // }
-    // this.options = [
-    //   {
-    //     legend: {
-    //       data: ['Productos'],
-    //       align: 'left',
-    //     },
-    //     tooltip: {},
-    //     xAxis: {
-    //       data: dailySalesData ? dailySalesData.map(item => item.nombreProducto) : [],
-    //       silent: false,
-    //       splitLine: {
-    //         show: false,
-    //       },
-    //     },
-    //     yAxis: {},
-    //     series: [
-    //       {
-    //         name: 'Productos',
-    //         type: 'line',
-    //         data: dailySalesData ? dailySalesData.map(item => item.ventasDiarias) : [],
-    //         animationDelay: idx => idx * 10,
-    //       },
-    //     ],
-    //     animationEasing: 'elasticOut',
-    //     animationDelayUpdate: idx => idx * 5,
-    //   },
-    //   // Configuración del gráfico de ventas mensuales
-    //   {
-    //     legend: {
-    //       data: ['Productos con Oferta', 'Productos sin Oferta'],
-    //       align: 'left',
-    //     },
-    //     tooltip: {},
-    //     xAxis: {
-    //       data: monthlySalesData ? monthlySalesData.map(item => item.nombreProducto) : [],
-    //       silent: false,
-    //       splitLine: {
-    //         show: false,
-    //       },
-    //     },
-    //     yAxis: {},
-    //     series: [
-    //       {
-    //         name: 'Productos con Oferta',
-    //         type: 'line',
-    //         data: monthlySalesData ? monthlySalesData.filter(item => item.descuentoProducto).map(item => item.ventasMensuales) : [],
-    //         animationDelay: idx => idx * 10,
-    //       },
-    //       {
-    //         name: 'Productos sin Oferta',
-    //         type: 'line',
-    //         data: monthlySalesData ? monthlySalesData.filter(item => !item.descuentoProducto).map(item => item.ventasMensuales) : [],
-    //         animationDelay: idx => idx * 10 + 100,
-    //       },
-    //     ],
-    //     animationEasing: 'elasticOut',
-    //     animationDelayUpdate: idx => idx * 5,
-    //   },
-    // ];
+        // Luego, obtenemos los datos de ventas
+        this.http.get<any>('http://172.16.10.1:3080/api/ventas').subscribe(
+          (ventasData: any[]) => {
+            const series: any[] = [];
+            const legendData: string[] = [];
+            const xAxisData: string[] = []; // Array para almacenar las fechas formateadas
+
+            // Iteramos sobre los datos de ventas
+            ventasData.forEach((venta: any) => {
+              const productId = venta.idProducto.toString();
+              const productName = this.productNames[productId];
+
+              // Agregamos el nombre de producto a la leyenda si no está ya agregado
+              if (!legendData.includes(productName)) {
+                legendData.push(productName);
+              }
+
+              // Si la serie para este producto aún no ha sido creada, la creamos
+              if (!series.some(s => s.name === productName)) {
+                series.push({
+                  name: productName,
+                  type: 'bar',
+                  data: [], // Inicializamos los datos como un array vacío
+                  emphasis: {
+                    focus: 'series',
+                    label: {
+                      show: true,
+                    },
+                  },
+                });
+              }
+
+              // Agregamos los datos de ventas para este producto a la serie correspondiente
+              const index = series.findIndex(s => s.name === productName);
+              series[index].data.push(venta.total_vendido);
+
+              // Agregamos la fecha al eje X si no está ya agregada
+              if (!xAxisData.includes(venta.fecha)) {
+                xAxisData.push(venta.fecha);
+              }
+            });
+
+            // Configuramos las opciones del gráfico
+            this.options = {
+              xAxis: {
+                type: 'category',
+                data: xAxisData,
+              },
+              yAxis: {
+                type: 'value',
+              },
+              legend: {
+                data: legendData,
+              },
+              series: series,
+            };
+          },
+          (error) => {
+            console.error('Error al obtener los datos de ventas:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error al obtener los nombres de productos:', error);
+      }
+    );
   }
 
-
+  // Método para obtener nombres de productos
+  getProductNames(): Observable<{ [key: string]: string }> {
+    return this.http.get<{ [key: string]: string }>(
+      'http://172.16.10.1:3080/api/productos/nombres'
+    );
+  }
 }

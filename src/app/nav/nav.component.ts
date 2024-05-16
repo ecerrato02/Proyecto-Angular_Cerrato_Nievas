@@ -39,6 +39,10 @@ export class NavComponent implements OnInit{
     this.comprobarCarrito();
 
     this.admin = sessionStorage.getItem('isAdmin');
+
+    this.idProductosService.carritoState$.subscribe((carritoVacio: boolean) => {
+      this.carritoVacio = !carritoVacio;
+    });
   }
 
   comprobarCarrito() {

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { productos } from "./bd/productos";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {ProductosComponent} from "./productos/productos.component";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +13,29 @@ export class IdProductosService {
   arrayCarrito: productos[] = [];
   totalCarrito = 0;
   carritoState: boolean = true;
+  carritoProductoSinStock: boolean = false;
   numeroDeProductosDiferentes = 0;
   plataformaSeleccionada = "";
   nombreProductos: string[] = [];
   abecedario: string[] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
 
+  private carritoStateSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public carritoState$ = this.carritoStateSubject.asObservable();
+
   constructor(private router: Router, private http: HttpClient) {
     this.cargarProductos();
     this.cargarCarritoDesdeLocalStorage();
-
   }
 
   cargarProductos(){
-    this.http.get<any[]>('http://172.16.10.1:3080/api/llistatProductes').subscribe(
-      (data) => {
-        this.arrayProductos = (Object.values(data));
+    this.http.get<any[]>('http://172.16.10.1:3080/api/llistatProductes').subscribe((data) => {
+        this.arrayProductos = Object.values(data);
+        this.arrayCarrito.forEach((itemCarrito) => {
+          const productoEncontrado = this.arrayProductos.find((producto) => producto.idProducto === itemCarrito.idProducto);
+          if (productoEncontrado) {
+            itemCarrito.stock = productoEncontrado.stock;
+          }
+        });
       },
       error => {
         console.error('Error al obtener los productos:', error);
@@ -83,6 +93,10 @@ export class IdProductosService {
     this.actualizarTotalCarrito();
   }
 
+  agregadoCorrectamenteAlert() {
+    return true;
+  }
+
   agregarAlCarrito(producto: productos): void {
     const productoEncontrado = this.arrayCarrito.find(productoCarrito => productoCarrito.idProducto === producto.idProducto);
 
@@ -92,16 +106,18 @@ export class IdProductosService {
       productoParaCarrito.precioProducto -= productoParaCarrito.precioProducto * productoParaCarrito.porcentajeDescuentoProducto;
     }
 
-    if (productoEncontrado) {
-      productoEncontrado.cantidadProducto += productoParaCarrito.cantidadProducto;
-    } else {
-      productoParaCarrito.claves = [];
-      for (let i = 0; i < productoParaCarrito.cantidadProducto; i++) {
-        productoParaCarrito.claves.push(this.generarClaveProducto());
+    if(productoParaCarrito.cantidadProducto <= productoParaCarrito.stock) {
+      if (productoEncontrado) {
+        productoEncontrado.cantidadProducto += productoParaCarrito.cantidadProducto;
+      } else {
+        productoParaCarrito.claves = [];
+        for (let i = 0; i < productoParaCarrito.cantidadProducto; i++) {
+          productoParaCarrito.claves.push(this.generarClaveProducto());
+        }
+        this.arrayCarrito.push(productoParaCarrito);
       }
-      this.arrayCarrito.push(productoParaCarrito);
+      this.guardarCarritoEnLocalStorage();
     }
-    this.guardarCarritoEnLocalStorage()
   }
 
   generarClaveProducto() {
@@ -170,13 +186,16 @@ export class IdProductosService {
   carritoEmpty(){
     if(this.arrayCarrito.length > 0){
       this.carritoState = true;
+      this.carritoStateSubject.next(true);
     } else if (this.arrayCarrito.length <= 0){
       this.carritoState = false;
+      this.carritoStateSubject.next(false);
     }
   }
 
   vaciarCarrito() {
     this.arrayCarrito = [];
     localStorage.removeItem('carrito');
+    this.carritoEmpty();
   }
 }

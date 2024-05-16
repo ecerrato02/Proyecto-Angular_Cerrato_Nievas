@@ -28,10 +28,10 @@ import { NavComponent } from "../nav/nav.component";
 export class ProductosComponent implements OnInit {
   producto: any;
   mensajeError: string | null = null;
-  agregadoCorrectamente = false;
   plataformaSeleccionada = '';
   loggedIn = false;
-  stockDisponible = true;
+  stockDisponible = false;
+  agregadoCorrectamente = false;
   private arrayProductos: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig, private http: HttpClient, private nav: NavComponent) {
@@ -44,7 +44,7 @@ export class ProductosComponent implements OnInit {
   }
 
   sumar() {
-    if (this.producto.cantidadProducto < 50) {
+    if (this.producto.cantidadProducto < this.producto.stock) {
       this.producto.cantidadProducto++;
     }
   }
@@ -73,13 +73,15 @@ export class ProductosComponent implements OnInit {
 
   agregarProductoAlCarrito(producto: productos) {
     this.idProductosService.agregarAlCarrito(producto);
-    this.agregadoCorrectamente = true;
     this.agregadosCarritoLog(producto);
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.nav.comprobarCarrito();
-    setTimeout(() => {
-      this.agregadoCorrectamente = false;
-    }, 5000);
+    if (producto.stock > producto.cantidadProducto) {
+      this.agregadoCorrectamente = this.idProductosService.agregadoCorrectamenteAlert();
+      setTimeout(() => {
+        this.agregadoCorrectamente = false
+      }, 8000);
+    }
   }
 
   agregadosCarritoLog(producto: productos){
@@ -94,9 +96,7 @@ export class ProductosComponent implements OnInit {
   }
 
   checkStock() {
-    for (const producto of this.arrayProductos) {
-      producto.sinStock = producto.stock === 0;
-    }
+    this.stockDisponible = this.producto.stock > 0;
   }
 
   ngOnInit() {
@@ -105,11 +105,11 @@ export class ProductosComponent implements OnInit {
       if (productNameUrl) {
         this.idProductosService.cargarProductos();
         this.producto = this.idProductosService.obtenerProductoPorNombreUrl(productNameUrl);
-        if (!this.producto) {
+        this.stockDisponible = this.producto.stock > 0;
+        if (this.producto) {
+          this.checkStock();
+        } else {
           this.mensajeError = 'Producto no encontrado.';
-        }
-        if (this.producto && this.producto.stock === 0) {
-          this.stockDisponible = false;
         }
       } else {
         this.mensajeError = 'Nombre del producto no proporcionado en la URL.';
