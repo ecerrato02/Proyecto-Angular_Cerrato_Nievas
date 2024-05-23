@@ -1,0 +1,15 @@
+<h1 class="titulo-centrado">100 JUEGOS GRATIS PARA QUE NO TENGAS QUE PAGAR POR ELLOS</h1>
+<div class="tw-grid tw-grid-cols-5">
+  <div *ngFor="let juego of this.juegosPantalla" class="productos">
+    <a href="{{juego.game_url}}" class="productos-enlaces">
+    <div class="todos-productos">
+      <img alt="Imagen Productos" class="imagen-productos image-gradientBottom" src='{{juego.thumbnail}}'>
+      <h3 class="nombre-producto">{{juego.title}}</h3>
+      <div>
+        <p>{{juego.short_description}}</p>
+      </div>
+    </div>
+    </a>
+  </div>
+</div>
+<router-outlet></router-outlet>
