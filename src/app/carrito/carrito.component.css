@@ -106,6 +106,42 @@
   color: #4CAF50;
 }
 
+.agregar-una-unidad-gris {
+  background-color: transparent;
+  color: grey;
+  border: 0;
+  padding: 0.25em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.75em;
+  margin: 0.25em 0.125em;
+  transition-duration: 0.4s;
+  cursor: default;
+}
+
+#espace{
+  margin-bottom: 1em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+#correctDeleted{
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 1em;
+  border: 0.001em solid black;
+  border-left: 0.3em solid green;
+  padding: 1.25em;
+  padding-left: .5em;
+  padding-right: .5em;
+  width: 100%;
+  margin: auto;
+  height: auto;
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+  animation: entrada 1s;
+}
+
 @keyframes desaparecer {
   from { opacity: 1; }
   to { opacity: 0; }

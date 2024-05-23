@@ -5,7 +5,7 @@
     <img id="carritoVacio" class="tw-m-auto" src="http://172.16.10.1:3080/imagenes/carrito-negro.png">
   </div>
 </div>
-<div *ngIf="this.idProductosService.carritoState">
+<div *ngIf="this.idProductosService.carritoState" class="tw-transition-all">
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
       <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
@@ -36,6 +36,11 @@
             <span class="text-primary negrita">Tu carrito</span>
             <span class="badge bg-primary rounded-pill">{{this.idProductosService.numeroDeProductosDiferentes}}</span>
           </h4>
+          <div id="espace">
+            <div *ngIf="showMensajeProductoEliminado" id="correctDeleted">
+              <p class="tw-font-bold">{{this.mensajeProductoEliminado}}</p>
+            </div>
+          </div>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm negrita">Producto:
               <p class="my-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cantidad:</p>
@@ -50,7 +55,10 @@
               <button id="eliminar-una-unidad-btn" class="eliminar-una-unidad" (click)="eliminarUnaUnidad(producto.idProducto)">
                 <i class="fa fa-minus-circle icono-eliminar"></i>
               </button>
-              <button id="agregar-una-unidad-btn" class="agregar-una-unidad" (click)="agregarUnaUnidad(producto.idProducto)">
+              <button *ngIf="botonAgregarProducto" id="agregar-una-unidad-btn" class="agregar-una-unidad" (click)="agregarUnaUnidad(producto.idProducto)">
+                <i class="fa fa-plus-circle icono-agregar"></i>
+              </button>
+              <button *ngIf="!botonAgregarProducto" class="agregar-una-unidad-gris">
                 <i class="fa fa-plus-circle icono-agregar"></i>
               </button>
               <button class="trash-icon" (click)="eliminarTodasUnidades(producto.idProducto)">

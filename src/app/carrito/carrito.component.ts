@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import { IdProductosService } from "../id-productos.service";
@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import { MetodoPagoService } from "../metodo-pago.service";
 import {productos} from "../bd/productos";
 import {HttpClient} from "@angular/common/http";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-carrito',
@@ -21,14 +22,45 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })
-export class CarritoComponent {
+export class CarritoComponent implements OnInit, OnDestroy{
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   formularioCompleto: boolean = false;
+  botonAgregarProducto: boolean = true;
+  showMensajeProductoEliminado: boolean = false;
+  mensajeProductoEliminado: string = "";
+  private intervalId: any;
 
   constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService: MetodoPagoService, private http: HttpClient) {
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.idProductosService.actualizarTotalCarrito();
     this.idProductosService.carritoEmpty();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+
+  verificarCarritoVacio() {
+    if (this.idProductosService.arrayCarrito.length === 0) {
+      clearInterval(this.intervalId);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['carrito']);
+      });
+    }
+  }
+
+  ngOnInit() {
+    this.idProductosService.cargarProductos();
+    let arrayCarrito = this.idProductosService.arrayCarrito;
+    arrayCarrito.forEach(productos => {
+      this.productoSinStockQuitarCarrito(productos.idProducto);
+    })
+
+    if (this.idProductosService.carritoState) {
+      this.intervalId = setInterval(() => {
+        this.verificarCarritoVacio();
+      }, 5000);
+    }
   }
 
   pagarTarjeta() {
@@ -56,19 +88,46 @@ export class CarritoComponent {
 
   eliminarUnaUnidad(idProducto: number) {
     this.idProductosService.eliminarUnaUnidadCarrito(idProducto);
+    const index = this.idProductosService.arrayCarrito.findIndex(p => p.idProducto === idProducto);
+    const productoAgregado = this.idProductosService.arrayCarrito[index];
+
+    if(productoAgregado.stock > productoAgregado.cantidadProducto) {
+      this.botonAgregarProducto = true;
+    }
   }
 
   agregarUnaUnidad(idProducto: number) {
     const index = this.idProductosService.arrayCarrito.findIndex(p => p.idProducto === idProducto);
     const productoAgregado = this.idProductosService.arrayCarrito[index];
 
-    this.idProductosService.agregarUnaUnidadCarrito(idProducto);
-    this.idProductosService.actualizarTotalCarrito();
-    this.unoAgregadoLog(productoAgregado);
+    if(productoAgregado.stock > productoAgregado.cantidadProducto) {
+      this.idProductosService.agregarUnaUnidadCarrito(idProducto);
+      this.idProductosService.actualizarTotalCarrito();
+      this.unoAgregadoLog(productoAgregado);
+    } else if (productoAgregado.stock === productoAgregado.cantidadProducto){
+      this.botonAgregarProducto = false;
+    }
+  }
+
+  productoSinStockQuitarCarrito(idProducto: number) {
+    const index = this.idProductosService.arrayCarrito.findIndex(p => p.idProducto === idProducto);
+    const producto = this.idProductosService.arrayCarrito[index];
+
+    if(producto.stock === 0) {
+      this.eliminarTodasUnidades(idProducto);
+      this.mensajeProductoEliminado = "¡Se ha eliminado " + producto.nombreProducto + " del carrito debido a que no hay stock suficiente!"
+      this.showMensajeProductoEliminado = true;
+      setTimeout( () => {
+        this.showMensajeProductoEliminado = false;
+      }, 5000)
+    } else if (producto.stock < producto.cantidadProducto) {
+      producto.cantidadProducto = producto.stock;
+    }
   }
 
   eliminarTodasUnidades(idProducto: number) {
     const index = this.idProductosService.arrayCarrito.findIndex(p => p.idProducto === idProducto);
+
     if (index !== -1) {
       this.animacionesEliminacion[idProducto] = true;
 

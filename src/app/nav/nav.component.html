@@ -45,7 +45,7 @@
               <img class="perfil-icono" alt="Perfil" src="http://172.16.10.1:3080/imagenes/perfil-icono.png">
               <p id="nombreUsuario" class="tw-ml-8 test tw-mr-4">{{this.username}}</p>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ul class="dropdown-menu z-2" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" routerLink="/perfil">Perfil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li *ngIf="sessionStorage.getItem('isAdmin') === 'true'"><a class="dropdown-item" routerLink="admin">Productos</a></li>

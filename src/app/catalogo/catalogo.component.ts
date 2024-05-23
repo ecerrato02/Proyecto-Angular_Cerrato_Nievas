@@ -63,11 +63,7 @@ export class CatalogoComponent implements OnInit{
   }
 
   verDetalleProducto(producto: any) {
-    if (producto.sinStock) {
-      this.router.navigate(['/catalogo']);
-    } else {
-      this.router.navigate([producto.productNameUrl]).then(r => '/catalogo');
-    }
+    this.router.navigate([producto.productNameUrl]).then(r => '/catalogo');
   }
 
   filtrado() {

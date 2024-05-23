@@ -28,9 +28,9 @@ export class productos{
   cantidadProducto = 0;
   starsProducto = 0;
   claveProducto = "";
-  stockProducto: number;
+  stock: number;
   claves?: string[];
-  constructor(newIdProducto: number, newProductNameUrl: string,  newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string, newCantidadProducto: number, newStarsProducto: number, newClaveProducto: string, newStockProducto: number, newClaves?: string[]){
+  constructor(newIdProducto: number, newProductNameUrl: string,  newFotoProducto: string, newNombreProducto: string, newDescripcionProducto: string, newDescripcionLargaProducto: string, newCategoriaProducto: number, newPrecioProducto: number, newDescuentoProducto: boolean, newPorcentajeDescuentoProducto: number, newSoMinimoProducto: string, newProcesadorMinimoProducto: string, newMemoriaMinimoProducto: string, newGraficosMinimoProducto: string,  newHardwareRecomendadoProducto: boolean, newSteamProducto: boolean, newUbisoftProducto: boolean, newSwitchProducto: boolean, newXboxProducto: boolean, newPs4Producto: boolean, newPs5Producto: boolean, newSoRecomendadoProducto: string, newProcesadorRecomendadoProducto: string, newMemoriaRecomendadoProducto: string, newGraficosRecomendadoProducto: string, newVideoProducto: string, newCantidadProducto: number, newStarsProducto: number, newClaveProducto: string, newStock: number, newClaves?: string[]){
     this.idProducto = newIdProducto;
     this.productNameUrl = newProductNameUrl;
     this.fotoProducto = newFotoProducto;
@@ -60,7 +60,7 @@ export class productos{
     this.cantidadProducto = newCantidadProducto;
     this.starsProducto = newStarsProducto;
     this.claveProducto = newClaveProducto;
-    this.stockProducto = newStockProducto;
+    this.stock = newStock;
     this.claves = newClaves;
   }
 }

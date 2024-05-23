@@ -6,19 +6,24 @@
   <div class="contenido">
     <h2>{{producto.nombreProducto}}</h2>
     <p id="justificado">{{producto.descripcionProducto}}</p>
-    <div class="en-linea">
-      <label>Plataforma: </label>
-      <select [(ngModel)]="plataformaSeleccionada" (ngModelChange)="seleccionarPlataforma()" required>
-        <option *ngIf="producto.steamProducto">PC - Steam</option>
-        <option *ngIf="producto.ubisoftProducto">PC - Ubisoft</option>
-        <option *ngIf="producto.switchProducto">Nintendo Switch</option>
-        <option *ngIf="producto.xboxProducto">Xbox Series X/S</option>
-        <option *ngIf="producto.ps4Producto">PlayStation 4</option>
-        <option *ngIf="producto.ps5Producto">PlayStation 5</option>
-      </select>
+    <div *ngIf="stockDisponible">
+      <div class="en-linea">
+        <label>Plataforma: </label>
+        <select [(ngModel)]="plataformaSeleccionada" (ngModelChange)="seleccionarPlataforma()" required>
+          <option *ngIf="producto.steamProducto">PC - Steam</option>
+          <option *ngIf="producto.ubisoftProducto">PC - Ubisoft</option>
+          <option *ngIf="producto.switchProducto">Nintendo Switch</option>
+          <option *ngIf="producto.xboxProducto">Xbox Series X/S</option>
+          <option *ngIf="producto.ps4Producto">PlayStation 4</option>
+          <option *ngIf="producto.ps5Producto">PlayStation 5</option>
+        </select>
+      </div>
+      <div *ngIf="!plataformaSeleccionada && plataformaSeleccionada !== undefined" class="error">
+        <p>Por favor, seleccione una plataforma.</p>
+      </div>
     </div>
-    <div *ngIf="!plataformaSeleccionada && plataformaSeleccionada !== undefined" class="error">
-      <p>Por favor, seleccione una plataforma.</p>
+    <div *ngIf="!stockDisponible">
+      <p class="tw-flex tw-text-gray-500 tw-font-bold tw-text-xl">SIN STOCK</p>
     </div>
     <div id="precios-productos">
       <p id="precio-producto">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
@@ -30,10 +35,15 @@
     <div id="agregar-carrito">
       <div *ngIf="loggedIn">
         <div class="cantidad-container">
-          <button class="boton decrementar" (click)="restar()">-</button>
-          <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
-          <button class="boton incrementar" (click)="sumar()">+</button>
-          <button class="agregarAlCarrito" (click)="plataformaSeleccionada && agregarProductoAlCarrito(producto)" [disabled]="producto.stock === 0">
+          <div *ngIf="stockDisponible">
+            <button class="boton decrementar" (click)="restar()">-</button>
+            <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
+            <button class="boton incrementar" (click)="sumar()">+</button>
+          </div>
+          <button *ngIf="stockDisponible" class="agregarAlCarrito" (click)="plataformaSeleccionada && agregarProductoAlCarrito(producto)">
+            <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
+          </button>
+          <button *ngIf="!stockDisponible" class="agregarAlCarritoSinStock">
             <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
           </button>
         </div>
@@ -42,10 +52,15 @@
       </div>
       <div *ngIf="!loggedIn">
         <div class="cantidad-container">
-          <button class="boton decrementar" (click)="restar()">-</button>
-          <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
-          <button class="boton incrementar" (click)="sumar()">+</button>
-          <button class="agregarAlCarrito" (click)="plataformaSeleccionada && irInicioSesion()">
+          <div *ngIf="stockDisponible">
+            <button class="boton decrementar" (click)="restar()">-</button>
+            <input type="text" class="campo-cantidad" [(ngModel)]="producto.cantidadProducto" (input)="validarCantidad()">
+            <button class="boton incrementar" (click)="sumar()">+</button>
+          </div>
+          <button *ngIf="stockDisponible" class="agregarAlCarrito" (click)="plataformaSeleccionada && irInicioSesion()">
+            <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
+          </button>
+          <button *ngIf="!stockDisponible" class="agregarAlCarritoSinStock">
             <span class="icono-carrito"><i class="fas fa-shopping-cart"></i></span> AÑADIR AL CARRITO
           </button>
         </div>
