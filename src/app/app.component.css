@@ -162,11 +162,6 @@ footer{
   transform: scale(1.05);
 }
 
-.productos:hover{
-  transform: scale(1.03);
-  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.5);
-}
-
 .productos-enlaces{
   color: black;
   text-decoration: none;
@@ -506,10 +501,6 @@ footer{
   margin-left: 25%;
   margin-top: 0.8em;
   display: none;
-}
-
-.productos:hover .centrar-sumarproducto {
-  display: block;
 }
 
 .centrar-sumarproducto-descuento{

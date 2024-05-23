@@ -99,7 +99,7 @@ export class CarritoComponent {
 
   unoEliminadoLog(productoEliminado: any) {
     const logData = {
-      username: sessionStorage.getItem("username"),
+      username: sessionStorage.getItem(""),
       information: "ha eliminado x1 " + productoEliminado.nombreProducto + " de la cesta"
     };
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
