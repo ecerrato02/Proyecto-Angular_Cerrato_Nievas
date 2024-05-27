@@ -25,6 +25,9 @@
     <div *ngIf="!stockDisponible">
       <p class="tw-flex tw-text-gray-500 tw-font-bold tw-text-xl">SIN STOCK</p>
     </div>
+    <div *ngIf="stockDisponible">
+      <p *ngIf="producto.stock <= 20" class="tw-text-red-500">Quedan pocos en stock</p>
+    </div>
     <div id="precios-productos">
       <p id="precio-producto">{{Number(((producto.precioProducto - (producto.precioProducto * producto.porcentajeDescuentoProducto))).toFixed(2)).toLocaleString('es-ES')}}€</p>
       <div *ngIf="producto.descuentoProducto">
@@ -71,9 +74,15 @@
   </div>
 </div>
 
-<div id="espace">
+<div class="espacio">
   <div *ngIf="agregadoCorrectamente" id="correctAdd">
     <p>¡<span class="negrita">{{producto.nombreProducto}}</span> se ha agregado al carrito correctamente!</p>
+  </div>
+</div>
+<div class="espacio">
+  <div *ngIf="noAgregado" id="incorrectAdd">
+    <p>¡<span class="negrita">{{producto.nombreProducto}}</span> no se ha agregado al carrito, ya que no hay stock suficiente!</p>
+    <p><span class="negrita">Stock actual:</span> x{{producto.stock}}</p>
   </div>
 </div>
 <div id="espacio-derechoProductos">

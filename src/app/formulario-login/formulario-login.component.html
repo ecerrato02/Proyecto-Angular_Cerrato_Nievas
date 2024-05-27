@@ -25,7 +25,7 @@
       <div class="screen-body-item">
         <div id="espacioSuperior" *ngIf="!parametrosIncorrectos"></div>
         <div id="camposVacios" *ngIf="parametrosIncorrectos">
-          <p>Debes rellenar todos los campos</p>
+          <p id="errorLogin">{{ errorMessage }}</p>
         </div>
         <div class="app-form">
           <div class="app-form-group">
@@ -35,7 +35,7 @@
             <input [(ngModel)]="password" type="password" id="password" class="app-form-control" placeholder="CONTRASEÑA">
           </div>
           <div class="app-form-group buttons">
-            <button class="app-form-button" (click)="login()">ENTRAR</button>
+            <button class="app-form-button" (click)="loginWallet()">ENTRAR</button>
           </div>
         </div>
       </div>

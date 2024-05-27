@@ -86,7 +86,7 @@
               </div>
               <div class="panel-body">
 
-                <form (ngSubmit)="onSubmit()" class="form-horizontal" role="form" ngNativeValidate>
+                <form (ngSubmit)="agregarProducto()" enctype="multipart/form-data" class="form-horizontal" role="form" ngNativeValidate>
 
                   <div class="form-group">
                     <label for="productNameUrl" class="col-sm-3 control-label">ProductNameUrl</label>
@@ -95,9 +95,9 @@
                     </div>
                   </div> <!-- form-group // -->
                   <div class="form-group">
-                    <label for="fotoProducto" (change)="onFileSelected($event)" class="col-sm-3 control-label">Foto del producto</label>
+                    <label for="fotoProducto" class="col-sm-3 control-label">Foto del producto</label>
                     <div class="col-sm-3">
-                      <input type="File" class="form-control" name="qty" [(ngModel)]="fotoProducto" id="fotoProducto" placeholder="Obligatorio" required>
+                      <input type="File" class="form-control" name="qty" id="fotoProducto" (input)="onFileSelected($event)" placeholder="Obligatorio" required>
                     </div>
                   </div> <!-- form-group // -->
                   <div class="form-group">
@@ -246,7 +246,7 @@
                   <hr>
                   <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">
-                      <button type="submit" class="btn btn-primary" (click)="agregarProducto()">Registrar producto</button>
+                      <button type="submit" class="btn btn-primary">Registrar producto</button>
                     </div>
                   </div> <!-- form-group // -->
                 </form>

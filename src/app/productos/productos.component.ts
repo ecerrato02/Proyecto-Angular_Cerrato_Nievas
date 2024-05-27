@@ -32,6 +32,7 @@ export class ProductosComponent implements OnInit {
   loggedIn = false;
   stockDisponible = false;
   agregadoCorrectamente = false;
+  noAgregado = false;
   private arrayProductos: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private idProductosService: IdProductosService, private segura: DomSanitizer, private usuariosService: UsuariosService, config: NgbRatingConfig, private http: HttpClient, private nav: NavComponent) {
@@ -80,6 +81,11 @@ export class ProductosComponent implements OnInit {
       this.agregadoCorrectamente = this.idProductosService.agregadoCorrectamenteAlert();
       setTimeout(() => {
         this.agregadoCorrectamente = false
+      }, 8000);
+    } else {
+      this.noAgregado = true;
+      setTimeout(() => {
+        this.noAgregado = false;
       }, 8000);
     }
   }

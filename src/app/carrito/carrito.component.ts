@@ -28,6 +28,12 @@ export class CarritoComponent implements OnInit, OnDestroy{
   botonAgregarProducto: boolean = true;
   showMensajeProductoEliminado: boolean = false;
   mensajeProductoEliminado: string = "";
+
+  selectedPaymentMethod: string | null = null;
+
+  pagarCrypto(moneda: string) {
+    this.selectedPaymentMethod = moneda;
+  }
   private intervalId: any;
 
   constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService: MetodoPagoService, private http: HttpClient) {
@@ -64,10 +70,12 @@ export class CarritoComponent implements OnInit, OnDestroy{
   }
 
   pagarTarjeta() {
+    this.selectedPaymentMethod = 'Tarjeta';
     this.MeotodPagoService.pagoTarjeta();
   }
 
   pagarPayPal() {
+    this.selectedPaymentMethod = 'PayPal';
     this.MeotodPagoService.pagoPayPal();
   }
 
@@ -177,4 +185,5 @@ export class CarritoComponent implements OnInit, OnDestroy{
   }
 
   protected readonly Number = Number;
+  protected readonly sessionStorage = sessionStorage;
 }

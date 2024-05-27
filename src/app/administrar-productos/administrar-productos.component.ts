@@ -2,19 +2,24 @@ import {Component, OnInit} from '@angular/core';
 import {RouterLinkActive, RouterOutlet} from "@angular/router";
 import {IdProductosService} from "../id-productos.service";
 import {HttpClient} from "@angular/common/http";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-administrar-productos',
   standalone: true,
   imports: [
     RouterOutlet,
-    RouterLinkActive
+    RouterLinkActive,
+    NgForOf
   ],
   templateUrl: './administrar-productos.component.html',
   styleUrl: './administrar-productos.component.css'
 })
 export class AdministrarProductosComponent implements OnInit {
   productos: any[] = [];
+  pedidos: any[] = [];
+  todosPedidos: any[] = [];
+  totalGanado: any;
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +33,38 @@ export class AdministrarProductosComponent implements OnInit {
 
   }
 
+  obtenerPedidos() {
+    this.http.get<any[]>('http://172.16.10.1:3080/api/pedidos').subscribe(
+      (response: any[]) => {
+        this.pedidos = response;
+    }, error => {
+        console.log('Error fetching productos:', error);
+    });
+  }
+
+  obtenerTodosPedidos() {
+    this.http.get<any[]>('http://172.16.10.1:3080/api/todosPedidos').subscribe(
+      (response: any[]) => {
+        this.todosPedidos = response;
+      }, error => {
+        console.log('Error fetching productos:', error);
+      });
+  }
+
+  obtenerTotalGanado() {
+    this.http.get<any>('http://172.16.10.1:3080/api/totalGanado').subscribe(
+      (response) => {
+        this.totalGanado = response[0].totalSum;
+      }, error => {
+        console.log('Error fetching productos:', error);
+      });
+  }
+
   ngOnInit() {
     this.obtenerProductos();
+    this.obtenerPedidos();
+    this.obtenerTodosPedidos();
+    this.obtenerTotalGanado();
     const list = document.querySelectorAll(".navigation2 li");
 
     function activeLink(this: HTMLElement) {
@@ -53,4 +88,6 @@ export class AdministrarProductosComponent implements OnInit {
       };
     }
   }
+
+  protected readonly Number = Number;
 }

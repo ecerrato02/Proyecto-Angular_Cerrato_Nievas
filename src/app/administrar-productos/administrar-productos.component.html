@@ -48,9 +48,11 @@
         <!--<ion-icon name="menu-outline"></ion-icon>-->
       </div>
 
-      <div class="user">
-        <img src="assets/imgs/customer01.jpg" alt="">
-      </div>
+      <a href="/perfil">
+        <div class="user">
+          <img src="http://172.16.10.1:3080/imagenes/profile.png" alt="">
+        </div>
+      </a>
     </div>
 
     <!-- ======================= Cards ================== -->
@@ -70,7 +72,7 @@
       <a class="tw-no-underline" href="#">
         <div class="card hover:tw-scale-105">
           <div>
-            <div class="numbers">80</div>
+            <div class="numbers">{{this.todosPedidos.length}}</div>
             <div class="cardName">Ventas Totales</div>
           </div>
 
@@ -96,8 +98,8 @@
       <a class="tw-no-underline" href="#">
         <div class="card hover:tw-scale-105">
           <div>
-            <div class="numbers">7.842€</div>
-            <div class="cardName">Ganancias Mensuales</div>
+            <div class="numbers">{{Number(this.totalGanado).toLocaleString('es-ES')}}€</div>
+            <div class="cardName">Ingresos Totales</div>
           </div>
 
           <div class="iconBx">
@@ -112,24 +114,21 @@
       <div class="recentOrders">
         <div class="cardHeader">
           <h2>Últimos Pedidos</h2>
-          <a href="#" class="btn">Ver Todos</a>
         </div>
-
         <table>
-          <thead>
           <tr>
-            <td>ID Pedido</td>
-            <td>Precio Total</td>
-            <td>Pago</td>
-            <td>Estado</td>
+            <td class="tw-text-center tw-font-bold">ID Pedido</td>
+            <td class="tw-text-center tw-font-bold">Usuario</td>
+            <td class="tw-text-center tw-font-bold">Precio Total</td>
+            <td class="tw-text-center tw-font-bold">Pago</td>
+            <td class="tw-text-center tw-font-bold">Estado</td>
           </tr>
-          </thead>
-
-          <tbody>
+          <tbody class="-tw-mt-20" *ngFor="let pedido of pedidos">
           <tr>
-            <td>Star Refrigerator</td>
-            <td>$1200</td>
-            <td>Paid</td>
+            <td>{{pedido.idPedido}}</td>
+            <td>{{pedido.usuarioPedido}}</td>
+            <td>{{Number(pedido.precioTotal).toLocaleString('es-ES')}}€</td>
+            <td>Pagado</td>
             <td><span class="status delivered">Finalizado</span></td>
           </tr>
           </tbody>
@@ -143,75 +142,12 @@
         </div>
 
         <table>
-          <tr>
+          <tr *ngFor="let usuario of pedidos">
             <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+              <div class="imgBx"><img src="http://172.16.10.1:3080/imagenes/profile.png" alt=""></div>
             </td>
             <td>
-              <h4>David</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>Amit</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>David</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>Amit</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>David</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>Amit</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>David</h4>
-            </td>
-          </tr>
-
-          <tr>
-            <td width="60px">
-              <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-            </td>
-            <td>
-              <h4>Amit</h4>
+              <h4>{{ usuario.usuarioPedido }}</h4>
             </td>
           </tr>
         </table>

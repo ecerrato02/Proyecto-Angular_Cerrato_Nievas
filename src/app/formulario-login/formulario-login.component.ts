@@ -22,6 +22,7 @@ import {FormsModule} from "@angular/forms";
 export class FormularioLoginComponent {
   username = "";
   password = "";
+  errorMessage = '';
   parametrosIncorrectos = false;
   constructor(private router: Router, private userService: UsuariosService, private http: HttpClient) {}
 
@@ -31,16 +32,47 @@ export class FormularioLoginComponent {
         console.log('Inicio de sesión exitoso:', response);
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('username', response.username);
-        this.router.navigate(['']);
         this.parametrosIncorrectos = false;
         this.loginLog();
+        this.router.navigate(['/']);
       })
       .catch((error) => {
-        console.error('Error al iniciar sesión:', error);
+        this.errorMessage = 'Usuario o contraseña incorrectos';
         this.parametrosIncorrectos = true;
+        setTimeout(() => {
+          this.parametrosIncorrectos = false;
+        }, 5000);
         this.sendLoginAttemptLog();
       });
   }
+
+  async loginWallet() {
+    // @ts-ignore
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        // @ts-ignore
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        console.log('Cartera iniciada:', accounts);
+        if (accounts.length > 0) {
+          sessionStorage.setItem('address', accounts[0]);
+        }
+        this.login();
+      } catch (error) {
+        this.errorMessage = 'Error al iniciar sesión con MetaMask';
+        this.parametrosIncorrectos = true;
+        setTimeout(() => {
+          this.parametrosIncorrectos = false;
+        }, 5000);
+      }
+    } else {
+      this.parametrosIncorrectos = true;
+      this.errorMessage = 'Debes instalar MetaMask';
+      setTimeout(() => {
+        this.parametrosIncorrectos = false;
+      }, 5000);
+    }
+  }
+
   sendLoginAttemptLog() {
     const logData = { information: 'Se ha intentado iniciar sesión' };
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData)

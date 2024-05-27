@@ -28,7 +28,24 @@ export class NavComponent implements OnInit{
   carritoVacio: boolean = true;
   admin: any;
 
-  constructor(private router: Router, protected userService: UsuariosService, private http: HttpClient, public idProductosService: IdProductosService, protected adminGuard: AdminGuardService) {}
+  constructor(private router: Router, protected userService: UsuariosService, private http: HttpClient, public idProductosService: IdProductosService, protected adminGuard: AdminGuardService) {
+    //@ts-ignore
+    if (typeof window.ethereum !== "undefined") {
+      //@ts-ignore
+      window.ethereum.on('accountsChanged', (account) => {
+        if (account.length >= 0) {
+          this.metaMaskListener();
+        }
+      })
+    }
+
+  }
+
+  metaMaskListener() {
+    this.userService.logout();
+    sessionStorage.removeItem('address');
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit() {
     $(document).ready(function () {
@@ -66,3 +83,5 @@ export class NavComponent implements OnInit{
   protected readonly canActivate = canActivate;
   protected readonly sessionStorage = sessionStorage;
 }
+
+

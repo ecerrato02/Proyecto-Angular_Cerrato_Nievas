@@ -50,7 +50,7 @@
             <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let producto of idProductosService.arrayCarrito" [ngClass]="{'producto-eliminado': animacionesEliminacion[producto.idProducto]}">
               <h6 class="my-0">{{producto.nombreProducto}}</h6>
               <p>&nbsp;{{producto.cantidadProducto}}</p>
-              <p class="precios">{{Number(producto.precioProducto.toFixed(2)).toLocaleString('es-ES')}}€</p>
+              <p class="precios">{{Number(producto.precioProducto).toLocaleString('es-ES')}}€</p>
               <p class="">{{Number((producto.precioProducto * producto.cantidadProducto).toFixed(2)).toLocaleString('es-ES')}}€</p>
               <button id="eliminar-una-unidad-btn" class="eliminar-una-unidad" (click)="eliminarUnaUnidad(producto.idProducto)">
                 <i class="fa fa-minus-circle icono-eliminar"></i>
@@ -193,6 +193,23 @@
               <div class="form-check">
                 <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required (click)="pagarPayPal()"  (input)="verificarFormulario()">
                 <label class="form-check-label" for="paypal">PayPal</label>
+              </div>
+              <div class="form-check">
+                <input id="cryptoBTC" name="paymentMethod" type="radio" class="form-check-input" (click)="pagarCrypto('BTC')" required (input)="verificarFormulario()">
+                <label class="form-check-label" for="cryptoBTC">Crypto (BTC)</label>
+                <div *ngIf="selectedPaymentMethod === 'BTC'" class="tw-w-full tw-items-center tw-justify-center tw-text-center tw-border-2 tw-m-10 tw-p-10 tw-rounded-3xl tw-shadow-lg">
+                  <h4 class="tw-font-bold">Sesión iniciada correctamente en MetaMask</h4>
+                  <img src="http://172.16.10.1:3080/imagenes/metaMask.svg" alt="" width="256" height="57" class="tw-m-auto">
+                  <p class="text-body-secondary">{{ sessionStorage.getItem('address') }}</p>
+                </div>
+              </div>
+              <div class="form-check">
+                <input id="cryptoETH" name="paymentMethod" type="radio" class="form-check-input" (click)="pagarCrypto('ETH')" required (input)="verificarFormulario()">
+                <label class="form-check-label" for="cryptoETH">Crypto (ETH)</label>
+                <div *ngIf="selectedPaymentMethod === 'ETH'" class="tw-w-full tw-items-center tw-justify-center tw-text-center">
+                  <h4>Sesión iniciada correctamente en MetaMask</h4>
+                  <p class="text-body-secondary">{{ sessionStorage.getItem('address') }}</p>
+                </div>
               </div>
             </div>
 

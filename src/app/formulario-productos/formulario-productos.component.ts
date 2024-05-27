@@ -51,70 +51,52 @@ export class FormularioProductosComponent {
   graficosRecomendadoProducto: string = '';
   videoProducto: string = '';
   stock: number = 0;
+  selectedFile: File | null = null;
 
   constructor(private http: HttpClient, public idProd: IdProductosService) {
-
   }
 
-  async agregarProducto(){
-    console.log(this.productNameUrl)
+  async agregarProducto() {
+    console.log(this.productNameUrl);
     try {
-      const intentarAnadir = this.http.post('http://172.16.10.1:3080/api/afegirProducte', {
-        productNameUrl: this.productNameUrl,
-        fotoProducto: this.fotoProducto,
-        nombreProducto: this.nombreProducto,
-        descripcionProducto: this.descripcionProducto,
-        descripcionLargaProducto: this.descripcionLargaProducto,
-        categoriaProducto: this.categoriaProducto,
-        precioProducto: this.precioProducto,
-        descuentoProducto: this.descuentoProducto,
-        porcentajeDescuentoProducto: this.porcentajeDescuentoProducto,
-        soMinimoProducto: this.soMinimoProducto,
-        procesadorMinimoProducto: this.procesadorMinimoProducto,
-        memoriaMinimoProducto: this.memoriaMinimoProducto,
-        graficosMinimoProducto: this.graficosMinimoProducto,
-        hardwareRecomendadoProducto: this.hardwareRecomendadoProducto,
-        steamProducto: this.steamProducto,
-        ubisoftProducto: this.ubisoftProducto,
-        switchProducto: this.switchProducto,
-        xboxProducto: this.xboxProducto,
-        ps4Producto: this.ps4Producto,
-        ps5Producto: this.ps5Producto,
-        soRecomendadoProducto: this.soRecomendadoProducto,
-        procesadorRecomendadoProducto: this.procesadorRecomendadoProducto,
-        memoriaRecomendadoProducto: this.memoriaRecomendadoProducto,
-        graficosRecomendadoProducto: this.graficosRecomendadoProducto,
-        videoProducto: this.videoProducto,
-        stock: this.stock
-      }).subscribe();
-      console.log('Producto agregado:', intentarAnadir);
+      if (!this.selectedFile) {
+        alert('Por favor seleccione una imagen');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('fotoProducto', this.selectedFile);
+      formData.append('productNameUrl', this.productNameUrl);
+      formData.append('nombreProducto', this.nombreProducto);
+      formData.append('descripcionProducto', this.descripcionProducto);
+      formData.append('descripcionLargaProducto', this.descripcionLargaProducto);
+      formData.append('categoriaProducto', this.categoriaProducto.toString());
+      formData.append('precioProducto', this.precioProducto.toString());
+      formData.append('descuentoProducto', this.descuentoProducto.toString());
+      formData.append('porcentajeDescuentoProducto', this.porcentajeDescuentoProducto.toString());
+      formData.append('soMinimoProducto', this.soMinimoProducto);
+      formData.append('procesadorMinimoProducto', this.procesadorMinimoProducto);
+      formData.append('memoriaMinimoProducto', this.memoriaMinimoProducto);
+      formData.append('graficosMinimoProducto', this.graficosMinimoProducto);
+      formData.append('hardwareRecomendadoProducto', this.hardwareRecomendadoProducto.toString());
+      formData.append('steamProducto', this.steamProducto.toString());
+      formData.append('ubisoftProducto', this.ubisoftProducto.toString());
+      formData.append('switchProducto', this.switchProducto.toString());
+      formData.append('xboxProducto', this.xboxProducto.toString());
+      formData.append('ps4Producto', this.ps4Producto.toString());
+      formData.append('ps5Producto', this.ps5Producto.toString());
+      formData.append('soRecomendadoProducto', this.soRecomendadoProducto);
+      formData.append('procesadorRecomendadoProducto', this.procesadorRecomendadoProducto);
+      formData.append('memoriaRecomendadoProducto', this.memoriaRecomendadoProducto);
+      formData.append('graficosRecomendadoProducto', this.graficosRecomendadoProducto);
+      formData.append('videoProducto', this.videoProducto);
+      formData.append('stock', this.stock.toString());
+
+      const response = await this.http.post<any>('http://172.16.10.1:3080/api/afegirProducte', formData).toPromise();
+      console.log('Producto agregado:', response);
     } catch (error) {
       console.error('Error al agregar producto:', error);
     }
-  }
-
-  selectedFile: File | null = null;
-
-  onSubmit() {
-    if (!this.selectedFile) {
-      alert('Por favor seleccione una imagen');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('productNameUrl', this.productNameUrl);
-    formData.append('image', this.selectedFile);
-
-    this.http.post<any>('http://172.16.10.1:3080/api/upload', formData).subscribe(
-      response => {
-        console.log('Imagen subida exitosamente:', response);
-        alert('Imagen subida exitosamente');
-      },
-      error => {
-        console.error('Error al subir imagen:', error);
-        alert('Error al subir imagen');
-      }
-    );
   }
 
   onFileSelected(event: any) {
