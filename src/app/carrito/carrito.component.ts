@@ -22,12 +22,15 @@ import {data} from "autoprefixer";
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })
+
 export class CarritoComponent implements OnInit, OnDestroy{
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   formularioCompleto: boolean = false;
   botonAgregarProducto: boolean = true;
   showMensajeProductoEliminado: boolean = false;
   mensajeProductoEliminado: string = "";
+  precioeth: number = 0;
+  preciobnb: number = 0;
 
   selectedPaymentMethod: string | null = null;
 
@@ -40,6 +43,8 @@ export class CarritoComponent implements OnInit, OnDestroy{
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.idProductosService.actualizarTotalCarrito();
     this.idProductosService.carritoEmpty();
+    this.getPrecioeth();
+    this.getPreciobtc();
   }
 
   ngOnDestroy() {
@@ -67,6 +72,10 @@ export class CarritoComponent implements OnInit, OnDestroy{
         this.verificarCarritoVacio();
       }, 5000);
     }
+    setInterval(() => {
+      this.getPreciobtc();
+      this.getPrecioeth();
+    }, 60000);
   }
 
   pagarTarjeta() {
@@ -182,6 +191,30 @@ export class CarritoComponent implements OnInit, OnDestroy{
 
   finalizarCompra() {
     this.router.navigate(['/pasarela-pago']);
+  }
+  async getPrecioeth(): Promise<void> {
+
+    let response = null;
+    try {
+      response = await fetch('https://api.coingecko.com/api/v3/coins/ethereum');
+      const precio = await response.json();
+      this.precioeth = this.idProductosService.totalCarrito / precio.market_data.current_price.eur
+    }catch (error) {
+      console.error('Error fetching precio: ', error);
+    }
+  }
+
+  async getPreciobtc(): Promise<void> {
+
+    let response = null;
+    try {
+      response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin');
+      const precio = await response.json();
+      this.preciobnb = this.idProductosService.totalCarrito / precio.market_data.current_price.eur
+
+    }catch (error) {
+      console.error('Error fetching precio: ', error);
+    }
   }
 
   protected readonly Number = Number;
