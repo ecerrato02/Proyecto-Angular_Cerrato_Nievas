@@ -19,11 +19,13 @@ import {AdministrarProductosComponent} from "./administrar-productos/administrar
 import { AdminGuardService } from './admin-guard.service';
 import {AdminVentasComponent} from "./admin-ventas/admin-ventas.component";
 import { FormularioProductosComponent } from './formulario-productos/formulario-productos.component';
+import {JuegosGratisComponent} from "./juegos-gratis/juegos-gratis.component";
 
 
 export const routes: Routes = [
   {path: '', component:MenuComponent},
   {path: 'catalogo', component:CatalogoComponent},
+  {path: 'juegos-gratis', component:JuegosGratisComponent},
   {path: 'condiciones', component:CondicionesComponent},
   {path: 'faq', component:FaqComponent},
   {path: 'carrito', component:CarritoComponent},
@@ -43,7 +45,6 @@ export const routes: Routes = [
   {path: 'admin-ventas', component:AdminVentasComponent, canActivate: [AdminGuardService]},
   {path: ':productNameUrl', component:ProductosComponent},
   {path: '**', redirectTo: '/404'},
-
 
   //, canActivate: [AdminGuardService]
 ];
