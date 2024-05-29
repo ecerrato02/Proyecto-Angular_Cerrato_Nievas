@@ -8,6 +8,7 @@ import { MetodoPagoService } from "../metodo-pago.service";
 import {productos} from "../bd/productos";
 import {HttpClient} from "@angular/common/http";
 import {data} from "autoprefixer";
+import Web3 from "web3";
 
 @Component({
   selector: 'app-carrito',
@@ -22,24 +23,30 @@ import {data} from "autoprefixer";
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })
-export class CarritoComponent implements OnInit, OnDestroy{
+export class CarritoComponent implements OnInit, OnDestroy {
   animacionesEliminacion: { [idProducto: number]: boolean } = {};
   formularioCompleto: boolean = false;
   botonAgregarProducto: boolean = true;
   showMensajeProductoEliminado: boolean = false;
   mensajeProductoEliminado: string = "";
-
+  web3: any;
   selectedPaymentMethod: string | null = null;
-
-  pagarCrypto(moneda: string) {
-    this.selectedPaymentMethod = moneda;
-  }
   private intervalId: any;
 
   constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService: MetodoPagoService, private http: HttpClient) {
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.idProductosService.actualizarTotalCarrito();
     this.idProductosService.carritoEmpty();
+
+    // @ts-ignore
+    if (typeof window.ethereum !== 'undefined') {
+      // @ts-ignore
+      this.web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+      // @ts-ignore
+      window.ethereum.enable(); // Solicitar al usuario que autorice el acceso a su cuenta
+    } else {
+      console.error('MetaMask no detectado');
+    }
   }
 
   ngOnDestroy() {
@@ -52,6 +59,27 @@ export class CarritoComponent implements OnInit, OnDestroy{
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['carrito']);
       });
+    }
+  }
+
+  async pagarCrypto(moneda: string | null, monto: number) {
+    try {
+      const accounts = await this.web3.eth.getAccounts();
+      const amountWei = this.web3.utils.toWei(monto.toString(), 'ether');
+      const receiverAddress = '0xf9A2872f9d76Bb62BFDcf40448701a10B67f924A';
+
+      // Utiliza el método sendSignedTransaction para enviar la transacción firmada
+      const transaction = {
+        from: accounts[0],
+        to: receiverAddress,
+        value: amountWei,
+      };
+
+      const signedTransaction = await this.web3.eth.accounts.signTransaction(transaction, 'tu_clave_privada');
+      const txReceipt = await this.web3.eth.sendSignedTransaction(signedTransaction.rawTransaction);
+      console.log('Pago exitoso:', txReceipt);
+    } catch (error) {
+      console.error('Error al procesar el pago:', error);
     }
   }
 
@@ -180,10 +208,25 @@ export class CarritoComponent implements OnInit, OnDestroy{
     this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
   }
 
-  finalizarCompra() {
-    this.router.navigate(['/pasarela-pago']);
+  async finalizarCompra() {
+    if (this.selectedPaymentMethod === 'Tarjeta' || this.selectedPaymentMethod === 'PayPal') {
+      this.router.navigate(['/pasarela-pago']);
+    } else if (this.selectedPaymentMethod === 'BTC' || this.selectedPaymentMethod === 'ETH') {
+      try {
+        const monto = this.idProductosService.totalCarrito;
+        await this.pagarCrypto(this.selectedPaymentMethod, monto);
+      } catch (error) {
+        console.error('Error al procesar el pago:', error);
+        // Manejar el error aquí
+      }
+    } else {
+      console.error('Método de pago no válido:', this.selectedPaymentMethod);
+      // Manejar el error aquí
+    }
   }
+
 
   protected readonly Number = Number;
   protected readonly sessionStorage = sessionStorage;
 }
+

@@ -18,8 +18,10 @@ import {NgForOf, NgIf} from "@angular/common";
 export class JuegosGratisComponent {
 
   juegosPantalla: any[] = [];
+
   constructor(private router: Router, private http: HttpClient) {
     this.getJuegos();
+
   }
 
   async getJuegos(): Promise<void> {
@@ -28,16 +30,18 @@ export class JuegosGratisComponent {
       const response = await fetch('https://www.freetogame.com/api/games');
       const juegos = await response.json();
       let juego = 0;
-      for (juego; juego < 100; juego++){
+      for (juego; juego < 100; juego++) {
         this.juegosPantalla[juego] = (juegos[juego])
         contador++
       }
-      console.log(juegos)
-      console.log(contador)
     } catch (error) {
       console.error('Error fetching juegos: ', error);
     }
   }
 
+
+
   protected readonly Number = Number;
+
+
 }

@@ -33,7 +33,7 @@ export class NavComponent implements OnInit{
     if (typeof window.ethereum !== "undefined") {
       //@ts-ignore
       window.ethereum.on('accountsChanged', (account) => {
-        if (account.length >= 0) {
+        if (account.length === 0) {
           this.metaMaskListener();
         }
       })

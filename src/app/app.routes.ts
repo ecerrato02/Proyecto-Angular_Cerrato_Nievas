@@ -25,7 +25,7 @@ import {JuegosGratisComponent} from "./juegos-gratis/juegos-gratis.component";
 export const routes: Routes = [
   {path: '', component:MenuComponent},
   {path: 'catalogo', component:CatalogoComponent},
-  {path: 'juegos-gratis', component:JuegosGratisComponent},
+  {path: 'free-games', component:JuegosGratisComponent},
   {path: 'condiciones', component:CondicionesComponent},
   {path: 'faq', component:FaqComponent},
   {path: 'carrito', component:CarritoComponent},
