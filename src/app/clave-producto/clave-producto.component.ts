@@ -3,6 +3,7 @@ import { IdProductosService } from "../id-productos.service";
 import {productos} from "../bd/productos";
 import {NgForOf, NgIf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
+import {MetodoPagoService} from "../metodo-pago.service";
 
 @Component({
   selector: 'app-clave-producto',
@@ -24,7 +25,7 @@ export class ClaveProductoComponent implements OnInit{
   nombreProducto: string[] = [];
   productosEnCesta: productos[] = [];
 
-  constructor(public idProductosService: IdProductosService, private http: HttpClient) {}
+  constructor(public idProductosService: IdProductosService, private http: HttpClient, private MetodoPagoService: MetodoPagoService) {}
   ngOnInit() {
     this.obtenerPlataforma();
     this.nombreProducto = this.idProductosService.nombreProductos;
@@ -67,10 +68,15 @@ export class ClaveProductoComponent implements OnInit{
   usuarioPedido = sessionStorage.getItem("username");
   precioTotal = this.idProductosService.totalCarrito;
   productosCarrito = this.idProductosService.arrayCarrito;
-
+  metodoPago = "";
 
   guardarCompra(precioTotal: any, usuarioPedido: any, productosCarrito: any) {
-    this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', { usuarioPedido: usuarioPedido, precioTotal: precioTotal, productosCarrito: productosCarrito })
+    if (this.MetodoPagoService.pagarCrypto){
+      this.metodoPago = this.MetodoPagoService.metodoPago + " (" + this.MetodoPagoService.cryptoSelect + ")";
+    } else {
+      this.metodoPago = this.MetodoPagoService.metodoPago;
+    }
+    this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', { usuarioPedido: usuarioPedido, precioTotal: precioTotal, productosCarrito: productosCarrito, metodoPago: this.metodoPago })
       .subscribe(
         response => {
           console.log('Pedido guardado correctamente:', response);

@@ -29,22 +29,24 @@ export class CarritoComponent implements OnInit, OnDestroy{
   botonAgregarProducto: boolean = true;
   showMensajeProductoEliminado: boolean = false;
   mensajeProductoEliminado: string = "";
-  precioeth: number = 0;
+  preciobtc: number = 0;
   preciobnb: number = 0;
 
   selectedPaymentMethod: string | null = null;
-
-  pagarCrypto(moneda: string) {
-    this.selectedPaymentMethod = moneda;
-  }
   private intervalId: any;
 
   constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService: MetodoPagoService, private http: HttpClient) {
     this.idProductosService.actualizarNumeroDeProductosDiferentes();
     this.idProductosService.actualizarTotalCarrito();
     this.idProductosService.carritoEmpty();
-    this.getPrecioeth();
     this.getPreciobtc();
+    this.getPreciobnb();
+  }
+
+  pagarCrypto(moneda: string) {
+    this.selectedPaymentMethod = moneda;
+    const total = this.selectedPaymentMethod === 'BNB' ? this.preciobtc : this.preciobnb;
+    this.MeotodPagoService.comprar(total, moneda).then(r => console.log(r));
   }
 
   ngOnDestroy() {
@@ -74,7 +76,7 @@ export class CarritoComponent implements OnInit, OnDestroy{
     }
     setInterval(() => {
       this.getPreciobtc();
-      this.getPrecioeth();
+      this.getPreciobnb();
     }, 60000);
   }
 
@@ -190,25 +192,31 @@ export class CarritoComponent implements OnInit, OnDestroy{
   }
 
   finalizarCompra() {
-    this.router.navigate(['/pasarela-pago']);
-  }
-  async getPrecioeth(): Promise<void> {
-
-    let response = null;
-    try {
-      response = await fetch('https://api.coingecko.com/api/v3/coins/ethereum');
-      const precio = await response.json();
-      this.precioeth = this.idProductosService.totalCarrito / precio.market_data.current_price.eur
-    }catch (error) {
-      console.error('Error fetching precio: ', error);
+    if(this.selectedPaymentMethod === 'BNB'){
+      this.MeotodPagoService.comprar(this.preciobnb ,this.selectedPaymentMethod);
+    } else if (this.selectedPaymentMethod === 'BTC') {
+      this.MeotodPagoService.comprar(this.preciobtc ,this.selectedPaymentMethod);
+    } else {
+      this.router.navigate(['/pasarela-pago']);
     }
   }
-
   async getPreciobtc(): Promise<void> {
 
     let response = null;
     try {
       response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin');
+      const precio = await response.json();
+      this.preciobtc = this.idProductosService.totalCarrito / precio.market_data.current_price.eur
+    }catch (error) {
+      console.error('Error fetching precio: ', error);
+    }
+  }
+
+  async getPreciobnb(): Promise<void> {
+
+    let response = null;
+    try {
+      response = await fetch('https://api.coingecko.com/api/v3/coins/binancecoin');
       const precio = await response.json();
       this.preciobnb = this.idProductosService.totalCarrito / precio.market_data.current_price.eur
 

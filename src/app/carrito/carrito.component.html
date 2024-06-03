@@ -197,7 +197,7 @@
               <div class="form-check">
                 <input id="cryptoBTC" name="paymentMethod" type="radio" class="form-check-input" (click)="pagarCrypto('BTC')" required (input)="verificarFormulario()">
                 <label class="form-check-label" for="cryptoBTC">Crypto (BTC)</label>
-                <div class="tw-text-green-600"><strong>{{this.preciobnb}}</strong><strong class="tw-text-xl"> BTC</strong></div>
+                <div class="tw-text-green-600"><strong>{{this.preciobtc}}</strong><strong class="tw-text-xl"> BTC</strong></div>
                 <div *ngIf="selectedPaymentMethod === 'BTC'" class="tw-w-full tw-items-center tw-justify-center tw-text-center tw-border-2 tw-m-10 tw-p-10 tw-rounded-3xl tw-shadow-lg">
                   <h4 class="tw-font-bold">Sesión iniciada correctamente en MetaMask</h4>
                   <img src="http://172.16.10.1:3080/imagenes/metaMask.svg" alt="" width="256" height="57" class="tw-m-auto">
@@ -205,9 +205,9 @@
                 </div>
               </div>
               <div class="form-check">
-                <input id="cryptoETH" name="paymentMethod" type="radio" class="form-check-input" (click)="pagarCrypto('ETH')" required (input)="verificarFormulario()">
+                <input id="cryptoETH" name="paymentMethod" type="radio" class="form-check-input" (click)="pagarCrypto('BNB')" required (input)="verificarFormulario()">
                 <label class="form-check-label" for="cryptoETH">Crypto (ETH)</label>
-                <div class="tw-text-green-600"><strong>{{this.precioeth}}</strong> <strong class="tw-text-xl"> ETH</strong></div>
+                <div class="tw-text-green-600"><strong>{{this.preciobnb}}</strong> <strong class="tw-text-xl"> ETH</strong></div>
                 <div *ngIf="selectedPaymentMethod === 'ETH'" class="tw-w-full tw-items-center tw-justify-center tw-text-center">
                   <h4>Sesión iniciada correctamente en MetaMask</h4>
                   <p class="text-body-secondary">{{ sessionStorage.getItem('address') }}</p>
