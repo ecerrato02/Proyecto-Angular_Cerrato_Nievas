@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import {Web3} from "web3";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class MetodoPagoService {
-tarjeta = true;
-paypal = false;
-pagarCrypto = false;
-cryptoSelect = "";
-metodoPago = "";
-hashTransaccion = "";
+
+  tarjeta = true;
+  paypal = false;
+  pagarCrypto = false;
+  cryptoSelect = "";
+  metodoPago = "";
+  hashTransaccion = "";
 
 private web3: Web3;
 
@@ -36,7 +40,7 @@ pagoCrypto(cryptoSelected: string){
   this.cryptoSelect = cryptoSelected;
 }
 
-  constructor() {
+  constructor(private router: Router) {
     this.web3 = new Web3((window as any).ethereum);
   }
 
@@ -74,6 +78,8 @@ pagoCrypto(cryptoSelected: string){
         .on('transactionHash', (hash: string) => {
           console.log('Transacción enviada con éxito. Hash:', hash);
           this.hashTransaccion = hash;
+          this.router.navigate(['/clave']);
+
         })
         .on('error', (error: Error) => {
           console.error('Error al enviar la transacción:', error);
@@ -95,6 +101,8 @@ pagoCrypto(cryptoSelected: string){
         .on('transactionHash', (hash: string) => {
           console.log('Transacción enviada con éxito. Hash:', hash);
           this.hashTransaccion = hash;
+          this.router.navigate(['/clave']);
+
         })
         .on('error', (error: Error) => {
           console.error('Error al enviar la transacción:', error);

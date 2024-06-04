@@ -32,7 +32,7 @@ export class CarritoComponent implements OnInit, OnDestroy{
   preciobtc: number = 0;
   preciobnb: number = 0;
 
-  selectedPaymentMethod: string | null = null;
+  selectedPaymentMethod = "Tarjeta";
   private intervalId: any;
 
   constructor(public idProductosService: IdProductosService, private router: Router, public MeotodPagoService: MetodoPagoService, private http: HttpClient) {
@@ -45,8 +45,6 @@ export class CarritoComponent implements OnInit, OnDestroy{
 
   pagarCrypto(moneda: string) {
     this.selectedPaymentMethod = moneda;
-    const total = this.selectedPaymentMethod === 'BNB' ? this.preciobtc : this.preciobnb;
-    this.MeotodPagoService.comprar(total, moneda).then(r => console.log(r));
   }
 
   ngOnDestroy() {
@@ -192,12 +190,12 @@ export class CarritoComponent implements OnInit, OnDestroy{
   }
 
   finalizarCompra() {
-    if(this.selectedPaymentMethod === 'BNB'){
-      this.MeotodPagoService.comprar(this.preciobnb ,this.selectedPaymentMethod);
-    } else if (this.selectedPaymentMethod === 'BTC') {
-      this.MeotodPagoService.comprar(this.preciobtc ,this.selectedPaymentMethod);
-    } else {
+    if (this.selectedPaymentMethod === 'Tarjeta' || this.selectedPaymentMethod === "PayPal") {
       this.router.navigate(['/pasarela-pago']);
+    } else {
+      const total = this.selectedPaymentMethod === 'BNB' ? this.preciobtc : this.preciobnb;
+      const metodoPago = this.selectedPaymentMethod;
+      this.MeotodPagoService.comprar(total, metodoPago).then(r => console.log(r));
     }
   }
   async getPreciobtc(): Promise<void> {

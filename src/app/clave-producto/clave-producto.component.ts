@@ -30,6 +30,7 @@ export class ClaveProductoComponent implements OnInit{
     this.obtenerPlataforma();
     this.nombreProducto = this.idProductosService.nombreProductos;
     this.productosEnCesta = this.idProductosService.obtenerProductosEnCesta();
+    this.metodoPagoSave();
     this.finalizado();
   }
 
@@ -59,25 +60,27 @@ export class ClaveProductoComponent implements OnInit{
     }
   }
 
-  finalizado(){
+   finalizado(){
     this.compraFinalizadaLog()
     this.guardarCompra(this.precioTotal, this.usuarioPedido, this.productosCarrito);
     this.idProductosService.vaciarCarritoCompra();
   }
-
   usuarioPedido = sessionStorage.getItem("username");
   precioTotal = this.idProductosService.totalCarrito;
   productosCarrito = this.idProductosService.arrayCarrito;
   metodoPago = "";
   transactionHash = "";
 
-  guardarCompra(precioTotal: any, usuarioPedido: any, productosCarrito: any) {
+  metodoPagoSave() {
     if (this.MetodoPagoService.pagarCrypto){
       this.metodoPago = this.MetodoPagoService.metodoPago + " (" + this.MetodoPagoService.cryptoSelect + ")";
       this.transactionHash = this.MetodoPagoService.hashTransaccion;
     } else {
       this.metodoPago = this.MetodoPagoService.metodoPago;
     }
+  }
+
+  guardarCompra(precioTotal: any, usuarioPedido: any, productosCarrito: any) {
     this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', { usuarioPedido: usuarioPedido, precioTotal: precioTotal, productosCarrito: productosCarrito, metodoPago: this.metodoPago, hashTransaccion: this.transactionHash })
       .subscribe(
         response => {
