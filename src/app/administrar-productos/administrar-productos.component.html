@@ -121,15 +121,15 @@
             <td class="tw-text-center tw-font-bold">Usuario</td>
             <td class="tw-text-center tw-font-bold">Precio Total</td>
             <td class="tw-text-center tw-font-bold">Pago</td>
-            <td class="tw-text-center tw-font-bold">Estado</td>
+            <td class="tw-text-center tw-font-bold">Hash</td>
           </tr>
           <tbody class="-tw-mt-20" *ngFor="let pedido of pedidos">
           <tr>
             <td>{{pedido.idPedido}}</td>
             <td>{{pedido.usuarioPedido}}</td>
             <td>{{Number(pedido.precioTotal).toLocaleString('es-ES')}}€</td>
-            <td>Pagado</td>
-            <td><span class="status delivered">Finalizado</span></td>
+            <td>{{pedido.metodoPago}}</td>
+            <td>{{pedido.hashTransaccion}}</td>
           </tr>
           </tbody>
         </table>
