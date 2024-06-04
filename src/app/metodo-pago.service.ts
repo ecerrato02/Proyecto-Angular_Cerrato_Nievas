@@ -10,6 +10,7 @@ paypal = false;
 pagarCrypto = false;
 cryptoSelect = "";
 metodoPago = "";
+hashTransaccion = "";
 
 private web3: Web3;
 
@@ -72,6 +73,7 @@ pagoCrypto(cryptoSelected: string){
       await this.web3.eth.sendTransaction({ from, to, value })
         .on('transactionHash', (hash: string) => {
           console.log('Transacción enviada con éxito. Hash:', hash);
+          this.hashTransaccion = hash;
         })
         .on('error', (error: Error) => {
           console.error('Error al enviar la transacción:', error);
@@ -92,6 +94,7 @@ pagoCrypto(cryptoSelected: string){
       await tokenContract.methods.transfer(to, amountInWei).send({ from })
         .on('transactionHash', (hash: string) => {
           console.log('Transacción enviada con éxito. Hash:', hash);
+          this.hashTransaccion = hash;
         })
         .on('error', (error: Error) => {
           console.error('Error al enviar la transacción:', error);

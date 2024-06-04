@@ -69,14 +69,16 @@ export class ClaveProductoComponent implements OnInit{
   precioTotal = this.idProductosService.totalCarrito;
   productosCarrito = this.idProductosService.arrayCarrito;
   metodoPago = "";
+  transactionHash = "";
 
   guardarCompra(precioTotal: any, usuarioPedido: any, productosCarrito: any) {
     if (this.MetodoPagoService.pagarCrypto){
       this.metodoPago = this.MetodoPagoService.metodoPago + " (" + this.MetodoPagoService.cryptoSelect + ")";
+      this.transactionHash = this.MetodoPagoService.hashTransaccion;
     } else {
       this.metodoPago = this.MetodoPagoService.metodoPago;
     }
-    this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', { usuarioPedido: usuarioPedido, precioTotal: precioTotal, productosCarrito: productosCarrito, metodoPago: this.metodoPago })
+    this.http.post<any>('http://172.16.10.1:3080/api/afegirComanda', { usuarioPedido: usuarioPedido, precioTotal: precioTotal, productosCarrito: productosCarrito, metodoPago: this.metodoPago, hashTransaccion: this.transactionHash })
       .subscribe(
         response => {
           console.log('Pedido guardado correctamente:', response);
