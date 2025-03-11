@@ -1,8 +1,8 @@
 <div *ngIf="!this.idProductosService.carritoState">
   <div class="py-5 text-center">
-    <img id="logoCarritoVacio" class="tw-m-auto" src="http://172.16.10.1:3080/imagenes/logo-BD.png" alt="" width="72" height="57">
+    <img id="logoCarritoVacio" class="tw-m-auto" src="http://localhost:3080/imagenes/logo-BD.png" alt="" width="72" height="57">
     <p class="lead">¡El carrito de la compra está vacio! Ve a la <a routerLink="/catalogo">tienda</a></p>
-    <img id="carritoVacio" class="tw-m-auto" src="http://172.16.10.1:3080/imagenes/carrito-negro.png">
+    <img id="carritoVacio" class="tw-m-auto" src="http://localhost:3080/imagenes/carrito-negro.png">
   </div>
 </div>
 <div *ngIf="this.idProductosService.carritoState" class="tw-transition-all">
@@ -25,7 +25,7 @@
   <div class="container tw-mb-20">
     <main>
       <div class="py-5 text-center">
-        <img class="logo-carrito tw-m-auto" src="http://172.16.10.1:3080/imagenes/logo-BD.png" alt="" width="72" height="57">
+        <img class="logo-carrito tw-m-auto" src="http://localhost:3080/imagenes/logo-BD.png" alt="" width="72" height="57">
         <h2>Carrito de compra</h2>
         <p class="lead">Rellene el siguiente formulario para confirmar su compra, los siguientes productos mostrados son los correspondientes a pagar.</p>
       </div>
@@ -200,7 +200,7 @@
                 <div class="tw-text-green-600"><strong>{{this.preciobtc}}</strong><strong class="tw-text-xl"> BTC</strong></div>
                 <div *ngIf="selectedPaymentMethod === 'BTC'" class="tw-w-full tw-items-center tw-justify-center tw-text-center tw-border-2 tw-m-10 tw-p-10 tw-rounded-3xl tw-shadow-lg">
                   <h4 class="tw-font-bold">Sesión iniciada correctamente en MetaMask</h4>
-                  <img src="http://172.16.10.1:3080/imagenes/metaMask.svg" alt="" width="256" height="57" class="tw-m-auto">
+                  <img src="http://localhost:3080/imagenes/metaMask.svg" alt="" width="256" height="57" class="tw-m-auto">
                   <p class="text-body-secondary">{{ sessionStorage.getItem('address') }}</p>
                 </div>
               </div>

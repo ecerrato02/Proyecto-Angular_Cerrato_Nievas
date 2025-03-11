@@ -28,7 +28,7 @@ export class AdminVentasComponent implements OnInit {
         this.productNames = productNames;
 
         // Luego, obtenemos los datos de ventas
-        this.http.get<any>('http://172.16.10.1:3080/api/ventas').subscribe(
+        this.http.get<any>('http://localhost:3080/api/ventas').subscribe(
           (ventasData: any[]) => {
             const series: any[] = [];
             const legendData: string[] = [];
@@ -98,7 +98,7 @@ export class AdminVentasComponent implements OnInit {
   // Método para obtener nombres de productos
   getProductNames(): Observable<{ [key: string]: string }> {
     return this.http.get<{ [key: string]: string }>(
-      'http://172.16.10.1:3080/api/productos/nombres'
+      'http://localhost:3080/api/productos/nombres'
     );
   }
 }

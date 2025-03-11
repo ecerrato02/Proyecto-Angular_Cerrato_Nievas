@@ -48,7 +48,7 @@ export class FormularioContactosComponent {
   }
   enviarFormulario() {
     this.formularioEnviado = true;
-    this.http.post<any>("http://172.16.10.1:3080/api/contactForm", {subject: this.subject, email: this.email, information: this.information, name: this.name}).subscribe((data) => {
+    this.http.post<any>("http://localhost:3080/api/contactForm", {subject: this.subject, email: this.email, information: this.information, name: this.name}).subscribe((data) => {
     })
     setTimeout(() => {
       this.formularioEnviado = false;

@@ -28,7 +28,7 @@ export class IdProductosService {
   }
 
   cargarProductos(){
-    this.http.get<any[]>('http://172.16.10.1:3080/api/llistatProductes').subscribe((data) => {
+    this.http.get<any[]>('http://localhost:3080/api/llistatProductes').subscribe((data) => {
         this.arrayProductos = Object.values(data);
         this.arrayCarrito.forEach((itemCarrito) => {
           const productoEncontrado = this.arrayProductos.find((producto) => producto.idProducto === itemCarrito.idProducto);

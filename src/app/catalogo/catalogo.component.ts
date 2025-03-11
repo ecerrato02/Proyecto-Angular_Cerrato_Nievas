@@ -54,7 +54,7 @@ export class CatalogoComponent implements OnInit{
 
   ngOnInit() {
     this.todosLosProductos = this.idProductosService.obtenerProductos();
-    this.http.get<any>('http://172.16.10.1:3080/api/llistatProductes').subscribe(
+    this.http.get<any>('http://localhost:3080/api/llistatProductes').subscribe(
       (data) => {
         this.arrayProductos = (Object.values(data));
         this.checkStock();

@@ -24,7 +24,7 @@ export class AdministrarProductosComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   obtenerProductos() {
-    this.http.get<any[]>('http://172.16.10.1:3080/api/llistatProductes').subscribe(
+    this.http.get<any[]>('http://localhost:3080/api/llistatProductes').subscribe(
       (response: any[]) => {
         this.productos = response;
     }, error => {
@@ -34,7 +34,7 @@ export class AdministrarProductosComponent implements OnInit {
   }
 
   obtenerPedidos() {
-    this.http.get<any[]>('http://172.16.10.1:3080/api/pedidos').subscribe(
+    this.http.get<any[]>('http://localhost:3080/api/pedidos').subscribe(
       (response: any[]) => {
         this.pedidos = response;
     }, error => {
@@ -43,7 +43,7 @@ export class AdministrarProductosComponent implements OnInit {
   }
 
   obtenerTodosPedidos() {
-    this.http.get<any[]>('http://172.16.10.1:3080/api/todosPedidos').subscribe(
+    this.http.get<any[]>('http://localhost:3080/api/todosPedidos').subscribe(
       (response: any[]) => {
         this.todosPedidos = response;
       }, error => {
@@ -52,7 +52,7 @@ export class AdministrarProductosComponent implements OnInit {
   }
 
   obtenerTotalGanado() {
-    this.http.get<any>('http://172.16.10.1:3080/api/totalGanado').subscribe(
+    this.http.get<any>('http://localhost:3080/api/totalGanado').subscribe(
       (response) => {
         this.totalGanado = response[0].totalSum;
       }, error => {

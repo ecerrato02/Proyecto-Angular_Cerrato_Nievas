@@ -92,7 +92,7 @@ export class FormularioProductosComponent {
       formData.append('videoProducto', this.videoProducto);
       formData.append('stock', this.stock.toString());
 
-      const response = await this.http.post<any>('http://172.16.10.1:3080/api/afegirProducte', formData).toPromise();
+      const response = await this.http.post<any>('http://localhost:3080/api/afegirProducte', formData).toPromise();
       console.log('Producto agregado:', response);
     } catch (error) {
       console.error('Error al agregar producto:', error);

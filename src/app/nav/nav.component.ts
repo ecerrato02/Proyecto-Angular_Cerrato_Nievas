@@ -77,7 +77,7 @@ export class NavComponent implements OnInit{
 
   logoutLog(){
     const logData = { username: sessionStorage.getItem("username"), information: "ha cerrado sesión" };
-    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
   protected readonly canActivate = canActivate;

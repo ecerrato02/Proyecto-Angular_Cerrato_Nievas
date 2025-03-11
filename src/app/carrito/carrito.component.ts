@@ -170,7 +170,7 @@ export class CarritoComponent implements OnInit, OnDestroy{
       username: sessionStorage.getItem("username"),
       information: "ha eliminado x" + productoEliminado.cantidadProducto + " " + productoEliminado.nombreProducto + " de la cesta"
     };
-    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
   unoEliminadoLog(productoEliminado: any) {
@@ -178,7 +178,7 @@ export class CarritoComponent implements OnInit, OnDestroy{
       username: sessionStorage.getItem(""),
       information: "ha eliminado x1 " + productoEliminado.nombreProducto + " de la cesta"
     };
-    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
   unoAgregadoLog(productoEliminado: any) {
@@ -186,7 +186,7 @@ export class CarritoComponent implements OnInit, OnDestroy{
       username: sessionStorage.getItem("username"),
       information: "ha añadido x1 " + productoEliminado.nombreProducto + " a la cesta"
     };
-    this.http.post<any>('http://172.16.10.1:3080/api/logs', logData).subscribe({});
+    this.http.post<any>('http://localhost:3080/api/logs', logData).subscribe({});
   }
 
   finalizarCompra() {
